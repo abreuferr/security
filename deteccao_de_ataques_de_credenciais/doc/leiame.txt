@@ -1,0 +1,241 @@
+#
+# Terminologia
+#
+
+- uma senha pode ser armazenada de três forma.
+    - texto plano;
+    - criptografada de forma reversivel;
+    - armazenada no formato hash;
+
+- Security Account Manager (SAM)
+    - banco de dados do MS-Windows utilizado para armazenar e 
+    gerenciar contas de usuário e a senha no formato hash LM 
+    ou NTLM.
+
+- Hash LM
+    - forma como a senha é gravada no banco de dados SAM do 
+    MS-Windows.
+
+- Hash NTLM
+    - utiliza o algoritmo RC4-HMAC para gerar o hash da senha. 
+    Depois de gerado o hash da senha, o resultado é armazenado 
+    em um banco de dados, Security Account Manager (SAM).
+
+    - exemplo
+    admin:aad3b435b51404eeaad3b435b51404ee:e19ccf75ee54e06b06a5907af13cef42
+    
+    - passivel de ataque do tipo Pass-The-Hash;
+
+- Net-NTLMv1/v2 ou NTLMv1/v2
+    - evolução do LM e NTLM
+    
+    - padrão de autenticação padrão desde o MS-Windows Vista
+    
+    - utilzado para a autenticação em rede
+    
+    - NÃO é passivel de ataque do tipo Pass-The-Hash;
+
+- Microsoft Active Directory
+    - objetivo do MS-AD
+        - autenticação - identificar os utilizadosres/usuários dos recursos da rede;
+        - autorização - definir  que os usuários podem fazer;
+    - o AD fornece o serviço de diretório e mantem uma base de dados de usuários, computadores,
+    grupos, pliticas e objetos;
+    - entidade central de autenticação - Controlador de Domínio (Domain Controller – DC);
+    - protocolo de autenticação mútua - Kerberos;
+
+- Kerberos
+    - O protocolo Kerberos, RFC 4120, prove autenticação mútua entre duas partes em uma conversa
+    e comunicação segura em um meio não seguro. 
+    - utilização de uma chave simétrica, conhecida por ambas as partes para estabelecer
+    uma chave de sessão. A chave de sessão é utilizada para cifrar mensagens trocadas.
+    - Kerberos Distribution Center – KDC – (Centro de Distribuição Kerberos), que é responsável
+    pela distribuição de chaves e tíquetes para permitir que usuários acessem recursos e serviços
+    na rede.
+
+#
+# Armazenamento de Credenciais no MS-Windows
+#
+
+Podem ser encontradas em uma base de dados no disco do computador cliente como a Security Account 
+Manager (SAM)
+
+Um componente chamado LSA secrets armazena cache de credenciais do domínio que são usadas pela 
+Local Security Authority (LSA). A LSA é responsável, dentre outras coisas, pelo logon de usuários 
+no sistema. 
+
+Credenciais podem ser armazenadas na memória do computador por meio do processo LSASS.
+
+Hashes também podem ser achadas na base de dados dos controladores de domínio do AD, que
+retém todas as credenciais do domínio, por acesso via serviços de diretórios ou no arquivo
+NTDS.DIT
+
+#
+# Cenário de ataque
+#
+
+- Invasão
+    um computador da rede é invadidos. Este computador faz parte de uma rede de Domínio MS-Windows, MS-AD. o
+    computador invadido não necessáriamente faz parte da Empresa Alvo. O computdor pode fazer parte de uma
+    rede de uma empresa que foi sub-contratada pela empresa Alvo. Desta forma, o atacante escolheu o elo
+    mais fraco da corrente;
+
+- Escalornar Privilégio 
+    o atacante consegue escalonar e obter o privilégio ddo sistema operacional do computador invadido;
+
+- Roubo de credencial 
+    a partir do momento em que o hacker obtem o privilégio sobre o sistema operacinal, ele possui o acesso 
+    a áreas do sistema operacional que antes eram restritas. Uma dessas áreas é a área a onde estão 
+    armazenadas as credencias de acesso ao computador;
+
+- Movimentação
+    as credenciais que estão armazenadas na estação são roubadas. Se utilizando dessas credenciais, o atacante 
+    pode testar essas credenciais em outros computadores. Esse tipo de movimento se chama "movimento lateral pela
+    rede";
+
+#
+# Pass-the-Hash (PtH)
+#
+
+- PtH são técnicas de ataque onde um atacante utiliza um hash de 
+senha como um equivalente da senha para personificar o usuário
+portador da senha e acessar recursos permitidos a ele. Nesses casos
+tanto o hash como o ticket funcionam como equivalentes de senha.
+
+- Em um ataque do tipo Pass-the-Hash, uma aplicação em que o hash 
+da senha de usuário é calculado no cliente e enviada por meio de 
+um canal inseguro para o servidor, que comparará os hashes e o 
+autenticará caso coincidam. Um atacante capturando o tráfego na 
+rede pode obter esse hash e repetir a chamada do cliente ao servidor, 
+personificando o usuário e obtendo a autenticação do servidor.
+
+- https://www.guiadoti.com/2018/04/entendendo-o-ataque-pass-the-hash-ntlm/
+
+#
+# Pass-the-Ticket (PtT)
+#
+
+Nesse tipo de ataque o invasor obtém um ticket de serviço válido, gerado pelo
+AS(Authentication Serice) ou TGS(Ticket Granting Service), em face a uma requisição 
+do usuário. O ticket obtido pode ser tanto um TGT(Ticket Granting Ticket) ou ticket 
+de serviço. O ticket é injetado na LSASS e usado para requisitar outros ticket ou 
+acessar o serviço correspondente ao ticket.
+
+- Em uma atque que utiliza a técnica PtT, um atacante também personifica
+um usuário, mas ao invés de usar um hash de senha o atacante utiliza um 
+tickets do Kerberos, gerado pelo KDC ou forjado.
+
+- O tickets roubado pode ser válido por um período de tempo preestabelecido, 
+como por exemplo, 10 horas. O valor de 10 horas corresponde ao valor padrão
+para tickets usuários e serviços. Outra possibilidade é a do atacante ser 
+ser capaz de gerar tickets para quaisquer serviços, os chamados Golden Ticket),
+
+- Nesse tipo de ataque o invasor obtém um ticket de serviço válido, gerado
+pelo Serviço de Autenticação (AS) ou Serviço de Concessão de Ticket (TGS),
+em face a uma requisição do usuário. O ticket obtido pode ser tanto um 
+Ticket-Granting Ticket (TGT) ou ticket de serviço. O tickets é injetado na 
+Local Security Authority Subsystem Service (Serviço de Subsistema de Autoridade
+de Segurança Local - LSASS) e usado para requisitar outros tickets ou acessar 
+o serviço correspondente ao ticket.
+
+- A grande dificuldade de mitigar esse tipo de ataque é a de que uma vez que o
+atacante obtem o hash de um ticket válido, toda as ações tomadas por esse usuário
+serão validas. Uma das possiveis formas de se combater esse ataque é a de impedir
+que o atacante obtenha privilégios e consequentemente roube credenciais ou tickes.
+
+#
+# Overpass-the-Hash (Pass-the-Key)
+#
+
+O servidor armazena em sua base de dados os hashes da senha de usuário
+
+Em uma arquitetura cliente-servidor, o cliente passar a senha para o servidor, por 
+meio de um canal seguro preestabelecido, o servidor calcular o hash da senha e
+compará-lo com o armazenado em sua base de dados, autenticando o usuário caso os hashes
+coincidam.
+
+o atacante obtém uma das chaves de longo prazo de um usuário, que são derivadas da 
+senha dele, e a injeta em memória, no processo LSASS. Assim quando a requisição AS-REQ 
+é feita, essa chave será usada para criar um carimbo de tempo cifrado como autenticador.
+
+Basicamente, essa é uma combinação dos ataques Pass-the-Hash (PtH) e Pass-the-Ticket.
+A ideia de overpass-the-hash consiste em aproveitar o hash NTLM de uma conta de usuário
+para obter um tíquete Kerberos que pode ser usado para acessar recursos de rede. Isso 
+pode ser útil se você só conseguir obter o hash NTLM para uma conta, mas exigir a 
+autenticação Kerberos para chegar ao seu destino.
+
+1 - obter o NTLM hash da conta que queremos comprometer;
+2 - depois de obter o NTLM hash da conta, executar o ataque Pass-the-Hash (PtH);
+
+#
+# Golden Tickets
+#
+
+Quando a chave comprometida é chave para a conta KRBTGT do domínio, o atacante
+tem a possibilidade de criar os seus próprios ticket TGT, usando como alvo 
+qualquer serviço da rede, personificando qualquer usuário e com os privilégios 
+que ele desejar.
+
+A conta KRBTGT é a conta utilizada para criptografar todos os outros tickets. A 
+"golden icket" dá a credencial de administrador do domínio para qualquer computador
+na rede que não expira.
+
+#
+# Silver Tickets
+#
+
+Um atacante que tem acesso a uma chave de um serviço (KS) na rede é capaz de 
+usar essa chave para forjar ticket para acesso àquele serviço. Esse ticket são
+conhecidos como Silver Tickets.
+
+Outro ataque do tipo Pass-the-ticket, mas esse ataque tira proveito de um recurso 
+do Windows que facilita o uso de serviços na rede. O servidor Kerberos concede a 
+um usuário um ticket TGS, e um usuário pode usar esse ticket para entrar em 
+qualquer serviço na rede. A Microsoft nem sempre verifica um TGS após sua emissão, 
+por isso é fácil escapar de qualquer proteção.
+
+#
+# Medidas de Prevenção 
+#
+
+- autenticação de múltiplos fatores
+- limitação do número e uso de contas de domínio com privilégios
+
+# SO
+
+Protected Users Group – Grupo de Usuários Protegidos – Aos usuários adicionados a 
+esse grupo, são empregadas de forma automática medidas de segurança adicionais. 
+Algumas dessas medidas são:
+    • Desabilitada autenticação NTLM, Digest ou CredSSP;
+    • Senhas não são armazenadas no cache em memória;
+    • Não serão usadas os tipos de criptografia DES ou RC4 no Protocolo Kerberos.
+
+    # Domain Protected Users
+    https://docs.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/protected-users-security-group
+
+LSA Protection (proteção LSA) - tecnologia que transforma o processo LSASS em um
+processo protegido do sistema operacional.
+
+Device Guard e Credential Guard - O recurso Credential Guard usa tecnologia de virtualização
+que possui o objetivo de tirar o processo LSASS da memória do sistema operacional e 
+isolá-lo em outra área (Isolated LSA), como se pertencesse a um sistema operacional 
+convidado (Virtual Secure Mode).
+
+    # Credential Guard
+    https://docs.microsoft.com/en-us/windows/security/identity-protection/credential-guard/credential-guard-manage
+
+LAPS (Local Administrator Password Solution)
+https://www.microsoft.com/en-us/download/details.aspx?id=46899
+
+# Detecção de Eventos
+
+- logs de eventos que ocorrem no MS-Windows
+
+# Detecção de Anomalia
+
+- Entra em cena a detecção de anomalia que normalmente usa algum método de aprendizado
+de máquina para realizar sua tarefa.
+
+# Detecção de Honeytokens
+
+- DCEPT, um acrônimo para Domain Controller Enticing Password Tripwire

@@ -1,0 +1,87 @@
+#
+# Guacamole - Apache Guacamole - https://guacamole.incubator.apache.org/
+# 
+# MT4 GROUP
+# Guilherme Hakme <ghakme@senhasegura.com>
+#
+
+#include <tunables/global>
+
+/usr/sbin/guacd flags=(attach_disconnected, mediate_deleted) {
+  #include <abstractions/authentication>
+  #include <abstractions/base>
+  #include <abstractions/bash>
+  #include <abstractions/consoles>
+  #include <abstractions/fonts>
+  #include <abstractions/nameservice>
+  #include <abstractions/openssl>
+  #include <abstractions/user-tmp>
+  #include <abstractions/wutmp>
+
+  capability audit_write,
+  capability setgid,
+  capability setuid,
+  capability sys_resource,
+
+  deny /etc/sudoers.d/README r,
+
+  /dev/null rwk,
+  /etc/dma/dma.conf r,
+  /etc/guacamole/guacd.conf r,
+  /etc/host.conf r,
+  /etc/hosts r,
+  /etc/inputrc r,
+  /etc/mailname r,
+  /etc/nsswitch.conf r,
+  /etc/resolv.conf r,
+  /etc/sudoers r,
+  /etc/timezone r,
+  /home/vnc/.vnc/*.pid r,
+  /home/xvnc_fajita/.vnc/*.pid r,
+  /proc/*/fd/ r,
+  /proc/*/loginuid r,
+  /proc/*/net/arp r,
+  /run/fajita/fajita.pid rw,
+  /srv/cache/drive/[0-9a-f]*/ rw,
+  /srv/cache/drive/[0-9a-f]*/** rw,
+  /srv/cache/sessao/[0-9a-f]*.input w,
+  /srv/cache/sessao/[0-9a-f]*.output rw,
+  /srv/cache/sessao/[0-9a-f]*.drop w,
+  /srv/cache/sessao/[0-9a-f]*.holdon rw,
+  /usr/bin/hostname mrix,
+  /usr/bin/logger mrix,
+  /usr/bin/mcookie mrix,
+  /usr/bin/mkdir mrix,
+  /usr/bin/perl ix,
+  /usr/bin/sleep mrix,
+  /usr/bin/sudo mrix,
+  /usr/bin/tail mrix,
+  /usr/bin/tigervncconfig Px,
+  /usr/bin/tigervncserver Px,
+  /usr/bin/which mrix,
+  /usr/bin/xauth mrix,
+  /usr/lib/dma/dma-mbox-create mrix,
+  /usr/sbin/dma mrix,
+  /usr/sbin/guacd mr,
+  /var/senhasegura/arz/*/*[0-9]*/*[0-9]*/*[0-9]*/*[0-9]* rw,
+  /var/senhasegura/arz/*[0-9]*/*[0-9]*/*[0-9]*/*[0-9]* rw,
+  owner /etc/passwd r,
+  owner /etc/senhasegura/group r,
+  owner /etc/sudoers.d/ r,
+  owner /etc/sudoers.d/orbitcmd r,
+  owner /home/vnc/.Xauthority r,
+  owner /home/vnc/.vnc/*.url w,
+  owner /home/xvnc_fajita/.Xauthority r,
+  owner /home/xvnc_fajita/.Xauthority-c w,
+  owner /home/xvnc_fajita/.Xauthority-l l,
+  owner /home/xvnc_fajita/.Xauthority-l w,
+  owner /proc/*/cmdline r,
+  owner /proc/*/stat r,
+  owner /srv/cache/drive/*[0-9a-f]*/Download/** rw,
+  owner /var/spool/dma/*[0-9a-zA-Z]*.*[0-9a-f]* k,
+  owner /var/spool/dma/*[0-9a-zA-Z]*.*[0-9a-f]* l,
+  owner /var/spool/dma/*[0-9a-zA-Z]*.*[0-9a-f]* r,
+  owner /var/spool/dma/*[0-9a-zA-Z]*.*[0-9a-f]* w,
+  owner /var/spool/dma/tmp_XXXX*[0-9a-zA-Z]* rwk,
+
+}

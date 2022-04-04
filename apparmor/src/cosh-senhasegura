@@ -1,0 +1,161 @@
+#
+# cosh-senhasegura - 
+#
+# MT4 GROUP
+# Guilherme Hakme <ghakme@senhasegura.com>
+#
+
+#include <tunables/global>
+
+profile cosh-senhasegura flags=(attach_disconnected, mediate_deleted) {
+  #include <abstractions/authentication>
+  #include <abstractions/base>
+  #include <abstractions/consoles>
+  #include <abstractions/libpam-systemd>
+  #include <abstractions/nameservice>
+  #include <abstractions/wutmp>
+
+  deny capability net_admin,
+
+  capability audit_control,
+  capability audit_write,
+  capability chown,
+  capability dac_override,
+  capability dac_read_search,
+  capability fowner,
+  capability kill,
+  capability net_bind_service,
+  capability setgid,
+  capability setuid,
+  capability sys_chroot,
+  capability sys_ptrace,
+  capability sys_resource,
+  capability sys_tty_config,
+
+  # negado a permissão para montar um dispositivo.
+  deny mount,
+
+  # O ptrace system call prove um meio o qual um processo, tracer, observe e controle 
+  # a execução de outro processo.
+  ptrace (read trace) peer=unconfined,
+
+  deny /sys/[^f]*/** wlkx,
+  deny /sys/f[^s]*/** wlkx,
+  deny /sys/firmware/** rwlkx,
+  deny /sys/fs/[^c]*/** wlkx,
+  deny /sys/fs/c[^g]*/** wlkx,
+  deny /sys/fs/cg[^r]*/** wlkx,
+  deny /sys/kernel/security/** rwlkx,
+  deny @{PROC}/* w, # deny write for all files directly in /proc (not in a subdir)
+  deny @{PROC}/kcore rwlkx,
+  deny @{PROC}/kmem rwlkx,
+  deny @{PROC}/mem rwlkx,
+  deny @{PROC}/sys/[^k]** w, # deny /proc/sys except /proc/sys/k* (effectively /proc/sys/kernel)
+  deny @{PROC}/sys/kernel/{?,??,[^s][^h][^m]**} w, # deny everything except shm* in /proc/sys/kernel/
+  deny @{PROC}/sysrq-trigger rwlkx,
+  deny @{PROC}/{[^1-9],[^1-9][^0-9],[^1-9s][^0-9y][^0-9s],[^1-9][^0-9][^0-9][^0-9]*}/** w,
+
+  / r,
+  /** r,
+  /dev/ptmx rw,
+  /dev/pts/[0-9]* rw,
+  /dev/urandom r,
+  /etc.legal r,
+  /etc/default/locale r,
+  /etc/environment r,
+  /etc/hosts.allow r,
+  /etc/hosts.deny r,
+  /etc/modules.conf r,
+  /etc/motd r,
+  /etc/security/** r,
+  /etc/ssh/** r,
+  /etc/ssl/openssl.cnf r,
+  /opt/cosh/ r,
+  /opt/cosh/Crypto.Cipher._AES.x86_64-linux-gnu.so mr,
+  /opt/cosh/Crypto.PublicKey._fastmath.x86_64-linux-gnu.so mr,
+  /opt/cosh/Crypto.Util._counter.x86_64-linux-gnu.so mr,
+  /opt/cosh/_cffi_backend.x86_64-linux-gnu.so mr,
+  /opt/cosh/_ctypes.x86_64-linux-gnu.so mr,
+  /opt/cosh/_hashlib.x86_64-linux-gnu.so mr,
+  /opt/cosh/_json.x86_64-linux-gnu.so mr,
+  /opt/cosh/_ssl.x86_64-linux-gnu.so mr,
+  /opt/cosh/bcrypt._bcrypt.x86_64-linux-gnu.so mr,
+  /opt/cosh/bz2.x86_64-linux-gnu.so mr,
+  /opt/cosh/cosh rix,
+  /opt/cosh/coshmkdir rix,
+  /opt/cosh/cryptography.hazmat.bindings._constant_time.x86_64-linux-gnu.so mr,
+  /opt/cosh/cryptography.hazmat.bindings._openssl.x86_64-linux-gnu.so mr,
+  /opt/cosh/libbz2.so.1.0 mr,
+  /opt/cosh/libcrypto.so.* mr,
+  /opt/cosh/libffi.so.* mr,
+  /opt/cosh/libgmp.so.* mr,
+  /opt/cosh/libpython2.7.so.* mr,
+  /opt/cosh/libreadline.so.* mr,
+  /opt/cosh/libsenhasegura-autosudo.so.1 mr,
+  /opt/cosh/libsodium.so.23 mr,
+  /opt/cosh/libssl.so.* mr,
+  /opt/cosh/libtinfo.so.* mr,
+  /opt/cosh/libz.so.* mr,
+  /opt/cosh/nacl._sodium.x86_64-linux-gnu.so mr,
+  /opt/cosh/readline.x86_64-linux-gnu.so mr,
+  /opt/cosh/resource.x86_64-linux-gnu.so mr,
+  /opt/cosh/termios.x86_64-linux-gnu.so mr,
+  /sbin/ldconfig mrix,
+  /srv/cache/home/** rw,
+  /srv/cache/sessao/*[0-9]*.input w,
+  /srv/cache/sessao/*[0-9]*.output rw,
+  /srv/cache/sessao/[0-9a-f]*.drop w,
+  /srv/cache/sessao/[0-9a-f]*.holdon rw,
+  /srv/cache/tmp/* w,
+  /sys/fs/cgroup/*/user/*/[0-9]*/ rw,
+  /sys/fs/cgroup/systemd/user.slice/user-[0-9]*.slice/session-c[0-9]*.scope/ rw,
+  /tmp/ssh-[a-zA-Z0-9]*/ w,
+  /tmp/ssh-[a-zA-Z0-9]*/agent.[0-9]* wl,
+  /usr/bin/bash rUx,
+  /usr/bin/dash rUx,
+  /usr/bin/false rUx,
+  /usr/bin/passwd Cx -> passwd,
+  /usr/bin/scp rix,
+  /usr/lib/openssh/sftp-server Px,
+  /usr/sbin/nologin rUx,
+  /usr/sbin/sshd mrix,
+  /usr/share/ssh/blacklist.* r,
+  /var/log/btmp rw,
+  /var/tmp/cosh/cosh_*[0-9]*.status w,
+  /{,var/}run/motd{,.dynamic}{,.new} rw,
+  @{HOME}/.ssh/authorized_keys{,2} r,
+  @{PROC}/1/environ r,
+  @{PROC}/@{pids}/fd/ r, # pid of the just-logged in user's shell
+  @{PROC}/@{pid}/task/@{pid}/attr/exec w,
+  @{PROC}/cmdline r,
+  owner /** rwl,
+  owner /{,var/}run/sshd{,.init}.pid wl,
+  owner @{PROC}/@{pid}/limits r,
+  owner @{PROC}/@{pid}/loginuid rw,
+  owner @{PROC}/@{pid}/mounts r,
+  owner @{PROC}/@{pid}/oom_adj rw,
+  owner @{PROC}/@{pid}/oom_score_adj rw,
+  owner @{PROC}/@{pid}/uid_map r,
+
+
+  profile passwd {
+    #include <abstractions/authentication>
+    #include <abstractions/base>
+    #include <abstractions/nameservice>
+
+    capability audit_write,
+    capability chown,
+    capability fsetid,
+    capability setgid,
+    capability setuid,
+
+    /dev/pts/[0-9]* rw,
+    /usr/bin/passwd r,
+    /{,var/}run/utmp rwk,
+    owner /etc/.pwd.lock rwk,
+    owner /etc/nshadow rw,
+    owner /etc/shadow rw,
+    owner @{PROC}/@{pid}/loginuid r,
+
+  }
+}

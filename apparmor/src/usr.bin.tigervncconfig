@@ -1,0 +1,19 @@
+#
+# tigervncconfig - software de configuração do servidor de vnc TigerVNC.
+#
+# MT4 GROUP
+# Guilherme Hakme <ghakme@senhasegura.com>
+#
+
+#include <tunables/global>
+
+/usr/bin/tigervncconfig flags=(attach_disconnected, mediate_deleted) {
+  #include <abstractions/base>
+  #include <abstractions/consoles>
+  #include <abstractions/ubuntu-browsers.d/user-files>
+
+  /usr/bin/tigervncconfig mr,
+  owner /home/vnc/.Xauthority r,
+  owner /home/xvnc_fajita/.Xauthority r,
+
+}

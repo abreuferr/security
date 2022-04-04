@@ -1,0 +1,120 @@
+#
+# Formatar Token e Setar senhas
+#
+# Inicializar um token e chama-lo de token_teste pw de so  123456
+pkcs11-tool -vv --module /usr/lib/libeToken.so --init-token --label token_teste
+
+# Cadastrar um pin de usuario pw 1234
+pkcs11-tool -vv --module /usr/lib/libeToken.so --login --init-pin  
+
+# Verificar Objetos dentro do token
+pkcs11-tool -vv --module /usr/lib/libeToken.so --login -O
+
+# Simplificador
+alias tkn='pkcs11-tool --module /usr/lib/libeToken.so --pin 1234 --login'
+
+#
+# Criar chaves assimetricas e simetricas
+#
+
+# Chave 1 RSA 2048
+pkcs11-tool -vv --module /usr/lib/libeToken.so --login --keypairgen --key-type RSA:2048 --id 1 --label rsa1
+#tkn --keypairgen --key-type RSA:2048 --id 1 --label rsa1
+
+# Chave 2 EC SECP r1
+pkcs11-tool -vv --module /usr/lib/libeToken.so --login --keypairgen --key-type EC:secp384r1 --id 2 --label ec1
+#tkn --keypairgen --key-type EC:secp384r1 --id 2 --label ec1
+
+# Chave 3 EC Koblitz k1
+pkcs11-tool -vv --module /usr/lib/libeToken.so --login --keypairgen --key-type EC:prime256v1 --id 3 --label k1
+#tkn --keypairgen --key-type EC:prime256v1 --id 3 --label k1
+
+# Chave 4 AES 256 = 32x8
+pkcs11-tool --pin 1234 -vv --module /usr/lib/libeToken.so --login --keygen --id 4 --key-type aes:32 --label aes256 --sensitive
+#tkn --keygen --id 4 --key-type aes:32 --label aes256 --sensitive
+
+# Chave 5 AES 128 = 16x8
+pkcs11-tool --pin 1234 -vv --module /usr/lib/libeToken.so --login --keygen --id 5 --key-type aes:16 --label aes128 --sensitive
+#tkn --keygen --id 5 --key-type aes:16 --label aes128 --sensitive
+
+#
+# Criar um CSR utilizando a chave privada RSA
+#
+
+Utilizando o arquivo "engine.conf" veja o SLOT e o ID da chave privada a utilizar, no caso, Slot 0 e ID 01 - o CSR deve ser assinado pela infra
+openssl req -new -subj '/CN=teste@teste.com/' -sha256 -config engine.conf -engine pkcs11 -keyform engine -key 0:01 -out arquivo_para_vpn.csr
+
+#
+# Criar um certificado auto-assinado
+#
+
+openssl req -x509 -engine pkcs11 -config engine.conf -keyform engine -new -key 0:01 -sha256 -days 3650 -out auto_assinado.pem -subj "/CN=teste@teste.com"
+
+#
+# Importar certificado para o HSM 
+#
+
+# Converter de PEM para DER
+openssl x509 -outform der -in auto_assinado.pem -out auto_assinado.der
+
+# Subir o certificado, importante que o ID seja o MESMO da chave pública 
+pkcs11-tool --module /usr/lib/libeToken.so -l --write-object auto_assinado.der --type cert --id 01 --label "teste@teste.com"
+
+#
+# Deletar Objetos é simples utilizando ID ou label junto com type (cert, privkey, pubkey, secrkey, data)
+#
+
+tkn --delete-object --id 04 --type secrkey
+tkn --delete-object --id 05 --type secrkey
+
+# Verificar ID do certificado para a configuração da VPN
+openvpn --show-pkcs11-ids /usr/lib/libeToken.so
+
+#
+# Coisas Legais
+#
+
+# Resgatar URL (para openssl) de objetos dentro do token
+p11tool --provider=/usr/lib/libeToken.so --list-all
+
+# Gerar random de 4096 bits
+tkn --generate-random 4096 2>/dev/null
+
+#
+# Assinar e Verificar utilizando chave RSA id 01 (De dentro pra fora)
+#
+
+# Puxar chave PUBLICA para VERIFICAR(decrypt) a informação protegida
+pkcs11-tool --read-object --pin 1234 --id 01 --type pubkey --module /usr/lib/libeToken.so -o chave_publica.der
+
+# Converter de DER para PEM (LEMBRETE é RSA não certificado X509)
+openssl rsa -inform DER -outform PEM  -in chave_publica.der -pubin -out chave_publica.pem
+
+# Assinar um conteudo com chave privada RSA  e mecanismo RSA-PKCS
+tkn --sign -m RSA-PKCS --id 01 -i 245letras.txt -o 245letras.txt.RSA-PKCS.sign
+
+# Verificar conteudo assinado em RSA-PKCS
+openssl rsautl -verify -inkey chave_publica.pem -in 245letras.txt.RSA-PKCS.sign -pubin -out 245letras.txt.RSA-PKCS.verificado
+c676abd3e11d960448566b580147c75149a22efbed5a1f748177238920f9ac26
+
+#
+# Criptografar Fora e verificar com RSA AOEP (de fora pra dentro)
+#
+
+# Encriptar algo fora usando chave publica 
+openssl pkeyutl -encrypt -inkey chave_publica.pem -pubin -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256 -pkeyopt rsa_mgf1_md:sha256 -in 191letras.txt -out 191letras.txt.RSA-AOEP
+
+# Decriptografar dentro usando chave privada (ambos fazem o mesmo)
+tkn --decrypt --id 01 -m RSA-PKCS-OAEP -i 191letras.txt.RSA-AOEP -o 191letras.txt.RSA-AOEP.verificado
+tkn --decrypt --id 01 -m RSA-PKCS-OAEP --hash-algorithm=sha256 -i 191letras.txt.RSA-AOEP -o 191letras.txt.RSA-AOEP.verificado
+
+#
+# {Depois voltamos nisso} Assinar e Verificar utilizando chave ECC id 02 (De dentro pra fora)
+#
+
+# Assinar um conteudo com chave privada RSA  e mecanismo ECDSA-SHA384
+tkn --sign -m ECDSA-SHA384 --id 02 -i 245letras.txt -o 245letras.txt.ECDSA-SHA384.sign
+
+# Recuperar chave publica para abrir ECDSA
+tkn --read-object --id 02 --type pubkey -o chave_publica_02.der
+tkn --read-object --id 03 --type pubkey -o chave_publica_03.der

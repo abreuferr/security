@@ -1,0 +1,25 @@
+# 
+# sftp-server - sftp é um protocolo de transferencia de arquivos que utiliza o tunel SSH para manioular
+# os arquivos.
+#
+# MT4 GROUP
+# Guilherme Hakme <ghakme@senhasegura.com>
+#
+
+#include <tunables/global>
+
+/usr/lib/openssh/sftp-server flags=(attach_disconnected, mediate_deleted) {
+  #include <abstractions/authentication>
+  #include <abstractions/base>
+  #include <abstractions/nameservice>
+
+  # o arquivo passwd contem informações dos usuários que são administradores
+  # no senhasegura.
+  /etc/senhasegura/nsso/passwd r,
+
+  # Os donos podem ler e escrever nos respectivos diretórios.
+  owner /srv/cache/home/ r,
+  owner /srv/cache/home/[a-z]*/* rw,
+  owner /srv/cache/home/[a-z]*/ r,
+
+}

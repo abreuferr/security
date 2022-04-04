@@ -1,0 +1,183 @@
+#: Title : softHSM
+#: Author : "Caio Abreu Ferreira" <abreuferr_gmail.com>
+#: Description : Uma série de informações de como trabalhar com software softHSM
+#: Options : None
+#: Reference :
+
+#
+# Instalação/configuração
+#
+
+# instalação
+#
+$ sudo apt install softhsm2 opensc gnutls-bin libengine-pkcs11-openssl1.1 -y -d
+
+# adicionar usuario ao grupo
+#
+$ sudo usermod -aG softhsm "$USER"
+
+# arquivo de configuração
+#
+$ sudo cat /etc/softhsm/softhsm2.conf
+
+#
+# Inicialização
+#
+
+# algoritmos suportados
+#
+$ pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so -M
+
+# informação sobre o dispositivo
+#
+$ pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so --show-info                                                         
+Cryptoki version 2.40
+Manufacturer     SoftHSM
+Library          Implementation of PKCS11 (ver 2.6)
+Using slot 0 with a present token (0x6394f2bf)
+
+# exibir os slots
+#
+$ softhsm2-util --show-slots
+Available slots:
+Slot 0
+    Slot info:
+        Description:      SoftHSM slot ID 0x0                                             
+        Manufacturer ID:  SoftHSM project                 
+        Hardware version: 2.6
+        Firmware version: 2.6
+        Token present:    yes
+    Token info:
+        Manufacturer ID:  SoftHSM project                 
+        Model:            SoftHSM v2      
+        Hardware version: 2.6
+        Firmware version: 2.6
+        Serial number:                    
+        Initialized:      no
+        User PIN init.:   no
+        Label:                                            
+
+$ p11tool --list-tokens
+Token 0:
+	URL: pkcs11:model=p11-kit-trust;manufacturer=PKCS%2311%20Kit;serial=1;token=System%20Trust
+	Label: System Trust
+	Type: Trust module
+	Flags: uPIN uninitialized
+	Manufacturer: PKCS#11 Kit
+	Model: p11-kit-trust
+	Serial: 1
+	Module: p11-kit-trust.so
+
+# inicializando um token do softHSM
+#
+$ softhsm2-util --init-token --slot 0 --label "softhsm" --so-pin 654321 --pin 123456
+The token has been initialized and is reassigned to slot 1670705855
+
+# exibindo slot utilizado
+#
+$ p11tool --list-tokens
+Token 0:
+	URL: pkcs11:model=p11-kit-trust;manufacturer=PKCS%2311%20Kit;serial=1;token=System%20Trust
+	Label: System Trust
+	Type: Trust module
+	Flags: uPIN uninitialized
+	Manufacturer: PKCS#11 Kit
+	Model: p11-kit-trust
+	Serial: 1
+	Module: p11-kit-trust.so
+
+Token 1:
+	URL: pkcs11:model=SoftHSM%20v2;manufacturer=SoftHSM%20project;serial=b9465d74e394f2bf;token=softhsm
+	Label: softhsm
+	Type: Generic token
+	Flags: RNG, Requires login
+	Manufacturer: SoftHSM project
+	Model: SoftHSM v2
+	Serial: b9465d74e394f2bf
+	Module: /usr/lib/x86_64-linux-gnu/softhsm/libsofthsm2.so
+
+$ pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so -L
+Available slots:
+Slot 0 (0x6394f2bf): SoftHSM slot ID 0x6394f2bf
+  token label        : softhsm
+  token manufacturer : SoftHSM project
+  token model        : SoftHSM v2
+  token flags        : login required, rng, token initialized, PIN initialized, other flags=0x20
+  hardware version   : 2.6
+  firmware version   : 2.6
+  serial num         : b9465d74e394f2bf
+  pin min/max        : 4/255
+Slot 1 (0x1): SoftHSM slot ID 0x1
+  token state:   uninitialized
+
+#
+# Chaves
+#
+
+# rsa 2048
+#
+$ pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so --login -p 123456 --token-label "softhsm" --keypairgen --key-type RSA:2048 --id 1 --label rsa_2048
+
+# rsa 4096
+#
+$ pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so --login -p 123456 --token-label "softhsm" --keypairgen --key-type RSA:4096 --id 2 --label rsa_4096
+
+# ecc
+#
+$ pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so --login -p 123456 --token-label "softhsm" --keypairgen --key-type EC:secp384r1 --id 3 --label ec_384
+$ pkcs11-tool --modul /usr/lib/softhsm/libsofthsm2.so --login --login-type user --keypairgen --id 1 --key-type EC:secp384r1
+
+# koblitz k1
+#
+$ pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so --login -p 123456 --token-label "softhsm" --keypairgen --key-type EC:prime256v1 --id 4 --label ec_256
+$ pkcs11-tool --modul /usr/lib/softhsm/libsofthsm2.so --login --login-type user --keypairgen --id 1 --key-type EC:prime256v1
+
+# aes
+#
+$ pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so --login -p 123456 --token-label "softhsm" --keygen --key-type AES:32 --id 5 --label aes_256
+$ pkcs11-tool --modul /usr/lib/softhsm/libsofthsm2.so --slot 1221758082 --login --login-type user --keygen --id 256 --key-type aes:32
+
+# visualizar o conteudo do slot
+#
+$ pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so -l -O --slot 0x6394f2bf -p 123456
+
+# login no HSM/slot
+#
+$ pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so -l -t --slot 0x6394f2bf -p 123456
+
+#
+# OpenSSL/TLS
+#
+
+# listar url do token
+#
+$ p11tool --login --list-privkeys
+
+warning: no token URL was provided for this operation; the available tokens are:
+
+pkcs11:model=p11-kit-trust;manufacturer=PKCS%2311%20Kit;serial=1;token=System%20Trust
+pkcs11:model=SoftHSM%20v2;manufacturer=SoftHSM%20project;serial=b9465d74e394f2bf;token=softhsm
+
+# chave privada
+#
+$ p11tool --login --list-privkeys "pkcs11:model=SoftHSM%20v2;manufacturer=SoftHSM%20project;serial=b9465d74e394f2bf;token=softhsm"
+
+#
+# Assinatura Digital
+#
+
+# arquivo para teste
+#
+$ echo "19d512fc649e1668eb84741284ad95ec03f3225719a83e40389dbade4eabe5ed" > data.txt
+
+# assinando arquivo
+#
+$ pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so --pin 123456 -m RSA-PKCS --sign --id 01 -i data.txt -o data.sig
+
+# visualização
+#
+$ base64 softhsm/src/data.sig
+
+# exportar chave pública
+#
+$ pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so --read-object --pin 123456 --id 01 --type pubkey -o softhsm/src/public-key.der

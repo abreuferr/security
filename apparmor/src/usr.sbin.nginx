@@ -1,0 +1,117 @@
+#
+# Nginx - webserver
+#
+# MT4 GROUP
+# Guilherme Hakme <ghakme@senhasegura.com>
+
+#include <tunables/global>
+
+/usr/sbin/nginx {
+  #include <abstractions/apache2-common>
+  #include <abstractions/base>
+  #include <abstractions/nis>
+
+  capability chown,
+  capability dac_override,
+  capability dac_read_search,
+  capability net_bind_service,
+  capability setgid,
+  capability setuid,
+  capability sys_resource,
+
+  # arquivos de configuração
+  /etc/nginx/conf.d/ r,
+  /etc/nginx/conf.d/nginx-mtls.conf r,
+  /etc/nginx/fastcgi_params r,
+  /etc/nginx/mime.types r,
+  /etc/nginx/nginx.conf r,
+  /etc/nginx/orbini_params r,
+  /etc/nginx/php5_params r,
+  /etc/nginx/senhasegura_params r,
+
+  # arquivos do site do senhasegura
+  /etc/nginx/sites-enabled/ r,
+  /etc/nginx/sites-enabled/monitor r,
+  /etc/nginx/sites-enabled/senhasegura r,
+  /etc/nginx/sites-available/monitor r,
+  /etc/nginx/sites-available/senhasegura r,
+
+  # módulos de segurança do Nginx
+  /etc/nginx/modsec/main.conf r,
+  /etc/nginx/modsec/modsecurity.conf r,
+  /etc/nginx/modsec/crs-setup.conf r,
+  /etc/nginx/modsec/unicode.mapping r,
+  /etc/nginx/modsec/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf r,
+  /etc/nginx/modsec/rules/REQUEST-901-INITIALIZATION.conf r,
+  /etc/nginx/modsec/rules/REQUEST-905-COMMON-EXCEPTIONS.conf r,
+  /etc/nginx/modsec/rules/REQUEST-910-IP-REPUTATION.conf r,
+  /etc/nginx/modsec/rules/REQUEST-911-METHOD-ENFORCEMENT.conf r,
+  /etc/nginx/modsec/rules/REQUEST-912-DOS-PROTECTION.conf r,
+  /etc/nginx/modsec/rules/REQUEST-913-SCANNER-DETECTION.conf r,
+  /etc/nginx/modsec/rules/REQUEST-920-PROTOCOL-ENFORCEMENT.conf r,
+  /etc/nginx/modsec/rules/REQUEST-921-PROTOCOL-ATTACK.conf r,
+  /etc/nginx/modsec/rules/REQUEST-930-APPLICATION-ATTACK-LFI.conf r,
+  /etc/nginx/modsec/rules/REQUEST-931-APPLICATION-ATTACK-RFI.conf r,
+  /etc/nginx/modsec/rules/REQUEST-932-APPLICATION-ATTACK-RCE.conf r,
+  /etc/nginx/modsec/rules/REQUEST-933-APPLICATION-ATTACK-PHP.conf r,
+  /etc/nginx/modsec/rules/REQUEST-941-APPLICATION-ATTACK-XSS.conf r,
+  /etc/nginx/modsec/rules/REQUEST-942-APPLICATION-ATTACK-SQLI.conf r,
+  /etc/nginx/modsec/rules/REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION.conf r,
+  /etc/nginx/modsec/rules/REQUEST-949-BLOCKING-EVALUATION.conf r,
+  /etc/nginx/modsec/rules/RESPONSE-950-DATA-LEAKAGES.conf r,
+  /etc/nginx/modsec/rules/RESPONSE-951-DATA-LEAKAGES-SQL.conf r,
+  /etc/nginx/modsec/rules/RESPONSE-952-DATA-LEAKAGES-JAVA.conf r,
+  /etc/nginx/modsec/rules/RESPONSE-953-DATA-LEAKAGES-PHP.conf r,
+  /etc/nginx/modsec/rules/RESPONSE-959-BLOCKING-EVALUATION.conf r,
+  /etc/nginx/modsec/rules/RESPONSE-980-CORRELATION.conf r,
+  /etc/nginx/modsec/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf r,
+  /etc/nginx/modsec/rules/windows-powershell-commands.data r,
+  /etc/nginx/modsec/rules/unix-shell.data r,
+  /etc/nginx/modsec/rules/restricted-upload.data r,
+  /etc/nginx/modsec/rules/php-config-directives.data r,
+  /etc/nginx/modsec/rules/php-variables.data r,
+  /etc/nginx/modsec/rules/php-function-names-933150.data r,
+  /etc/nginx/modsec/rules/php-function-names-933151.data r,
+  /etc/nginx/modsec/rules/sql-errors.data r,
+  /etc/nginx/modsec/rules/java-code-leakages.data r,
+  /etc/nginx/modsec/rules/java-errors.data r,
+  /etc/nginx/modsec/rules/php-errors.data r,
+  /etc/nginx/modsec/rules/scanners-user-agents.data r,
+  /etc/nginx/modsec/rules/scanners-headers.data r,
+  /etc/nginx/modsec/rules/scanners-urls.data r,
+  /etc/nginx/modsec/rules/scripting-user-agents.data r,
+  /etc/nginx/modsec/rules/crawlers-user-agents.data r,
+  /etc/nginx/modsec/rules/lfi-os-files.data r,
+  /etc/nginx/modsec/rules/restricted-files.data r,
+
+  /etc/nginx/ss_socket_server.conf r,
+  /etc/senhasegura/group r,
+  /etc/ssl/localcerts/* r,
+  /etc/ssl/nginx-mtls/* r,
+  /etc/ssl/openssl.cnf r,
+  
+  # binário e processo
+  /usr/sbin/nginx mr,
+  /run/nginx.pid rw,
+  
+  /usr/local/senhasegura/public_html/** r,
+
+  /var/cache/nginx/** w,
+  /var/cache/nginx/client_temp/*[0-9]* rw,
+  /var/cache/nginx/fastcgi_temp/** rw,
+  /var/cache/nginx/proxy_temp/*[0-9]* rw,
+  /var/cache/nginx/scgi_temp/*[0-9]* rw,
+  /var/cache/nginx/uwsgi_temp/*[0-9]* rw,
+
+  # arquivos de log
+  /var/log/nginx/access.log w,
+  /var/log/nginx/access.log.*[0-9]* w,
+  /var/log/nginx/error.log w,
+  /var/log/nginx/error.log.*[0-9]* w,
+  /var/log/nginx/senhasegura.access.log w,
+  /var/log/nginx/senhasegura.access.log.*[0-9]* w,
+  /var/log/nginx/senhasegura.error.log w,
+  /var/log/nginx/senhasegura.error.log.*[0-9]* w,
+  /var/log/modsec_audit.log w,
+  /var/log/modsec_audit.log.*[0-9]* w,
+}
