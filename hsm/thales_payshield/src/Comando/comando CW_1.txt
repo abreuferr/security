@@ -1,0 +1,44 @@
+#
+# Chave
+#
+
+Online-AUTH>gc 
+	Enter LMK id [0-1]: 1 
+	Enter key length [1,2,3]: 2 
+	Enter key type: 402 
+	Enter key scheme: u 
+ 
+	Clear component: 40DA 9E79 4970 2CBA 7C02 1C97 E902 CE68  
+	Encrypted component: U8742 EA26 8761 540B 732C BF0D 7A75 99A5  
+	Key check value: 266FF9 
+ 
+Online-AUTH>fk 
+	Enter LMK id [0-1]: 1 
+	Enter key length [1,2,3]: 2 
+	Enter key type: 402 
+	Enter key scheme: u 
+	Enter component type [X,H,T,E,S]: x 
+	Enter number of components [1-9]: 1 
+ 
+	Enter component 1: 40DA 9E79 4970 2CBA 7C02 1C97 E902 CE68 
+	Component 1 check value: 266FF9 
+	Continue? [Y/N]: y 
+ 
+	Encrypted key: U4743 EAA3 500C 0AB4 39C6 ACB9 3733 B489  
+	Key check value: 266FF9 
+
+#
+# Comando CW
+#
+
+Message Header			1234
+Command Code			CW
+CVK(402)				U4743EAA3500C0AB439C6ACB93733B489
+Primary account number	6505870000000276
+Delimiter				;
+Expiration date			2504
+Service code			206
+
+Command					0000CWU4743EAA3500C0AB439C6ACB93733B4896505870000000276;2504206
+
+Received response		0000CX00[383635] ; CVV = 865

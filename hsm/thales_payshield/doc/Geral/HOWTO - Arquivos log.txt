@@ -1,0 +1,29 @@
+#: Title : Arquivos de log
+#: Description : comandos que devem ser executados para gerar os arquivos de log.
+#: Options : Nome dos arquivos com os log do HSM.
+#  [HSM Serial Number]_[YYYY.MM.DD].txt
+
+Comandos 
+- gettime
+- vr
+- dt verbose
+- vt
+- va
+- qh
+- qm
+- qs
+- ql
+- xy
+- netstat
+- getcmds
+- configpb
+- snmp
+- utilcfg
+- utilstats
+- healthstats
+- errlog
+- auditlog
+
+
+FAZER COMPARAÇÃO DOS LOGS "ANTES" E "DEPOIS" PARA VERIFICAR AS DIFERENÇAS ENTRE OS
+ARQUIVOS DE LOG. PROBLEMA COM COMANDOS QUE NÃO SÃO CARREGADOS DEPOIS DA ATIVIDADE.

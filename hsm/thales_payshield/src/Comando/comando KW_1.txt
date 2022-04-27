@@ -1,0 +1,69 @@
+#
+# MK-AC
+#
+Encrypted key	U7A7EA9B8435BD50A6A8393639399A202
+Clear Key		318CF726B03B6ECD0192620EB652EFC8
+Key check value	sAB247A
+
+#
+# ARQC - BPTools
+#
+
+BP-Tools - Cryptographic Calculator is ready
+********************
+ 
+EMV Cryptography: UDK derivation finished
+****************************************
+MDK:					318CF726B03B6ECD0192620EB652EFC8
+PAN:					05878038067710
+PAN sequence nr.:		00
+Derivation option:		Option A
+Key parity:				Right odd
+----------------------------------------
+UDK:					D93467BCD3AD792A688A678370D06207
+KCV:					CB58CF
+ 
+EMV Cryptography: Common Session key derivation finished
+****************************************
+Master key:				D93467BCD3AD792A688A678370D06207
+ATC:					0012
+Key parity:                         
+----------------------------------------
+Key generated:			86E6EC105DD62C98920E799879DF62FD
+KCV:					0DDC2E
+ 
+EMV Cryptography: AAC generation finished
+****************************************
+Session key:			86E6EC105DD62C98920E799879DF62FD
+Terminal data:			00000000730000000000000000760000040000098620051800443085D27900001201A031F80000
+ICC data:                            
+Padding method:			Method 2 (EMV spec or e.g. VISA CV14)
+----------------------------------------
+AC generated:			A0AED0E12B04E008
+
+#
+# KW
+#
+
+Message Header:                             0000
+Command Code:                               KW
+Mode Flag:                                  3
+Scheme ID:                                  3
+MK-AC:                                      U7A7EA9B8435BD50A6A8393639399A202
+PAN Length:                                 08
+PAN/PAN Sequence No:                        <0587803806771000>
+Delimiter:                                  ;
+Application Transaction Counter:            <0012>
+Transaction Data Length:                    28
+Transaction Data:                           <00000000730000000000000000760000040000098620051800443085D27900001201A031F8000080>
+Delimiter:                                  ;
+ARQC/TC/AAC or MPVV:                        <A0AED0E12B04E008>
+CSU:                                        <00820000>
+Proprietary Authentication Data Length:     0
+Proprietary Authentication Data:                          
+Delimiter:                                  %
+LMK Identifier:                             01
+ 
+Command:									0000KW33U7A7EA9B8435BD50A6A8393639399A20208<0587803806771000>;<0012>28<00000000730000000000000000760000040000098620051800443085D27900001201A031F8000080>;<A0AED0E12B04E008><00820000>0%01
+ 
+Received response							0000KX00[AC5676B300820000]

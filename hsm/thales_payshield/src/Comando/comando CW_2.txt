@@ -1,0 +1,55 @@
+#
+# LMK
+#
+ID Authorized  Scheme   Algorithm  Status Check  Comments 
+01 Yes(H,C)    Variant  3DES(2key) Test   268604 variant 
+
+#
+# Criação dos componentes CVK_A e CVK_B
+#
+
+Online-AUTH>gc 
+    Enter LMK id [0-1]: 1
+    Enter key length [1,2,3]: 2 
+    Enter key type: 402 
+    Enter key scheme: u 
+ 
+    Clear component: A8CEB0107962E5A7 D9BA2CE6C1A2C704  
+    Encrypted component: U31F617E660E19945E19A2D053DE5FFF1  
+    Key check value: FD67A8
+
+CVK A (Clear) - A8CEB0107962E5A7
+CVK B (Clear) - D9BA2CE6C1A2C704
+
+#
+# Criação da Chave CVK(402)
+#
+Online-AUTH>fk 
+    Enter LMK id [0-1]: 1 
+    Enter key length [1,2,3]: 2 
+    Enter key type: 402 
+    Enter key scheme: u 
+    Enter component type [X,H,T,E,S]: x 
+    Enter number of components [1-9]: 1 
+ 
+    Enter component 1: A8CEB0107962E5A7D9BA2CE6C1A2C704 
+    Component 1 check value: FD67A8 
+ 
+    Encrypted key: UD6F064E7419E807AC834E02878B81E31
+    Key check value: FD67A8 
+
+Message Header        0000
+Command Code         CW
+CVK A/B                         UD6F064E7419E807AC834E02878B81E31
+Primary account           4123456789012345
+Delimiter                        ;
+Expiration date              8701
+Service code                  101
+Delimiter                        %
+LMK Identifier                01
+
+Command                0000CWUD6F064E7419E807AC834E02878B81E314123456789012345;8701101%01
+
+Received response    0000CX00[323334]
+
+CVV                                234

@@ -1,0 +1,1 @@
+tcpudpsim -f LK.txt -d 10.20.60.167 -s 1500 -r -c 1 -i 1 -o LK_out.txt

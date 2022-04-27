@@ -1,0 +1,77 @@
+
+
+Mon Apr 12 22:42:57 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: A0.txt
+Protocol Used: tcp
+Destination IP: 10.20.60.160
+Destination Port: 1500
+Destination timeout: 60
+Output: A0_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [A0]
+Description        : A0
+Command            : 0000A00000U%00
+Length of Command Sent: 14
+Command Test OK
+Command    :0000A00000U%00
+Expected response: 0000A100
+Received response: 0000A100[554437394341343431424541304338394231303537464242363442383846344644393445324535]
+Total Time      : 0.022
+Transactions/Sec: 45.959
+Avg Time        : 0.022
+
+
+
+Test End: Mon Apr 12 22:42:57 2021
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 12960
+-------------------------------------------------
+Target IP address : 10.20.60.160
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Started:          : Mon Apr 12 22:42:57 2021
+Ended:            : Mon Apr 12 22:42:57 2021
+Total Time Spent  : 0.0218 seconds
+Transactions/Sec  : 45.9586 trans/sec
+Avg Time          : 0.0218 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Earliest start:   : Mon Apr 12 22:42:57 2021
+Latest end:       : Mon Apr 12 22:42:57 2021
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

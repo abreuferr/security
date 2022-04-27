@@ -1,0 +1,4 @@
+# RSA
+#
+generatekey -b -g -m1 pkcs11 plainname=test3rsa type=rsa protect=module size=2048
+

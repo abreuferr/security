@@ -1,0 +1,39 @@
+#
+# LMK
+#
+
+Online-AUTH>vt 
+ 
+LMK table: 
+ID Authorized  Scheme   Algorithm  Status Check  Comments 
+01 Yes(H,C)    KeyBlock AES-256    Test   9D04A0 keyblock 
+
+
+#
+# ZMK
+#
+
+Message Header				0000
+Command Code				A2
+Key Type					FFF
+Component Check Flag		2
+Key Scheme (LMK)			S
+Delimiter					%
+LMK ID						01
+Delimiter					#
+Key Usage					K0
+Algorithm					T2
+Mode of Use					N
+Key Version Number			00
+Exportability				S
+Number of Optional Blocks	00
+
+Command						0000A2FFF2S%01#K0T2N00S00
+
+Received response			0000A100[5331303039363532544E303053303030303738444542374534303037363535393045393239393133413741413743454232334134414431353831433737333031304137414138463636433332383336344539374643463541454345363039364136423936443845]
+
+Message Header				0000
+Response Code				A1
+Error Code					00
+Key Under LMK				S1009652TN00S000078DEB7E400765590E929913A7AA7CEB23A4AD1581C773010A7AA8F66C328364E97FCF5AECE6096A6
+KCV							B96D8E

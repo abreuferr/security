@@ -1,0 +1,41 @@
+###########
+## INPUT ##
+###########
+
+Menssage Header:		0000
+Command Code:			M2
+Mode Flag:				00
+Input Format Flag:		1
+Output Format Flag:		1
+Key Type:				009
+Key (BDK):				[UE50543536EAB5493829F0D146C1865C8]
+KSN Descriptor:			A05
+Key Serial Number:		BC75601201000DE00003
+Message Length:			0020
+Encrypted Message:		BD41EF723AF48C1FBD41EF723AF48C1F
+
+Command:	0000M20011009UE50543536EAB5493829F0D146C1865C8A05BC75601201000DE000030020BD41EF723AF48C1FBD41EF723AF48C1F
+
+
+############
+## OUTPUT ##
+############
+
+Received response: 0000M300[303032303644363536453733363136373635364436443635364537333631363736353644]
+
+Message Header		0000
+Response Code		M3
+Error Code			00
+Message Length		30303230
+Decrypted Message	3644363536453733363136373635364436443635364537333631363736353644 (HEX) > 6D656E736167656D6D656E736167656D (HEX) > mensagemmensagem (ASCII)
+
+OU
+
+Expected response: 0000M300********************
+Received response: 0000M30000106D656E736167656D
+
+Message Header		0000
+Response Code		M3
+Error Code			00
+Message Length		0010
+Encrypted Message	6D656E736167656D (HEX) > mensagem (ASCII)

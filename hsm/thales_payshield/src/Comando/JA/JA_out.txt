@@ -1,0 +1,77 @@
+
+
+Wed Mar 10 17:28:11 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: JA.txt
+Protocol Used: tcp
+Destination IP: 10.20.60.160
+Destination Port: 1500
+Destination timeout: 60
+Output: JA_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [JA]
+Description        : Teste JA
+Command            : 0000JA012345678910%00
+Length of Command Sent: 21
+Command Test OK
+Command    :0000JA012345678910%00
+Expected response: 0000JB00
+Received response: 0000JB00[3533393238]
+Total Time      : 0.013
+Transactions/Sec: 78.882
+Avg Time        : 0.013
+
+
+
+Test End: Wed Mar 10 17:28:11 2021
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 20172
+-------------------------------------------------
+Target IP address : 10.20.60.160
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Started:          : Wed Mar 10 17:28:11 2021
+Ended:            : Wed Mar 10 17:28:11 2021
+Total Time Spent  : 0.0127 seconds
+Transactions/Sec  : 78.8818 trans/sec
+Avg Time          : 0.0127 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Earliest start:   : Wed Mar 10 17:28:11 2021
+Latest end:       : Wed Mar 10 17:28:11 2021
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

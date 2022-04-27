@@ -1,0 +1,122 @@
+#
+# LMK
+#
+Secure-AUTH>vt
+	LMK table:
+	ID Authorized  Scheme   Algorithm  Status Check  Comments
+	00 Yes(H,C)    Variant  3DES(2key) Test   268604 variant
+
+#
+# Chave ZEK - ZEK 00A 00A Zone Encryption Key
+#
+	Encrypted key: U11D15D1CFB4C981A5D1277CD440B7487
+	Key check value: C27AB5
+
+#
+# CS - ANTES
+#
+Enable ZEK/TEK encryption of ASCII data or Binary data or None: None
+
+#
+# M0 - ANTES
+#
+Menssage Header		0000
+Command Code		M0
+Mode Flag			00
+Input Format Flag	2
+Output Format Flag	1
+Key Type			00A
+Key (ZEK)			U11D15D1CFB4C981A5D1277CD440B7487
+Message Length		0010
+Message				testedecriptogra
+Delimiter			%
+LMK Identifier		00
+Command				0000M0002100AU11D15D1CFB4C981A5D1277CD440B74870010testedecriptogra%00
+
+Received response	0000M105
+
+Message Header		0000
+Response Code		M1
+Error Code			05
+
+#
+# CS - DEPOIS
+#
+Enable ZEK/TEK encryption of ASCII data or Binary data or None: ASCII
+
+#
+# M0 - DEPOIS
+#
+Menssage Header		0000
+Command Code		M0
+Mode Flag			00
+Input Format Flag	2
+Output Format Flag	1
+Key Type			00A
+Key (ZEK)			U11D15D1CFB4C981A5D1277CD440B7487
+Message Length		0020
+Message				testedecriptogra
+Delimiter			%
+LMK Identifier		00
+Command				0000M0002100AU11D15D1CFB4C981A5D1277CD440B74870010testedecriptogra%00
+
+Received response	0000M100002086E14E4F636988493C5E42E2DC03A1C4
+
+Message Header		0000
+Response Code		M1
+Error Code			00
+Message Length		0020
+Encrypted Message	86E14E4F636988493C5E42E2DC03A1C4
+
+#
+# M2 - DEPOIS
+#
+Menssage Header:	0000
+Command Code:		M2
+Mode Flag:			00
+Input Format Flag:	1
+Output Format Flag:	2
+Key Type:			00A
+Key:				U11D15D1CFB4C981A5D1277CD440B7487
+Message Length:		0010
+Encrypted Message:	86E14E4F636988493C5E42E2DC03A1C4
+Delimiter			%
+LMK Identifier		00
+
+Command    			0000M2001200AU11D15D1CFB4C981A5D1277CD440B7487002086E14E4F636988493C5E42E2DC03A1C4%00
+
+Received response	0000M3000010testedecriptogra
+
+Message Header		0000
+Response Code		M1
+Error Code			00
+Message Length		0010
+Decrypted Message	testedecriptogra
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

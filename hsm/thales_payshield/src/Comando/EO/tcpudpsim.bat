@@ -1,0 +1,1 @@
+tcpudpsim -f EO.txt -d 10.20.100.101 -s 1500 -c 1 -i 1 -o EO_out.txt -r

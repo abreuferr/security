@@ -1,0 +1,1 @@
+tcpudpsim -f KW.txt -d 10.20.60.167 -s 1500 -r -c 1 -i 1 -o KW_out.txt

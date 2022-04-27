@@ -1,0 +1,79 @@
+LMK table: 
+ID Authorized  Scheme   Algorithm  Status Check  Comments 
+00 Yes(H,C)    Variant  3DES(2key) Test   268604 Variant 
+Key change storage table:No keys loaded in key change storage
+
+###############################################################################################################
+# Component
+###############################################################################################################
+Clear component: F779 3B5D B564 B5BC 91DA BC68 FEB9 DAAE  
+Encrypted component: UA10D E99C 5717 AACE 55EC A66A DF58 8760  
+Key check value: E99D42 
+
+Clear component: 9D3B C715 D3FD 04C4 FDA7 FB58 2FEF C8C7  
+Encrypted component: U40E3 2B3E EECD A06F 97AD C743 764A 8642  
+Key check value: B4AACE
+
+###############################################################################################################
+# ZMK
+###############################################################################################################
+Secure-AUTH>fk 
+Enter LMK id [0-1]: 0 
+Enter key length [1,2,3]: 2 
+Enter key type: 000 
+Enter key scheme: u 
+Enter component type [X,H,T,E,S]: x 
+Enter number of components [1-9]: 2 
+Enter component 1: *************************************** 
+Component 1 check value: E99D42 
+Continue? [Y/N]: y 
+Enter component 2: *************************************** 
+Component 2 check value: B4AACE 
+Continue? [Y/N]: y 
+ 
+Encrypted key: U430F81396403E359679EA14A707659A6  
+Key check value: F9651D 
+
+
+###############################################################################################################
+# ZEK
+###############################################################################################################
+Secure-AUTH>fk 
+Enter LMK id [0-1]: 0 
+Enter key length [1,2,3]: 2 
+Enter key type: 00a 
+Enter key scheme: u 
+Enter component type [X,H,T,E,S]: x 
+Enter number of components [1-9]: 2 
+Enter component 1: *************************************** 
+Component 1 check value: E99D42 
+Continue? [Y/N]: y 
+Enter component 2: *************************************** 
+Component 2 check value: B4AACE 
+Continue? [Y/N]: y 
+
+####Encrypted key: U7C416A36909A00E7097A5814A9E562E7  
+####Key check value: F9651D 
+
+
+###############################################################################################################
+# A8
+###############################################################################################################
+Message Header				0000
+Command Code				A8
+Key Type					00A
+ZMK (or TMK)				U430F81396403E359679EA14A707659A6
+Key							U7C416A36909A00E7097A5814A9E562E7
+Key Scheme (ZMK or  TMK)	X
+Delimiter					%                      
+LMK Identifier				00
+
+Command						0000A800aU430F81396403E359679EA14A707659A6U9D7FEE0AF4BB9D29E109A73F20E80C5CX%00
+
+Received response: 			0000A900[583236453645313132373638324642374533333935414146344437344246344633393442324146]
+
+Message Header		0000
+Response Code		A9
+Error Code			00
+Key					X26E6E1127682FB7E3395AAF4D74BF4F3
+Key Check Value		94B2AF

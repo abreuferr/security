@@ -1,0 +1,1 @@
+tcpudpsim -f je.txt -d 10.20.60.167 -s 1500 -c 1 -i 1 -o je_out.txt -r

@@ -1,0 +1,33 @@
+#
+# LMK
+#
+Online>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 No          KeyBlock AES-256    Test   9D04A0 AES LMK 
+	01 No          Variant  3DES(2key) Test   268604 Variant 
+	Key change storage table:No keys loaded in key change storage 
+
+#
+# JA
+#
+
+Message Header			0000
+Command Code			JA
+Account Number			179999900013
+PIN Length				04
+Delimiter				*			(Only present if the following Excluded PIN fields are present.)
+Excluded PIN Count		02			(The number of excluded PINs listed in the following Excluded PIN Table.)
+Excluded PIN Length		04			(The length of each excluded PIN in the following Excluded PIN Table)
+Excluded PIN Table		00001111	(A list of PINs to be excluded)
+Delimiter				%
+LMK Identifier			00
+
+Command					0000JA17999990001304*020400001111%00
+
+Received response		0000JB00JD8FAD4F236235C468DEAC518A3A79D7E
+
+Message Header			0000
+Response Code			JB
+Error Code				00			
+PIN						JD8FAD4F236235C468DEAC518A3A79D7E

@@ -1,0 +1,22 @@
+###############################################################################################################
+# BU
+###############################################################################################################
+
+Message Header		0000
+Command Code		BU
+Key type			FF
+Key Length Flag		F
+Key					S10096P0TN00S0000ABEB692E5A4DB0387C26AFCB2C0E755C0198D012C1B1BB9DAA75FF521AAAAEBC46CD715C97269C2B
+Delimiter			;
+Key type			FFF
+Delimiter			%
+LMK ID				00
+
+Command				0000BUFFFS10096P0TN00S0000ABEB692E5A4DB0387C26AFCB2C0E755C0198D012C1B1BB9DAA75FF521AAAAEBC46CD715C97269C2B;FFF%00
+
+Received response	0000BV008A47320000000000
+
+Message Header		0000
+Response Code		BV
+Error Code			00
+Key Check Value		8A4732 0000000000

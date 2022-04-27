@@ -1,0 +1,117 @@
+#
+# J2
+#
+
+Message Header		0000
+Command Code		J2
+
+Command				0000J2
+
+Received response	0000J300B4665303046N21030412423921031112542821031112542800006053230000100000605320;0100200000000000;0200300000000000;0300400000000000;0400500000000000;0500600000000000;0600700000000000;0700800000000001;0800900000000000;0901000000000001;1001000000000001;
+
+Message Header	0000
+Response Code	J3
+Error Code		00
+
+Serial Number	B4665303046N
+Start Date		210304
+Start Time		124239
+End Date		210311
+End Time		125428
+Current Date	210311
+Current Time	125428
+Seconds			0000605323
+
+Starting Percentage	000
+Ending Percentage	010
+Number Time Periods	0000605320
+Delimiter			;
+
+Starting Percentage	010
+Ending Percentage	020
+Number Time Periods	0000000000
+Delimiter			;
+
+Starting Percentage	020
+Ending Percentage	030
+Number Time Periods	0000000000
+Delimiter			;
+
+Starting Percentage	030
+Ending Percentage	040
+Number Time Periods	0000000000
+Delimiter			;
+
+Starting Percentage	040
+Ending Percentage	050
+Number Time Periods	0000000000
+Delimiter			;
+
+Starting Percentage	050
+Ending Percentage	060
+Number Time Periods	0000000000
+Delimiter			;
+
+Starting Percentage	060
+Ending Percentage	070
+Number Time Periods	0000000000
+Delimiter			;
+
+Starting Percentage	070
+Ending Percentage	080
+Number Time Periods	0000000001
+Delimiter			;
+
+Starting Percentage	080
+Ending Percentage	090
+Number Time Periods	0000000000
+Delimiter			;
+
+Starting Percentage	090
+Ending Percentage	100
+Number Time Periods	0000000001
+Delimiter			;
+
+Starting Percentage	100
+Ending Percentage	100
+Number Time Periods	0000000001
+Delimiter			;
+
+Online-AUTH>utilstats 
+ 
+HSM Serial Number:         B4665303046N 
+ 
+Report Generation Time:    11-Mar-2021 13:03.19 
+Report Start Time:         04-Mar-2021 12:42.39 
+Report End Time:           11-Mar-2021 13:03.19 
+Total Number of Secs:      605855 
+ 
+HSM Loading: 
+      0-10%:    605852 
+      10-20%:    0 
+      20-30%:    0 
+      30-40%:    0 
+      40-50%:    0 
+      50-60%:    0 
+      60-70%:    0 
+      70-80%:    1 
+      80-90%:    0 
+      90-100%:   1 
+      100%:      1 
+ 
+Press "Enter" to continue... 
+ 
+Host Command Volumes: 
+    Cmd Code  Total Transactions  Average TPS 
+    BW        2                   0.00        
+    CC        2                   0.00        
+    CW        2                   0.00        
+    CY        2                   0.00        
+    EI        5                   0.00        
+    J2        2                   0.00        
+    JA        2                   0.00        
+    KQ        1                   0.00        
+    KW        1                   0.00        
+    M0        11                  0.00        
+    M2        4                   0.00        
+    X0        1                   0.00        

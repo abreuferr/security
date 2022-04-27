@@ -1,0 +1,22 @@
+Message Header  				0000
+Command Code  					CC
+Source ZPK						U7A7EAD902DD5CFBCAA69FE5645BD5CCD
+Source ZPK						U7A7EAD902DD5CFBCAA69FE5645BD5CCD
+Maximum PIN Length  			04
+Source PIN block 				39B5D93345A91A41 ; PIN Block obtido através do comando JG
+Source PIN block format   		01
+Destination PIN block format   	01
+PAN/Token						331810031069
+Delimiter						%
+LMK								00
+
+Command:                        0000CCU7A7EAD902DD5CFBCAA69FE5645BD5CCDU7A7EAD902DD5CFBCAA69FE5645BD5CCD0439B5D93345A91A410101331810031069
+
+Response                        0000CD00[0439B5D93345A91A4101]
+
+Message Header  				0000
+Response Code  					CD
+Error Code   					00
+PIN Length   					04
+Destination PIN block  			39B5D93345A91A41
+Destination PIN block format   	01

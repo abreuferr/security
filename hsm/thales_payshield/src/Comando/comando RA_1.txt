@@ -1,0 +1,12 @@
+Message Header					0000
+Command Code					RA
+Mode Flag						01
+Number of Authorised Activities	01
+Authorised Activity 			import.02.host:persistent
+Delimiter						%
+LMK Identifier					00
+
+Command							0000RA0101import.02.host.persistent%00
+
+Expected response: 0000RB00
+Received response: 0000RB15

@@ -1,0 +1,91 @@
+#
+# LMK
+#
+
+Online-AUTH>vt 
+
+LMK table: 
+ID Authorized  Scheme   Algorithm  Status Check  Comments 
+00 Yes(H,C)    KeyBlock AES-256    Test   9D04A0 keyblock 
+Key change storage table:No keys loaded in key change storage
+
+#
+# BDK
+#
+
+# BDK DE ORIGEM (AES)
+DUKPT (AES): Working keys derivation finished
+****************************************
+BDK:					E7E08D990422C5364C394A358CAAA399
+KSN:					BC75601102A00040001F0000
+----------------------------------------
+Initial Key:            324D0EB99D10B4B147AAAFD0A8BE9BF9
+KSN (working):          BC75601102A00040001F0000
+Transaction Counter:    001F0000
+Initial Key Id:         BC75601102A00040
+----------------------------------------
+PIN Encryption Key:     26AE2F073029FDD60AECC34478C86E2B - PEK AES
+
+# BDK DE DESTINO (3DES)
+
+BDK	3DES				F846B5629DBA5B5B2940106EEF86BAD3
+
+
+#
+# PIN BLOCK AES (ISO format 4)
+#
+
+PIN blocks: PIN block encrypt operation finished
+****************************************
+PAN:					1111222233334444
+PIN:					1234
+PAD:					N/A
+Format:					Format 4 (ISO-4)
+----------------------------------------
+Clear PIN block:		441234AAAAAAAAAAA9095144DF5A7C0C
+Clear PAN block:		41111222233334444000000000000000
+
+
+AES OLP PIN Block Format 4 operation finished
+****************************************
+Key:					26AE2F073029FDD60AECC34478C86E2B
+PIN Block:				441234AAAAAAAAAAA9095144DF5A7C0C
+PAN Block:				41111222233334444000000000000000
+Mode:					AES-ECB
+----------------------------------------
+Intermediate Block A:	F5E69BF6CE5935D2BD68A1B7D57F44DE - Campo encriptado de PIN
+Intermediate Block B:	B4F789D4ED6A0196FD68A1B7D57F44DE - PIN Block AES em claro
+----------------------------------------
+Encrypted PIN Block:	C31312AF0C1A04B0AFDCC8058B5D3579 - PIN Block AES encriptado
+
+
+#
+# Comando G0
+#
+
+Message Header					0000
+Command Code					G0
+Source Key						S10096B0TX00S00010993B965897F2161D0910BC3F8F698ACC4A0D5C822E258810CD3FC0BF8E9C2081AC5A20C0F563842
+Destination Key					S10096B0AX00S0000354B1CDB7F8C980EC7B2D4C5E6CCFB9FE65402B41CAB53020B18E7CECECBB40A1CCBC041190D2F16
+Source KSN Descriptor			A05
+Source Key Serial Number		BC75601102A00040001F
+Destination KSN Descriptor		000
+Destination Key Serial Number	BC75601102A00040001F0000
+Source PIN Block				145B9A94ACC32BED
+Source PB Format Code			01
+Destination PB Format Code		48
+PAN								1111222233334444
+Delimiter						;
+Delimiter						%
+LMK ID							00
+
+Command Message					0000G0S10096B0TX00S00010993B965897F2161D0910BC3F8F698ACC4A0D5C822E258810CD3FC0BF8E9C2081AC5A20C0F563842S10096B0AX00S0000354B1CDB7F8C980EC7B2D4C5E6CCFB9FE65402B41CAB53020B18E7CECECBB40A1CCBC041190D2F16A05BC75601102A00040001F000BC75601102A00040001F0000145B9A94ACC32BED01481111222233334444;%01
+
+Response Message				0000G10004C31312AF0C1A04B0AFDCC8058B5D357948
+
+Message Header					0000
+Response Code					G1
+Error Code						00
+PIN Length						04
+Destination PIN Block			C31312AF0C1A04B0AFDCC8058B5D3579
+Destination PB format code		48

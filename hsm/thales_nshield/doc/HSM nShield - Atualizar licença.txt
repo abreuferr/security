@@ -1,0 +1,38 @@
+
+
+
+############################################################################
+
+SEE restricted
+ECC x 3 files
+Client x 12
+
+############################################################################
+
+SunriseCGT2-45224292013_ACCECC_7CD1-74EA-6F43.txt
+SunriseCGT2-45224292013_ECCMQV_7CD1-74EA-6F43.txt
+SunriseCGT2-45224292013_ECC_7CD1-74EA-6F43.txt
+SunriseCGT2-45224292013_MEXP_7CD1-74EA-6F43.txt
+SunriseCGT2-45224292013_SEEU_7CD1-74EA-6F43.txt
+
+############################################################################
+
+Yes, 3 are for EC features.
+
+The MEXP is license for clients.
+
+The SEEU is SEE machine restricted license.
+
+You can rename them so its easier to type in the front panel.
+
+Rename them to 1 , 2 , 3 , 4, 5 if you wish.
+
+############################################################################
+
+1. Put the file that contains the feature enabling certificate in "/opt/nfast/kmdata/hsm-ESN/features/" on the remote file system. 
+
+2. From the front panel, select HSM > HSM feature enable > Read from a file.
+
+3. Specify the name of the file that contains the certificate.
+
+############################################################################

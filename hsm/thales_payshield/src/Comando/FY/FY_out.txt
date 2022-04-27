@@ -1,0 +1,77 @@
+
+
+Mon Mar 22 19:37:03 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: FY.txt
+Protocol Used: tcp
+Destination IP: 10.20.100.101
+Destination Port: 1500
+Destination timeout: 60
+Output: FY_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [FY]
+Description        : FY;
+Command            : 0000FY010203%01#S00S00
+Length of Command Sent: 22
+Command Test OK
+Command    :0000FY010203%01#S00S00
+Expected response: 0000FZ00
+Received response: 0000FZ00[3031353830819B301006072A8648CE3D020106052B810400230381860004007413DAD6DEBFC04A60D49E1E18CAC1D9D02ACEE24B168AD3E9AAD25C1D098E8BB8FC93ED53FFC57E7FED8E007744D6458DC0037A4A583615E2D615FB4F6A3C525001682672A352EEFEF8D92BCA25F7019AF3DBD91376FCF50940D342187DBE63073DC04C90CECDED6648E65046310CFF9D659CD70F2E82E693A9D463F79FE6F1E1595E533130323234303345533030533030303141393233304234413745463443313630434434343737354230344234354636434245413536453333314634344535423232334134323333464230314335443945353341384544413430453846393131453635393735303945324345334439304233363042423831393132344638364135353034304334454433423537354633363330373245423230423041343633463344334130354133314233303138323530323435383733373546313030313539443031324241423537344333304446464336433637464332384130374336443336]
+Total Time      : 0.049
+Transactions/Sec: 20.593
+Avg Time        : 0.049
+
+
+
+Test End: Mon Mar 22 19:37:03 2021
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 15968
+-------------------------------------------------
+Target IP address : 10.20.100.101
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Started:          : Mon Mar 22 19:37:03 2021
+Ended:            : Mon Mar 22 19:37:03 2021
+Total Time Spent  : 0.0486 seconds
+Transactions/Sec  : 20.5927 trans/sec
+Avg Time          : 0.0486 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Earliest start:   : Mon Mar 22 19:37:03 2021
+Latest end:       : Mon Mar 22 19:37:03 2021
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

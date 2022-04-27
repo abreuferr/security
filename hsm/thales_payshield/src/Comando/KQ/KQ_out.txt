@@ -1,0 +1,78 @@
+
+
+Wed Mar 10 17:24:31 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: KQ.txt
+Protocol Used: tcp
+Destination IP: 10.20.60.160
+Destination Port: 1500
+Destination timeout: 60
+Output: KQ_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [KQ]
+Description        : Comando KQ
+Command            : 0000KQ11UFE5152B928F45F1AE073F114408C0BA9<1122334455667700><0006><B491D40B>28<00000000000300000000000000768000048000098620082600b491d40b18000006a0000322000080>;<CA134CFEA2B6170F><0012>%00
+Length of Command Sent: 111
+
+Compare FAILED
+Command Number in File = 0 FAILED
+Failure on iter:1 of 1
+Section Failure: [KQ]
+Total Time      : 0.012
+Command    :0000KQ11UFE5152B928F45F1AE073F114408C0BA9<1122334455667700><0006><B491D40B>28<00000000000300000000000000768000048000098620082600b491d40b18000006a0000322000080>;<CA134CFEA2B6170F><0012>%00
+Expected response: 0000KX00
+Received response: 0000KR00[E54D0CB229594990]
+
+
+Test End: Wed Mar 10 17:24:31 2021
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 9796
+-------------------------------------------------
+Target IP address : 10.20.60.160
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 0
+Failed Tests      : 1
+-------------------------------------------------
+Started:          : Wed Mar 10 17:24:31 2021
+Ended:            : Wed Mar 10 17:24:31 2021
+Total Time Spent  : 0.0117 seconds
+Transactions/Sec  : 85.6626 trans/sec
+Avg Time          : 0.0117 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 0
+Failed Tests      : 1
+-------------------------------------------------
+Earliest start:   : Wed Mar 10 17:24:31 2021
+Latest end:       : Wed Mar 10 17:24:31 2021
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

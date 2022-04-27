@@ -1,0 +1,1 @@
+tcpudpsim -f A6.txt -d 10.20.100.101 -s 1500 -r -c 1 -i 1 -o A6_out.txt

@@ -1,0 +1,1 @@
+tcpudpsim -f RA.txt -d 10.20.100.200 -s 1500 -r -c 1 -i 1 -o RA_out.txt

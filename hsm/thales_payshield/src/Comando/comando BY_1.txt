@@ -1,0 +1,62 @@
+#
+# LMK
+#
+
+Secure>vt 
+
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H,C)    Variant  3DES(2key) Test   268604 variant 
+	Key change storage table:No keys loaded in key change storage 
+
+#
+# ZMK
+#
+
+Secure-AUTH>kg 
+ 
+	Key under LMK: U065E F499 04C3 336F 2501 6DC7 0048 D23C  
+	Key check value: 2CE2C8 
+
+Online-AUTH>kg 
+ 
+	Key under LMK: UDD7D D881 5D8A D9DA 468C 8F94 66F2 B3AF  
+	Key check value: 7A5A8D 
+
+#
+# EXPORT
+#
+
+Secure-AUTH>ke 
+ 
+	Enter LMK id [0-1]: 0 
+	Enter key type: 000 
+	Enter key scheme: x 
+	Enter ZMK: U065E F499 04C3 336F 2501 6DC7 0048 D23C 
+	Enter key under LMK: UDD7D D881 5D8A D9DA 468C 8F94 66F2 B3AF 
+ 
+	Key under ZMK: X3BBB 6C48 ED7F 4384 32EB B8AC 86B4 3B5E  
+	Key check value: 7A5A8D 
+
+#
+# COMANDO BY
+#
+
+Message header						0000
+Command code						BY
+ZMKi								U065EF49904C3336F25016DC70048D23C
+(The ZMKi encrypted under the LMK)
+ZMK									X3BBB6C48ED7F438432EBB8AC86B43B5E
+(The ZMK encrypted under ZMKi)
+Delimiter							% 
+LMK Identifier						00
+
+Command Message						0000BYU065EF49904C3336F25016DC70048D23CX3BBB6C48ED7F438432EBB8AC86B43B5E%00
+
+Response Command					0000BZ00UDD7DD8815D8AD9DA468C8F9466F2B3AF7A5A8D
+
+Message Header						0000
+Response Code						BZ
+Error Code							00
+ZMK									UDD7DD8815D8AD9DA468C8F9466F2B3AF
+Key Check Value						7A5A8D

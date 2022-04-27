@@ -1,0 +1,22 @@
+Message Header		0000
+Command Code		M6
+Mode Flag			0
+Input Format Flag	0
+MAC Size			1
+MAC Algorithm		1
+Padding Method		1
+Key Type			003
+Key					3A5A4583405B1D80
+Message Lenght		0008
+Message				<60265198066340080009404000000000>
+Delimiter			%
+LMK Identifier		01
+
+Command				0000M6001110033A5A4583405B1D800010<60265198066340080009404000000000>%01
+
+Received response	0000M700[AEE93F6331BCF7F8]
+
+0000
+M7
+00
+AEE93F6331BCF7F8

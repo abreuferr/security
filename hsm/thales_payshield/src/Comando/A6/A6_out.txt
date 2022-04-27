@@ -1,0 +1,77 @@
+
+
+Mon Mar 29 20:39:42 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: A6.txt
+Protocol Used: tcp
+Destination IP: 10.20.100.101
+Destination Port: 1500
+Destination timeout: 60
+Output: A6_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [A6]
+Description        : COMAND A6
+Command            : 0000A6009UB1039769EE3A27E9F334CE3BCEF07D9BX09684F7F62D6DA7D5D29EE6CD20A4867U%00
+Length of Command Sent: 79
+Command Test OK
+Command    :0000A6009UB1039769EE3A27E9F334CE3BCEF07D9BX09684F7F62D6DA7D5D29EE6CD20A4867U%00
+Expected response: 0000A700
+Received response: 0000A700[554630443146393231363837363231423030454346454432423139454334383344334634353139]
+Total Time      : 0.013
+Transactions/Sec: 74.962
+Avg Time        : 0.013
+
+
+
+Test End: Mon Mar 29 20:39:42 2021
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 13036
+-------------------------------------------------
+Target IP address : 10.20.100.101
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Started:          : Mon Mar 29 20:39:42 2021
+Ended:            : Mon Mar 29 20:39:42 2021
+Total Time Spent  : 0.0133 seconds
+Transactions/Sec  : 74.9620 trans/sec
+Avg Time          : 0.0133 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Earliest start:   : Mon Mar 29 20:39:42 2021
+Latest end:       : Mon Mar 29 20:39:42 2021
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

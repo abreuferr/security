@@ -1,0 +1,35 @@
+#
+# KU with Mastercard example
+#
+
+Message Header							0000
+Command Code							KU
+Mode Flag								3
+Scheme ID								1
+MK-SMI									U1BD84AE1109F2F1C1731C7B5A2CDB6E4
+PAN/Sequence No							<2934050000090501>
+Integrity Session Key Data				<1421242070442813> - For Scheme ID = '1', this is an 8 byte random number, RANDi
+Plaintext Message Data Length			000F
+Plaintext Message Data					<8424000210000F374994423D57F01E>
+Delimiter								;
+Confidentiality Session Data			<1421242070442813> - For Scheme ID = '1' (Europay/MasterCard) this is a random number, RANDc
+Offset									000F
+Cipher Text Message Data Length			0010
+Cipher Text Message Data				<5566B8C7706E08D35566B8C7706E08D3>
+Delimiter								;
+Source PIN Encryption Key Type			0
+Source PIN Encryption Key				T6C4811B95B2037C1885C37D2392772C3729AFD8DB3B6497C
+Source PIN Block Format Code			01
+Destination PIN Block Format Code		34
+PAN										934050000090
+Delimiter								%
+LMK Identifier							01
+
+Command									0000KU31U1BD84AE1109F2F1C1731C7B5A2CDB6E4<2934050000090501><1421242070442813>000F<8424000210000F374994423D57F01E>;<1421242070442813>000F0010<5566B8C7706E08D35566B8C7706E08D3>;0T6C4811B95B2037C1885C37D2392772C3729AFD8DB3B6497C0134934050000090%01
+
+Response:
+0000KV00[853B7E42F94A3A6830303038950F301C4656AEE8]
+
+
+Message Header:                                                                                                             0000
+Response Code:                                                                                                                

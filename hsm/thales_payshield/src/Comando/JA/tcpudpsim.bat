@@ -1,0 +1,1 @@
+tcpudpsim -f JA.txt -d 10.20.60.160 -s 1500 -r -c 1 -i 1 -o JA_out.txt

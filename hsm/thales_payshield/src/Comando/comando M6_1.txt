@@ -1,0 +1,40 @@
+#
+# OBSERVAÇÃO
+#
+
+No payShield 9000 com o comando M6 há algumas alterações quando comparado com o payShield 8000: Foi adicionado o campo “MAC Size” 
+que determina o tamanho em hex do MAC e o “MAC Algorithm” não possui mais 2 números como resposta.*
+
+No comando para adicionar os 23 bytes finais utilizei, assim como no seu exemplo, o Padding Method: 1. Porém, a mensagem ainda têm 
+que ter o tamanho múltiplo de 8, ao usar o Padding = 1 significa que a mensagem será completada com o “0” até seu tamanho ser múltiplo 
+de 8. Por isto a “Message Lenght” está 0018 (24 bytes) e na Message está o “0” no final.*
+
+#
+# COMANDO M6
+#
+
+Final block of a multi-block message (23 bytes).
+
+Message Header:			0000
+Command Code:			M6
+Mode flag:				3
+Input Format Flag:		0
+MAC Size:				1
+MAC Algorithm:			3
+Padding Method:			1
+Key Type:				003
+Key:					U6857D0C2971EC7A5EB5945778BD669DF
+IV:						34304642334430463443414542433546
+Message Length:			0018
+Message:				082187d22a5ad0bafcd65c50
+
+
+Command:				0000M630131003U6857D0C2971EC7A5EB5945778BD669DF<34304642334430463443414542433546>0018082187d22a5ad0bafcd65c50
+
+Received response:		0000M700[41384144363439304332353841363034]
+
+Message Header			0000
+Response Code			M7
+Error Code				00
+IV						4138414436343930
+MAC						4332353841363034

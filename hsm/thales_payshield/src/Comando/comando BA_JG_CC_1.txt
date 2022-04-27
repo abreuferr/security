@@ -1,0 +1,121 @@
+################################################################
+#
+# LMK - OKAY
+#
+################################################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H,C)    Variant  3DES(2key) Test   268604 variant 
+
+################################################################
+#
+# BA (Encrypt a clear text PIN) - OKAY
+#
+################################################################
+
+Header  		0000
+Command Code 	BA
+PIN 			1257F
+PAN				149210000519
+Delimiter		%
+LMK Identifier	00
+
+Command			0000BA1257F149210000519%00
+
+Response   		0000BB0061099
+
+Message Header  0000
+Response Code   BB
+Error Code 		00
+PIN 			61099
+
+################################################################
+#
+# JG (Translate a PIN from LMK to ZPK Encryption)
+#
+################################################################
+
+Message Header   		0000
+Command Code 			JG
+Destination ZPK 		U7A7EAD902DD5CFBCAA69FE5645BD5CCD
+PIN Block Format Code   01
+PAN 					149210000519
+PIN	 					61099
+Delimiter 				%
+LMK 					00
+
+Command 				0000JGU7A7EAD902DD5CFBCAA69FE5645BD5CCD0114921000051961099%00
+
+Response 				0000JH0086D67C56E5628A09
+
+Message Header   		0000
+Response Code 			JH
+Error Code 				00
+PIN Block 				86D67C56E5628A09
+
+
+################################################################
+#
+# CC - 01
+#
+################################################################
+
+Message Header  				0000
+Command Code  					CC
+Source ZPK						U7A7EAD902DD5CFBCAA69FE5645BD5CCD
+Source ZPK						UDDCC07B51BFD0C8F0BB9FBED95E242F4
+Maximum PIN Length  			04
+Source PIN block 				86D67C56E5628A09
+Source PIN block format   		01
+Destination PIN block format   	01
+PAN/Token						149210000519
+Delimiter						%
+LMK								00
+
+Command							0000CCU7A7EAD902DD5CFBCAA69FE5645BD5CCDUDDCC07B51BFD0C8F0BB9FBED95E242F40486D67C56E5628A090101149210000519%00
+
+Response                        0000CD0004833298B2A3241FC801
+
+Message Header  				0000
+Response Code  					CD
+Error Code   					00
+PIN Length   					04
+Destination PIN block  			833298B2A3241FC8
+Destination PIN block format   	01
+
+################################################################
+#
+# CC - 02
+#
+################################################################
+
+Message Header   			TEST
+Command Code   				CC
+Source ZPK 					U7A7EAD902DD5CFBCAA69FE5645BD5CCD
+Destination ZPK 			UDDCC07B51BFD0C8F0BB9FBED95E242F4
+PIn Block (fixed) 			12
+Pin Block 					FBDDA59BF2B29A22
+Source PIN Block 			48
+Destination PIN block 		01
+PAN 						149210000519
+Delimiter 					;
+Delimiter 					%
+LMK Identifier 				00
+
+Command						TESTCCU7A7EAD902DD5CFBCAA69FE5645BD5CCDUDDCC07B51BFD0C8F0BB9FBED95E242F412FBDDA59BF2B29A224801149210000519;%00
+
+
+Response                        0000CD000486D67C56E5628A0901
+
+Message Header  				0000
+Response Code  					CD
+Error Code   					00
+PIN Length   					04
+Destination PIN block  			86D67C56E5628A09
+Destination PIN block format   	01
+
+
+
+

@@ -1,0 +1,16 @@
+
+
+Fri Mar 12 19:14:03 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: KU.txt
+Protocol Used: tcp
+Destination IP: 10.20.60.167
+Destination Port: 1500
+Destination timeout: 60
+Output: KU_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+

@@ -1,0 +1,24 @@
+Ticket #XXXXXXXXXXXXXXXX - [Cliente] Solução - problema
+Ticket #2020071741000047 — [Tecban] HSM 9K - Doubts about using TLS in HSM
+ 
+Nomenclatura do [Cliente] colocar conforme o campo [ID do Cliente] do OTRS.
+Lista de [Soluções] que suportamos:
+payShield 9K;
+payShield 10K;
+payShield Remote Manager;
+payShield Monitor;
+CipherTrust;
+nShield
+nShield Monitor;
+Vormetric;
+Luna;
+Dinamo;
+HOP1;
+HOP2;
+HOP3;
+Problemas - O título conforme aberto pelo cliente.
+
+###############################################################################################################################
+
+Ticket #YYYYYYYYYYYYYYY — [Cliente] Solução - problema
+Ticket #YYYYYYYYYYYYYYY — [Tecban] HSM 9K - Doubts about using TLS in HSM ; nota no OTRS da FT referente ao número do chamado junto a Thales

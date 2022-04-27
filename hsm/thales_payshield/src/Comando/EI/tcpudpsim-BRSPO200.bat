@@ -1,0 +1,1 @@
+tcpudpsim -f EI.txt -d 192.168.3.4 -s 1500 -r -c 1 -i 1 -o EI_out.txt

@@ -1,0 +1,77 @@
+
+
+Wed Mar 10 17:42:33 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: CY.txt
+Protocol Used: tcp
+Destination IP: 10.20.60.160
+Destination Port: 1500
+Destination timeout: 60
+Output: CY_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [CY]
+Description        : 0000
+Command            : 0000CYUD6F064E7419E807AC834E02878B81E312344123456789012345;8701101%00
+Length of Command Sent: 69
+Command Test OK
+Command    :0000CYUD6F064E7419E807AC834E02878B81E312344123456789012345;8701101%00
+Expected response: 0000CZ00
+Received response: 0000CZ00
+Total Time      : 0.011
+Transactions/Sec: 92.185
+Avg Time        : 0.011
+
+
+
+Test End: Wed Mar 10 17:42:33 2021
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 24824
+-------------------------------------------------
+Target IP address : 10.20.60.160
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Started:          : Wed Mar 10 17:42:33 2021
+Ended:            : Wed Mar 10 17:42:33 2021
+Total Time Spent  : 0.0108 seconds
+Transactions/Sec  : 92.1854 trans/sec
+Avg Time          : 0.0108 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Earliest start:   : Wed Mar 10 17:42:33 2021
+Latest end:       : Wed Mar 10 17:42:33 2021
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

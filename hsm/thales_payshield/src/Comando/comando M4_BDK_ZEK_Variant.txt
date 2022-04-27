@@ -1,0 +1,39 @@
+Online-AUTH>vt
+	LMK table:
+	ID Authorized  Scheme   Algorithm  Status Check  Comments
+	01 Yes(H,C)    Variant  3DES(2key) Test   268604 variant
+
+# BDK_A(009)
+Encrypted key: U61E6481AEB53A0C6287892EBABE465C9
+Key check value: EDD0E5
+
+# ZEK(00A)
+Encrypted key: U236665286DEA7A8A402EB211F70912E8
+Key check value: 5DFDE8
+
+Message Header				0000
+Command Code				M4
+Source Mode Flag			00
+Destination Mode Flag		00
+Input Format Flag			0
+Output Format Flag			0
+Source Key Type				009
+Source Key	(BDK_A)			U61E6481AEB53A0C6287892EBABE465C9
+Source KSN Descriptor		A05
+Source Key Serial Number	FFFFBE77572925E00000
+Destination Key Type		00A
+Destination Key	(ZEK)		U236665286DEA7A8A402EB211F70912E8
+Message Length				0008
+Encrypted Message			<90544A5AD29B49D5>
+Delimiter					%
+LMK Identifier				01
+
+Command:					0000M4000000009U61E6481AEB53A0C6287892EBABE465C9A05FFFFBE77572925E0000000AU236665286DEA7A8A402EB211F70912E80008<90544A5AD29B49D5>%01
+
+Received response: 			0000M500[303030389F4AB4F8AE296BE5]
+
+Message Header				0000
+Response Code				M5
+Error Code					00
+Message Length				30303038 = 30303038(HEX) = 0008(ASCII)
+Translated Message			9F4AB4F8AE296BE5

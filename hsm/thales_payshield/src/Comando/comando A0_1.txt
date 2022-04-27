@@ -1,0 +1,133 @@
+###############################################################################################################
+# ZMK
+###############################################################################################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H,C)    KeyBlock AES-256    Test   9D04A0  
+
+Message Header					0000
+Command Code					A0
+Mode							0
+Key Type						FFF
+Key Scheme (LMK)				S
+Delimiter						%
+LMK ID							00
+Delimiter						#
+Key Usage						52
+Algorithm						T2
+Mode of Use						N
+Key Version Number				00
+Exportability					S
+Number of Optional Blocks		00
+
+Command							0000A00FFFS%00#52T2N00S00
+
+Received response				0000A100[5331303039363532544E303053303030303738444542374534303037363535393045393239393133413741413743454232334134414431353831433737333031304137414138463636433332383336344539374643463541454345363039364136423936443845]
+
+Message Header					0000
+Response Code					A1
+Error Code						00
+Key Under LMK					S1009652TN00S000078DEB7E400765590E929913A7AA7CEB23A4AD1581C773010A7AA8F66C328364E97FCF5AECE6096A6
+KCV								B96D8E
+
+###############################################################################################################
+# PVK
+###############################################################################################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H,C)    KeyBlock AES-256    Test   9D04A0
+
+Message Header					0000
+Command Code					A0
+Mode							0
+Key Type						FFF
+Key Scheme (LMK)				S
+Delimiter						%
+LMK ID							00
+Delimiter						#
+Key Usage						V0
+Algorithm						T2
+Mode of Use						N
+Key Version Number				00
+Exportability					S
+Number of Optional Blocks		00
+
+Command							0000A00FFFS%00#V0T2N00S00
+
+Received response 				0000A100[5331303039365630544E303053303030304243323831454235423538323339393636353134453730303134433833333643384633344435323544413734463833383246443142463242323235354439453530313542304144454538333038393534454638354130]
+
+Message Header					0000
+Response Code					A1
+Error Code						00
+Key Under LMK					S10096V0TN00S0000BC281EB5B58239966514E70014C8336C8F34D525DA74F8382FD1BF2B2255D9E5015B0ADEE8308954
+KCV								EF85A0
+
+###############################################################################################################
+# ZPK - LMK keyblock AES
+###############################################################################################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H,C)    KeyBlock AES-256    Test   9D04A0
+
+Message Header				0000
+Command Code				A0
+Mode						0
+Key Type					FFF
+Key Scheme (LMK)			S
+Delimiter					%
+LMK ID						00
+Delimiter					#
+Key Usage					P0
+Algorithm					T2
+Mode of Use					N
+Key Version Number			00
+Exportability				S
+Number of Optional Blocks	00
+
+Command						0000A00FFFS%00#P0T2N00S00
+
+Received response			0000A100S10096P0TN00S0000EE984C200C868F2EA7813A824087A68C7208D2E31B336A77CF45BF30352E644EB4ED3303AE0CF8EFD09EE3
+
+Message Header				0000
+Response Code				A1
+Error Code					00
+Key Under LMK				S10096P0TN00S0000EE984C200C868F2EA7813A824087A68C7208D2E31B336A77CF45BF30352E644EB4ED3303AE0CF8EF
+KCV							D09EE3
+
+###############################################################################################################
+# PVK - LMK keyblock AES
+###############################################################################################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H,C)    KeyBlock AES-256    Test   9D04A0
+
+Message Header				0000
+Command Code				A0
+Mode						0
+Key Type					FFF
+Key Scheme (LMK)			S
+Delimiter					%
+LMK ID						00
+Delimiter					#
+Key Usage					V0
+Algorithm					T2
+Mode of Use					N
+Key Version Number			00
+Exportability				S
+Number of Optional Blocks	00
+
+Command						0000A00FFFS%00#V0T2N00S00
+
+Message Header				0000
+Response Code				A1
+Error Code					00
+Key Under LMK				S10096V0TN00S0000BFF39E6C1B845A2430008522FE7CEB577E705E675A9F5150B066E758D015A347CE33B1C887C20E4A
+KCV							E37342

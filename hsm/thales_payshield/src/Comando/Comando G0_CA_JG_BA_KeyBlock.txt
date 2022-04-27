@@ -1,0 +1,165 @@
+################################################################################################################
+# LMK
+################################################################################################################
+
+LMK table: 
+ID Authorized  Scheme   Algorithm  Status Check  Comments 
+00 Yes(11H,0C) Variant  3DES(2key) Test   268604 Variant 
+01 Yes(12H,0C) KeyBlock AES-256    Test   9D04A0 Key Block 
+Key change storage table:No keys loaded in key change storage
+
+#################################################################################################################
+# BDK (B0)
+# ###############################################################################################################
+
+Online-AUTH>gc  
+	Enter LMK id [0-1]: 0 
+	Enter algorithm type [D=DES, A=AES]: d 
+	Enter key length [2,3]: 2 
+	Enter key scheme: s 
+	Enter Key Usage: b0 
+	Enter Mode of Use: n 
+	Enter component number [1-9]: 1 
+	Enter Exportability: s 
+	Enter Optional Blocks? [Y/N]: n 
+ 
+	Clear component: 7C192CEC9726F1459EA410830D2F838F
+	Encrypted component: S10096B0TNc1S00001C31E372C818A635C42FCF4D0CEE7F4378A75DCFFB989102032B0700FF2E52D8D5C8E4AFA7900A9E 
+	Key check value: DCD75A  
+ 
+Online-AUTH>fk
+	Enter LMK id [0-1]: 0 
+	Enter algorithm type [D=DES, A=AES]: d 
+	Enter key length [2,3]: 2 
+	Enter key scheme: s 
+	Enter component type [X,E,S]: x 
+	Enter number of components [1-9]: 1 
+	Enter Key Usage: b0 
+	Enter Mode of Use: n 
+	Enter Key Version Number: 99 
+	Enter Exportability: s 
+	Enter Optional Blocks? [Y/N]: n 
+ 
+	Enter component 1: *************************************** 
+	Component 1 check value: DCD75A 
+	Continue? [Y/N]: y 
+
+	Encrypted key: S10096B0TN00S0000BD42FC9314D6B15CCA1E2415F2A767583793D1A0BA076B89BC5E8DE8630F8ED965A9671B82381C2A 
+	Key check value: DCD75A  
+
+
+################################################################################################################
+# ZPK (P0)
+################################################################################################################
+Online-AUTH>kg 
+	Enter LMK id [0-1]: 0 
+	Enter algorithm type [D=DES, A=AES]: d 
+	Enter key length [2,3]: 2 
+	Enter key scheme (LMK):  
+	Enter key scheme (ZMK):  
+	Enter ZMK:  
+	Enter Key Usage: p0 
+	Enter Mode of Use: n 
+	Enter Key Version Number: 99 
+	Enter Exportability: s 
+	Enter Optional Blocks? [Y/N]: n 
+ 
+	Key under LMK: S10096P0TN00S0000501D6B2F6E9CA0CF461B95434DFE14E3616878241DF4DDF423C49AE71C912B474EB11BBCB9A85DDF 
+	Key check value: 37F651 
+
+
+###############################################################################################################
+# BA - Encrypt a Clear PIN
+###############################################################################################################
+Message Header: 		0000
+Command Code: 			BA
+PIN:					1234F
+Account Number: 		400000123456
+Delimiter				%
+LMK Identifier			01
+Command					0000BA1234F400000123456%01
+
+Received response: 		0000BB00[4A4539423031383433313232334235333038453939413141313231373944343933]
+Message Header  		0000
+Response Code   		BB
+Error Code 				00
+PIN 					JE9B018431223B5308E99A1A12179D493
+
+###############################################################################################################
+# JG - Translate a PIN from LMK to ZPK Encryption
+###############################################################################################################
+
+Message Header   		0000
+Command Code 			JG
+Destination ZPK 		S10096P0TN00S0000501D6B2F6E9CA0CF461B95434DFE14E3616878241DF4DDF423C49AE71C912B474EB11BBCB9A85DDF
+PIN Block Format Code   01
+PAN 					400000123456
+PIN	 					JE9B018431223B5308E99A1A12179D493
+Delimiter 				%
+LMK 					01
+
+Command 				0000JGS10096P0TN00S0000501D6B2F6E9CA0CF461B95434DFE14E3616878241DF4DDF423C49AE71C912B474EB11BBCB9A85DDF01400000123456JE9B018431223B5308E99A1A12179D493%01
+
+Received response: 		0000JH00[41464136453437303639393343423946]
+
+Message Header   		0000
+Response Code 			JH
+Error Code 				00
+PIN Block 				AFA6E4706993CB9F
+
+###############################################################################################################
+# CA - Translate a PIN from TPK to BDK
+###############################################################################################################
+
+Message Header					0000
+Command Code					CA
+Source TPK						S10096P0TN00S0000501D6B2F6E9CA0CF461B95434DFE14E3616878241DF4DDF423C49AE71C912B474EB11BBCB9A85DDF
+Destination key					S10096B0TN00S0000BD42FC9314D6B15CCA1E2415F2A767583793D1A0BA076B89BC5E8DE8630F8ED965A9671B82381C2A
+Destination KSN Descriptor		505
+Destination KSN					876543210E10004
+Maximum PIN Length				04
+Source PIN Block				AFA6E4706993CB9F
+Source PB Format Code			01
+Destination PB Format Code		01
+PAN								400000123456
+Delimiter						%
+LMK ID							01
+
+Command Message					0000CAS10096P0TN00S0000501D6B2F6E9CA0CF461B95434DFE14E3616878241DF4DDF423C49AE71C912B474EB11BBCB9A85DDFS10096B0TN00S0000BD42FC9314D6B15CCA1E2415F2A767583793D1A0BA076B89BC5E8DE8630F8ED965A9671B82381C2A505876543210E1000404AFA6E4706993CB9F0101400000123456;%01
+
+Received response: 				0000CB00[3034444431343731383042314631464134333031]			
+
+Message Header					0000
+Response Code					CB
+Error Code						00
+PIN Length						04
+Destination PIN Block			DD147180B1F1FA43
+Destination PB format code		01
+
+###############################################################################################################
+# COMANDO G0
+###############################################################################################################
+
+Message Header						0000
+Command Code						G0
+Source Key							S10096B0TN00S0000BD42FC9314D6B15CCA1E2415F2A767583793D1A0BA076B89BC5E8DE8630F8ED965A9671B82381C2A
+Destination Key				    	S10096P0TN00S0000501D6B2F6E9CA0CF461B95434DFE14E3616878241DF4DDF423C49AE71C912B474EB11BBCB9A85DDF
+Source KSN Descriptor				505
+Source KSN							876543210E10004
+Source PIN Block					DD147180B1F1FA43
+Source PIN Block Format Code		01
+Destination PIN Block Format Code	01
+PAN									400000123456
+Delimiter							%
+LMK Identifier						01
+
+Command								0000G0S10096B0TN00S0000BD42FC9314D6B15CCA1E2415F2A767583793D1A0BA076B89BC5E8DE8630F8ED965A9671B82381C2AS10096P0TN00S0000501D6B2F6E9CA0CF461B95434DFE14E3616878241DF4DDF423C49AE71C912B474EB11BBCB9A85DDF505876543210E10004DD147180B1F1FA430101400000123456%01
+
+Received response: 					0000G100[3034414641364534373036393933434239463031]
+
+Message Header						0000
+Response Code						G1
+Error Code							00
+PIN Length							3034 = 3034(HEX) = 04(ASCII)
+Destination PIN Block				AFA6E4706993CB9F
+Destination PIN Block Format:		01

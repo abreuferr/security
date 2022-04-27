@@ -1,0 +1,77 @@
+
+
+Thu Mar 25 19:17:47 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: BA.txt
+Protocol Used: tcp
+Destination IP: 10.20.60.167
+Destination Port: 1500
+Destination timeout: 60
+Output: BA_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [BA]
+Description        : BA
+Command            : 0000BA1234F432198765432%01
+Length of Command Sent: 26
+Command Test OK
+Command    :0000BA1234F432198765432%01
+Expected response: 0000BB00
+Received response: 0000BB00[4A3633314439423044373037364534303033323534323744363833433330433638]
+Total Time      : 0.021
+Transactions/Sec: 48.722
+Avg Time        : 0.021
+
+
+
+Test End: Thu Mar 25 19:17:47 2021
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 16612
+-------------------------------------------------
+Target IP address : 10.20.60.167
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Started:          : Thu Mar 25 19:17:47 2021
+Ended:            : Thu Mar 25 19:17:47 2021
+Total Time Spent  : 0.0205 seconds
+Transactions/Sec  : 48.7225 trans/sec
+Avg Time          : 0.0205 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Earliest start:   : Thu Mar 25 19:17:47 2021
+Latest end:       : Thu Mar 25 19:17:47 2021
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

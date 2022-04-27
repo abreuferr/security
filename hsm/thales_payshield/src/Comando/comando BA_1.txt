@@ -1,0 +1,17 @@
+# BA (Encrypt a clear text PIN.)
+
+Header                     0000
+Command Code    BA
+PIN                            1257F
+Account Number    331810031069
+Delimiter                  %
+LMK Identifier          00
+
+Command               0000BA1257F331810031069%00
+
+Response               0000BB00[75387]
+
+Message Header    0000
+Response Code    BB
+Error Code              00
+PIN                           75387

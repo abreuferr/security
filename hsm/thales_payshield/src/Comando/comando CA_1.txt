@@ -1,0 +1,47 @@
+***************************************************************************************************************
+EXEMPLO 01
+***************************************************************************************************************
+Message Header						0000
+Command Code						CA
+Source TPK							U1750CDFB0757D3B3994430636DBB281B
+Destination Key (ZPK)				U6C7D13EDC64DF9BAFED97F7E3F759793
+Maximum PIN Length					12
+Source PIN Block					BFB87728013AD761
+Source PIN Block Format Code		01
+Destination PIN Block Format Code	01
+Account Number						234567812345
+Command								0000CAU1750CDFB0757D3B3994430636DBB281BU6C7D13EDC64DF9BAFED97F7E3F75979312BFB87728013AD7610101234567812345
+
+Received response: 0000CB00[3034344335313236353832363634343145463031]
+
+***************************************************************************************************************
+EXEMPLO 02
+***************************************************************************************************************
+Message Header						0000
+Command Code						CA
+Source TPK							S00072P0TN00E000165D153CF33F0F069F430A23B5C7CA746AE8DB5A61F9FC618EFB8D381
+Destination Key						S00072B0TN00E000141C1605C8D2B13102BE7D1A32822B313AB06ED711E6276EA5D1833E5
+Destination KSN Descriptor			A05
+Destination KSN						BC75601102A00040001F
+Maximum PIN Length					12
+Source PIN Block					E6E60AD80EBAEBB3
+Source PIN Block Format Code		01
+Destination PIN Block Format Code	01
+PAN/Token							166203887730
+Delimiter							%
+LMK Identifier						01
+Command								0000CAS00072P0TN00E000165D153CF33F0F069F430A23B5C7CA746AE8DB5A61F9FC618EFB8D381S00072B0TN00E000141C1605C8D2B13102BE7D1A32822B313AB06ED711E6276EA5D1833E5A05BC75601102A00040001F12E6E60AD80EBAEBB30101166203887730%01
+
+Received response: 0000CB000[042CA10A608122BF1201]
+
+
+Received response					0000CB00[3034324341313041363038313232424631323031]
+Message Header						0000
+Response Code						CB
+Error Code							00
+
+34324341313041363038313232424631323031 = 3034324341313041363038313232424631323031(HEX) = 042CA10A608122BF1201(ASCII)
+
+PIN Length							04
+Destination PIN block				2CA10A608122BF12
+Destination PIN blockformat			01

@@ -1,0 +1,79 @@
+BA (BB) Encrypt a clear text PIN under the LMK
+JG (JH) Translate a PIN from LMK to ZPK Encryption
+JE (JF) Translate a PIN from ZPK to LMK Encryption
+
+############################################################
+# Dados do Cliente
+
+Message Header			0000
+Command Code			JE
+Source ZPK				UF8884B8A5AF7A2D6D6A0CA96C488E913
+PIN Block				71942AFF53998A00
+PIN Block Format Code	01
+PAN						720000000340
+Delimiter				%
+LMK Identifier			01
+
+PIN						2068
+
+############################################################
+# BA (BB) Encrypt a clear text PIN under the LMK
+
+Message Header			0000
+Command Code			BA
+PIN						2068F
+PAN						720000000340
+Delimiter				%
+LMK Identifier			01
+
+Command					0000BA2068F720000000340%01
+
+Received response		0000BB00[3930323439]
+
+Message Header			0000
+Response Code			BB
+Error Code				00
+PIN						3930323439 = 3930323439(HEX) = 90249(ASCII)
+
+############################################################
+# JG (JH) Translate a PIN from LMK to ZPK Encryption
+
+Message Header			0000
+Command Code			JG
+Destination ZPK			UF8884B8A5AF7A2D6D6A0CA96C488E913
+PIN Block Format Code	01
+PAN						720000000340
+PIN						90249
+Delimiter				%
+LMK Identifier			01
+
+Command					0000JGUF8884B8A5AF7A2D6D6A0CA96C488E9130172000000034090249%01
+
+Received response: 0000JH00[32413838333733453939344136313942]
+
+Message Header			0000
+Response Code			JH
+Error Code				00
+PIN Block				32413838333733453939344136313942 = 32413838333733453939344136313942(HEX) = 2A88373E994A619B(ASCII)
+
+############################################################
+# JE (JF) Translate a PIN from ZPK to LMK Encryption
+
+Message Header			0000
+Command Code			JE
+Source ZPK				UF8884B8A5AF7A2D6D6A0CA96C488E913
+PIN Block				2A88373E994A619B
+PIN Block Format Code	01
+PAN						720000000340
+Delimiter				%
+LMK Identifier			01
+
+
+Command					0000JEUF8884B8A5AF7A2D6D6A0CA96C488E9132A88373E994A619B01720000000340%01
+
+Received response		0000JF00[3930323439]
+
+Message Header			0000
+Response Code			JH
+Error Code				00
+PIN						3930323439 = 3930323439(HEX) = 90249(ASCII)

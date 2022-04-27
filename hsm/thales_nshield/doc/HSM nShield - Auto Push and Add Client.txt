@@ -1,0 +1,44 @@
+# Auto Push and Add Client
+#
+#
+# nShield = 10.20.60.160
+# RFS = 10.20.60.162
+# New client = 10.20.60.163/164/165
+#
+# reference: https://ncipher.zendesk.com/hc/en-us/articles/360001013197?input_string=how+to+add+a+new+client+via+the+command+line
+
+#
+# auto-push (nShield)
+#
+1-1-6-2-1-iPV4
+1-1-6-2-2-IP_RFS
+
+#
+# auto-push (RFS)
+#
+$ sudo cat /opt/nfast/kmdata/hsm-4613-02E0-D947/config/config
+	[config_op]
+	push=ON
+	remote_ip=10.20.60.162
+	remote_keyhash=0000000000000000000000000000000000000000
+
+# 
+# new client (RFS)
+#
+$ sudo cp /opt/nfast/kmdata/hsm-ESN/config/config /opt/nfast/kmdata/hsm-ESN/config/config.new
+$ sudo cat /opt/nfast/kmdata/hsm-ESN/config/config.new
+	(...)
+	[hs_clients]
+	addr=10.20.60.163
+	clientperm=unpriv
+	---
+	addr=10.20.60.164
+	clientperm=unpriv
+	---
+	addr=10.20.60.165
+	clientperm=unpriv
+
+#
+# add new client (RFS)
+#
+$ sudo /opt/nfast/bin/cfg-pushnethsm --address=10.20.60.160 /opt/nfast/kmdata/config/config.new

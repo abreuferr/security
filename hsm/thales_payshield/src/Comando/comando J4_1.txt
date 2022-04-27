@@ -1,0 +1,101 @@
+#
+# J2
+#
+
+Message Header		0000
+Command Code		J4
+
+Command				0000J4
+
+Received response: 0000J500[42343636353330333034364E32313033303431323432333932313033313131333130343232313033313131333130343230303030363036323938425730303030303030303030303243433030303030303030303030324357303030303030303030303032435930303030303030303030303245493030303030303030303030354A323030303030303030303030334A413030303030303030303030324B513030303030303030303030314B573030303030303030303030314D303030303030303030303031314D323030303030303030303030345830303030303030303030303031]
+
+Received response: 0000J500[B4665303046N2103041242392103111310422103111310420000606298BW000000000002CC000000000002CW000000000002CY000000000002EI000000000005J2000000000003JA000000000002KQ000000000001KW000000000001M0000000000011M2000000000004X0000000000001]
+
+Message Header	0000
+Response Code	J4
+Error Code		00
+
+Serial Number	B4665303046N
+Start Date		210304
+Start Time		124239
+End Date		210311
+End Time		131042
+Current Date	210311
+Current Time	131042
+Seconds			0000606298
+
+Command Code	BW
+Transactions	000000000002
+
+Command Code	CC
+Transactions	000000000002
+
+Command Code	CW
+Transactions	000000000002
+
+Command Code	CY
+Transactions	000000000002
+
+Command Code	EI
+Transactions	000000000005
+
+Command Code	J2
+Transactions	000000000003
+
+Command Code	JA
+Transactions	000000000002
+
+Command Code	KQ
+Transactions	000000000001
+
+Command Code	KW
+Transactions	000000000001
+
+Command Code	M0
+Transactions	000000000011
+
+Command Code	M2
+Transactions	000000000004
+
+Command Code	X0
+Transactions	000000000001
+
+Online-AUTH>utilstats 
+ 
+HSM Serial Number:         B4665303046N 
+ 
+Report Generation Time:    11-Mar-2021 13:03.19 
+Report Start Time:         04-Mar-2021 12:42.39 
+Report End Time:           11-Mar-2021 13:03.19 
+Total Number of Secs:      605855 
+ 
+HSM Loading: 
+      0-10%:    605852 
+      10-20%:    0 
+      20-30%:    0 
+      30-40%:    0 
+      40-50%:    0 
+      50-60%:    0 
+      60-70%:    0 
+      70-80%:    1 
+      80-90%:    0 
+      90-100%:    1 
+      100%:    1 
+ 
+Press "Enter" to continue... 
+ 
+ 
+Host Command Volumes: 
+    Cmd Code  Total Transactions  Average TPS 
+    BW        2                   0.00        
+    CC        2                   0.00        
+    CW        2                   0.00        
+    CY        2                   0.00        
+    EI        5                   0.00        
+    J2        2                   0.00        
+    JA        2                   0.00        
+    KQ        1                   0.00        
+    KW        1                   0.00        
+    M0        11                  0.00        
+    M2        4                   0.00        
+    X0        1                   0.00        

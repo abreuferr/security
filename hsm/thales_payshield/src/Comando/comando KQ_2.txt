@@ -1,0 +1,60 @@
+#
+# LMK
+#
+
+Online-AUTH>vt 
+LMK table: 
+ID Authorized  Scheme   Algorithm  Status Check  Comments 
+00 Yes(H)      Variant  3DES(2key) Test   268604 variant 
+Key change storage table:No keys loaded in key change storage
+
+#
+# DADOS
+#
+
+MK-ACClear component	31C24CBFEFCEFD5862B532618FDA7507
+Key check value			52BC80
+ 
+Clear component			893D85FE9B5E158C8F0DF8578A23866E
+Key check value			D12A43
+ 
+Clear Key				B8FFC9417490E8D4EDB8CA3605F9F369
+Encrypted key			UFE5152B928F45F1AE073F114408C0BA9
+Key check value			31CC0C
+
+#
+# MK-AC
+#
+
+Online-AUTH>kg 
+Enter LMK id [0-1]: 0 
+Enter key length [1,2,3]: 2 
+Enter key type: 109 
+Enter key scheme (LMK): u 
+Enter key scheme (ZMK):  
+Enter ZMK:  
+ 
+Key under LMK: U35F290DF8C62B1D8F5E9D68FF80FD5DF
+Key check value: 596BF3 
+
+#
+# KQ
+#
+
+Message Header				0000
+Command						KQ
+Mode Flag					1
+Scheme ID					1
+MK-AC						UFE5152B928F45F1AE073F114408C0BA9 *Alterado
+PAN/PAN Sequence No			<1122334455667700>
+ATC							<0006>
+UN							<B491D40B>
+Transaction Data Length		28
+Transaction Data			<00000000000300000000000000768000048000098620082600b491d40b18000006a0000322000080>
+Delimiter					;
+ARQC/TC/ACC					<CA134CFEA2B6170F> *Alterado
+ARC							<0012>
+ 
+Command						0000KQ11UFE5152B928F45F1AE073F114408C0BA9<1122334455667700><0006><B491D40B>28<00000000000300000000000000768000048000098620082600b491d40b18000006a0000322000080>;<CA134CFEA2B6170F><0012>%00
+ 
+Received response			0000KR00[E54D0CB229594990] – ARPC 

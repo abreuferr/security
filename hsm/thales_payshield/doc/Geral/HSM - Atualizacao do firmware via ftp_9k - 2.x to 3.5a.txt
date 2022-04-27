@@ -1,0 +1,7 @@
+You may upgrade directly from v2.0c to v3.5a.  Please perform the steps below before performing the upgrade.
+
+If the payShield 9000 is currently running software v2.2 or earlier, please follow the steps below in order to ensure that a software upgrade via FTP is completed successfully.
+1. Erase the Audit Log. This can be achieved using the CLEARAUDIT console command, or by selecting “Clear All” when viewing the audit log in HSM Manager.
+2. Erase the Error Log. This can be achieved using the CLEARERR console command, or by selecting “Clear All” when viewing the error log in HSM Manager.
+3. Power cycle the HSM. Remove power, wait for approximately 10 seconds, and then reapply power.
+4. Follow the Standard Update Procedure as described in the next section.

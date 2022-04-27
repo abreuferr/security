@@ -1,0 +1,115 @@
+###############################
+# COMANDO A0 (Generate a Key) #
+###############################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	01 Yes(H,C)    Variant  3DES(2key) Test   268604 Variant
+
+Message Header		0000
+Command Code		A0
+Mode				0
+Key Type			001; ZPK
+Key Type			002; PVK
+Key Scheme (LMK)	U
+Delimiter			%
+LMK Identifier		01
+Command				0000A00001U%01
+Command				0000A00002U%01
+
+Received response: 0000A100
+
+Message Header		0000
+Response Code		A1
+Error Code			00
+
+Key (under LMK)		U81ACFA90292399F27ADE6B8D82494FA2; ZPK
+KCV					110668
+
+Key (under LMK)		U5B65F197BAE2949D1CECB7719B30766D; PVK
+KCV					35AFCF
+
+#######################################################
+# COMANDO BA (Encrypt a clear text PIN under the LMK) #
+#######################################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	01 Yes(H,C)    Variant  3DES(2key) Test   268604 Variant
+
+Message header		0000
+command Code		BA
+PIN					1234F
+PAN					083405555060
+Delimiter			%
+LMK Identifier		01
+Command    			0000BA1234F083405555060%01
+
+Received response	0000BB0004109
+Message Header		0000
+Response Code		BB
+Error Code			00
+PIN					04109
+
+########################################################################################
+# COMANDO JG (Translate a PIN from encryption under the LMK to encryption under a ZPK) #
+########################################################################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	01 Yes(H,C)    Variant  3DES(2key) Test   268604 Variant
+
+Message header			0000
+Command Code			JG
+Destination ZPK			U81ACFA90292399F27ADE6B8D82494FA2
+PIN Block Format Code	47
+PAN						083405555060
+PIN						04109
+Delimiter				%
+LMK						01
+Command					0000JGU81ACFA90292399F27ADE6B8D82494FA24708340555506004109%01
+
+Received response		0000JH007EE494D91294F208
+Message Header			0000
+Response Code			JH
+Error Code				00
+PIN Block				7EE494D91294F208
+
+########################################################################
+# COMANDO BK (Generate an IBM PIN Offset (of a customer selected PIN)) #
+########################################################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	01 Yes(H,C)    Variant  3DES(2key) Test   268604 Variant
+
+Online-AUTH>ed 
+	Enter LMK id [0-1]: 1 
+	Enter decimalisation table: 0123456789012345 
+ 
+	Encrypted decimalisation table: FD64FC3FAD504BB3
+
+Message Header			0000
+Command Code			BK
+PIN Block Key Type		001
+PIN Block Key			U81ACFA90292399F27ADE6B8D82494FA2
+PVK						U5B65F197BAE2949D1CECB7719B30766D
+PIN Block				7EE494D91294F208
+PIN Block Format Code	47
+Check Length			04
+PAN						083405555060
+Decimalization Table	FD64FC3FAD504BB3
+PIN Validation Data		P2233620000886952
+Delimiter				%
+LMK						01
+
+Command					0000BK001U81ACFA90292399F27ADE6B8D82494FA2U5B65F197BAE2949D1CECB7719B30766D7EE494D91294F2084704083405555060FD64FC3FAD504BB3P2233620000886952%01
+
+Message Header			0000
+Response Code			BL
+Error Code				02
+PIN Offset				7174FFFFFFFF

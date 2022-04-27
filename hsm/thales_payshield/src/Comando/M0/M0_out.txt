@@ -1,0 +1,77 @@
+
+
+Thu Mar 25 18:59:57 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: M0.txt
+Protocol Used: tcp
+Destination IP: 10.20.60.167
+Destination Port: 1500
+Destination timeout: 60
+Output: M0_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [M0]
+Description        : HSM Status
+Command            : 0000M00000009U2F008E2708D73336402C9D1FE25B82FDA05BC75601201000DE000030008<1111111100000000>%00
+Length of Command Sent: 84
+Command Test OK
+Command    :0000M00000009U2F008E2708D73336402C9D1FE25B82FDA05BC75601201000DE000030008<1111111100000000>%00
+Expected response: 0000M100
+Received response: 0000M100[30303038B8E9AB4BF0CF80A0]
+Total Time      : 0.058
+Transactions/Sec: 17.100
+Avg Time        : 0.058
+
+
+
+Test End: Thu Mar 25 18:59:57 2021
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 11296
+-------------------------------------------------
+Target IP address : 10.20.60.167
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Started:          : Thu Mar 25 18:59:57 2021
+Ended:            : Thu Mar 25 18:59:57 2021
+Total Time Spent  : 0.0585 seconds
+Transactions/Sec  : 17.1000 trans/sec
+Avg Time          : 0.0585 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Earliest start:   : Thu Mar 25 18:59:57 2021
+Latest end:       : Thu Mar 25 18:59:57 2021
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

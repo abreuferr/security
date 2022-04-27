@@ -1,0 +1,19 @@
+# JG(Translate a PIN from LMK to ZPK Encryption)
+
+Message Header   		0000
+Command Code   			JG
+Destination ZPK 		U7A7EAD902DD5CFBCAA69FE5645BD5CCD
+PIN Block Format Code   01
+PAN	 					331810031069
+PIN						75387 # PIN obtido através do comando BA
+Delimiter				%
+LMK						00
+
+Command					0000JGU7A7EAD902DD5CFBCAA69FE5645BD5CCD0133181003106975387%00
+
+Response				0000JH00[39B5D93345A91A41]
+
+Message Header   		0000
+Response Code 			JH
+Error Code 				00
+PIN Block 				39B5D93345A91A41

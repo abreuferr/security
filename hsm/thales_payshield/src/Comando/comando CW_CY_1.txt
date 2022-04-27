@@ -1,0 +1,55 @@
+#
+# LMK
+#
+
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	01 No          Variant  3DES(2key) Test   268604 Variant 
+
+#
+# CHAVE CVK A/B
+#
+# key type = 402
+
+	Key under LMK: U3C8A58218B2E44621C234EC0DBFBA0BC  
+	Key check value: 957E46 
+
+#
+# COMANDO CW
+#
+
+Message Header 		0000
+Command Code 		CW
+CVK A/B 			U3C8A58218B2E44621C234EC0DBFBA0BC
+Primary account		4123456789012345
+Delimiter 			;
+Expiration date 	8701
+Service code 		101
+Delimiter			%
+LMK Identifier		01
+Command				0000CWU3C8A58218B2E44621C234EC0DBFBA0BC4123456789012345;8701101%01
+
+Received response	0000CX00019
+
+Message Header		0000
+Response code 		CX
+Error code 			00
+CVV 				019
+
+#
+# COMANDO CY
+#
+
+Message Header 		0000
+Command Code 		CY
+CVK A/B 			U3C8A58218B2E44621C234EC0DBFBA0BC
+CVV 				019
+Primary account 	4123456789012345
+Delimiter 			;
+Expiration date 	8701
+Service code 		101
+Delimiter			%
+LMK Identifier		01
+
+Command				0000CYU3C8A58218B2E44621C234EC0DBFBA0BC0194123456789012345;8701101%01
+
+Received response	0000CZ00

@@ -1,0 +1,7 @@
+[RA]
+
+
+%Comando RA
+$0000RA0101import.rsa.host.persistent
+!0000RA0101import.rsa.host.persistent
+@0000RB00

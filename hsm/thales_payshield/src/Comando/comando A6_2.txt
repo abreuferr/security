@@ -1,0 +1,42 @@
+Secure-AUTH>vt 
+
+LMK table: 
+ID Authorized  Scheme   Algorithm  Status Check  Comments 
+00 Yes(11H,11C)Variant  3DES(2key) Test   268604 Variant 
+01 Yes(11H,11C)KeyBlock AES-256    Test   9D04A0 Key Block 
+Key change storage table:No keys loaded in key change storage
+
+
+- ZMK
+Key under LMK: UB1039769EE3A27E9F334CE3BCEF07D9B 
+Key check value: F0269B
+
+- BDK
+Key under LMK: UF0D1F921687621B00ECFED2B19EC483D 
+Key check value: 3F4519
+
+- ZMK(BDK) - X9.17
+Key under ZMK: X09684F7F62D6DA7D5D29EE6CD20A4867
+Key check value: 3F4519
+
+
+
+# A6
+Message Header:		0000
+Command Code:		A6
+Key Type:			009
+ZMK:				UB1039769EE3A27E9F334CE3BCEF07D9B
+Key (ZMK):			X09684F7F62D6DA7D5D29EE6CD20A4867
+Key Scheme (LMK):	U
+Delimiter:			%
+LMK:				00
+
+Command:			0000A6009UB1039769EE3A27E9F334CE3BCEF07D9BX09684F7F62D6DA7D5D29EE6CD20A4867U%00
+
+Received response:	0000A700UF0D1F921687621B00ECFED2B19EC483D3F4519
+
+Message Header		0000
+Response Code		A7
+Error Code			00
+Key (under LMK)		UF0D1F921687621B00ECFED2B19EC483D
+Key Check Value		3F4519

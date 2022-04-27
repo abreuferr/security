@@ -1,0 +1,93 @@
+#
+# BDK
+# 
+# BDK de origem e BDK de destino
+#
+
+# BDK_origem
+Online-AUTH>gc  
+	Clear component: 	A8E30261E59E5D8AF1AE2AF7ADE9082A  
+	Encrypted component: UE0029EB93E506E334CDA0941BAA8D05B  
+	Key check value: 	BE8952 
+ 
+Online-AUTH>fk
+	Encrypted key: 	UB6AAA490869376E961547FF49FEC090F  
+	Key check value: 	 BE8952 
+
+# BDK_origem
+	Encrypted key: 	UB6AAA490869376E961547FF49FEC090F  
+	Key check value: 	BE8952
+
+# BDK_destino
+	Encrypted key: 	UD1AB1BA32ED20E7D96D210B246D6C3D9  
+	Key check value: 	FD0EB2
+	
+	
+#
+# PIN Block
+#
+# Como obter o PIN Block(1270A542-037 Host Programmer v3.4, pg 175)
+#
+
+- Format 			01
+- PIN				1234
+- account number	400000123456(account number) 2(checked digit)
+
+041234FFFFFFFFFF
+	(XOR)
+0000400000123456
+---------------------------------------------
+PIN block 			041274FFFFEDCBA9
+
+#
+# BDK(PIN)
+#
+# Criptografia do PIN utilizando o aplicativo Crypto Calculator
+DUKPT: PEK derivation
+****************************************
+BDK:				A8E30261E59E5D8AF1AE2AF7ADE9082A
+KSN:				2017110901A00040001F
+
+Derived IPEK:		FE2C2818182302E0B49A7CDA9A5C2EB9
+KCV:				3C4C02
+Derived PEK:		5B2FEA9C2DBB5A504873E952079AA356
+KCV:				EB2F1D
+
+DUKPT: PIN operation finished
+ ****************************************
+ PEK:				5B2FEA9C2DBB5A504873E952079AA356
+ PIN block:			041274FFFFEDCBA9
+
+ Encrypted PIN:		7F455E1F1B87E874
+
+##############################################################################################################################################################################
+#
+# COMANDO G0
+#
+
+Message Header						0000
+Command Code						G0
+Source Key							UB6AAA490869376E961547FF49FEC090F
+Destination Key Flag                *
+Destination Key				    	UD1AB1BA32ED20E7D96D210B246D6C3D9
+Source KSN Descriptor				609
+Source KSN							2017110901A00040001F
+Destination KSN Descriptor			A05
+Destination KSN						FFFFF01102A00040001F
+Source PIN Block					7F455E1F1B87E874
+Source PIN Block Format Code		01
+Destination PIN Block Format Code	01
+PAN									400000123456  
+Delimiter							%
+LMK Identifier						01
+
+Command    :0000G0UB6AAA490869376E961547FF49FEC090F*UD1AB1BA32ED20E7D96D210B246D6C3D96092017110901A00040001FA05FFFFF01102A00040001F7F455E1F1B87E8740101400000123456%01
+
+Received response: 0000G100046CEC913725C69EC901
+
+Message Header						0000
+Response Code						G1
+Error Code							00
+PIN Length							04
+Destination PIN Block				6CEC913725C69EC9
+Destination PIN blockformat code	01

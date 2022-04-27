@@ -1,0 +1,33 @@
+# RFS1 - OLD
+scp -r /opt/nfast/kmdata ft@10.20.60.152:/home/ft
+
+# CLIENT
+ls -l /home/ft
+total 0
+drwxrwsr-x. 9 ft ft 122 Jan  4 16:06 kmdata
+
+# RFS2 - NEW
+sudo mv -f kmdata kmdata.bkp
+
+# CLIENT
+sudo scp -r /home/ft/kmdata ft@10.20.60.151:/home/ft
+
+# RFS2 - NEW
+sudo mv -f kmdata /opt/nfast/
+sudo ls -l /opt/nfast
+	drwxrwsr-x.  9 nfast nfast  122 Jan  4 16:20 kmdata
+	drwxrwsr-x.  8 nfast nfast   96 Jan  4 16:13 kmdata.bkp
+
+# RFS2 - NEW
+sudo /opt/nfast/bin/anonkneti 10.20.60.150
+sudo /opt/nfast/bin/rfs-setup --force 10.20.60.150 7CD1-74EA-6F43 7d724e7e0519cbbd2657280adf7e527bc88583e5
+
+# CLIENT
+sudo /opt/nfast/bin/anonkneti 10.20.60.150
+sudo /opt/nfast/bin/nethsmenroll --force 10.20.60.150 7CD1-74EA-6F43 7d724e7e0519cbbd2657280adf7e527bc88583e5
+sudo /opt/nfast/bin/config-serverstartup -s
+sudo /opt/nfast/sbin/init.d-ncipher restart
+
+sudo /opt/nfast/bin/rfs-sync --update
+sudo /opt/nfast/bin/rfs-sync --commit
+sudo /opt/nfast/bin/rfs-sync --update

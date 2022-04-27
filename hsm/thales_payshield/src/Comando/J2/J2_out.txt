@@ -1,0 +1,77 @@
+
+
+Thu Mar 11 13:16:20 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: J2.txt
+Protocol Used: tcp
+Destination IP: 10.20.60.167
+Destination Port: 1500
+Destination timeout: 60
+Output: J2_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [J2]
+Description        : Teste J2
+Command            : 0000J2
+Length of Command Sent: 6
+Command Test OK
+Command    :0000J2
+Expected response: 0000J300
+Received response: 0000J300[42343636353330333034364E32313033303431323432333932313033313131323531313432313033313131323531313430303030363035313239303030303130303030303630353132363B303130303230303030303030303030303B303230303330303030303030303030303B303330303430303030303030303030303B303430303530303030303030303030303B303530303630303030303030303030303B303630303730303030303030303030303B303730303830303030303030303030313B303830303930303030303030303030303B303930313030303030303030303030313B313030313030303030303030303030313B]
+Total Time      : 0.006
+Transactions/Sec: 162.904
+Avg Time        : 0.006
+
+
+
+Test End: Thu Mar 11 13:16:20 2021
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 9652
+-------------------------------------------------
+Target IP address : 10.20.60.167
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Started:          : Thu Mar 11 13:16:20 2021
+Ended:            : Thu Mar 11 13:16:20 2021
+Total Time Spent  : 0.0061 seconds
+Transactions/Sec  : 162.9036 trans/sec
+Avg Time          : 0.0061 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Earliest start:   : Thu Mar 11 13:16:20 2021
+Latest end:       : Thu Mar 11 13:16:20 2021
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

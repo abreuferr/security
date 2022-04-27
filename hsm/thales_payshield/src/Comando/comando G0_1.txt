@@ -1,0 +1,133 @@
+##############################################################################################################################################################################
+# LMK
+#
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H,C)    KeyBlock AES-256    Test   9D04A0 keyblock - aes 
+
+##############################################################################################################################################################################
+# BDK (B0)
+# 
+
+Online-AUTH>gc  
+	Enter LMK id [0-1]: 0 
+	Enter algorithm type [D=DES, A=AES]: d 
+	Enter key length [2,3]: 2 
+	Enter key scheme: s 
+	Enter Key Usage: b0 
+	Enter Mode of Use: n 
+	Enter component number [1-9]: 1 
+	Enter Exportability: s 
+	Enter Optional Blocks? [Y/N]: n 
+ 
+	Clear component: 7C192CEC9726F1459EA410830D2F838F
+	Encrypted component: S10096B0TNc1S00001C31E372C818A635C42FCF4D0CEE7F4378A75DCFFB989102032B0700FF2E52D8D5C8E4AFA7900A9E 
+	Key check value: DCD75A  
+ 
+Online-AUTH>fk
+	Enter LMK id [0-1]: 0 
+	Enter algorithm type [D=DES, A=AES]: d 
+	Enter key length [2,3]: 2 
+	Enter key scheme: s 
+	Enter component type [X,E,S]: x 
+	Enter number of components [1-9]: 1 
+	Enter Key Usage: b0 
+	Enter Mode of Use: n 
+	Enter Key Version Number: 99 
+	Enter Exportability: s 
+	Enter Optional Blocks? [Y/N]: n 
+ 
+	Enter component 1: *************************************** 
+	Component 1 check value: DCD75A 
+	Continue? [Y/N]: y 
+
+	Encrypted key: S10096B0TN00S0000BD42FC9314D6B15CCA1E2415F2A767583793D1A0BA076B89BC5E8DE8630F8ED965A9671B82381C2A 
+	Key check value: DCD75A  
+
+
+##############################################################################################################################################################################
+# ZPK (P0)
+#
+Online-AUTH>kg 
+	Enter LMK id [0-1]: 0 
+	Enter algorithm type [D=DES, A=AES]: d 
+	Enter key length [2,3]: 2 
+	Enter key scheme (LMK):  
+	Enter key scheme (ZMK):  
+	Enter ZMK:  
+	Enter Key Usage: p0 
+	Enter Mode of Use: n 
+	Enter Key Version Number: 99 
+	Enter Exportability: s 
+	Enter Optional Blocks? [Y/N]: n 
+ 
+	Key under LMK: S10096P0TN00S0000501D6B2F6E9CA0CF461B95434DFE14E3616878241DF4DDF423C49AE71C912B474EB11BBCB9A85DDF 
+	Key check value: 37F651 
+
+##############################################################################################################################################################################
+# PIN Block
+#
+# Como obter o PIN Block(1270A542-037 Host Programmer v3.4, pg 175)
+#
+
+- Format 			01
+- PIN				1234
+- PAN				400000123456(account number) 2(checked digit)
+
+041234FFFFFFFFFF
+	(XOR)
+0000400000123456
+---------------------------------------------
+PIN block 			041274FFFFEDCBA9
+
+#
+# BDK(PIN)
+#
+# Criptografia do PIN utilizando o aplicativo Crypto Calculator
+
+DUKPT: PEK derivation
+****************************************
+BDK:			7C192CEC9726F1459EA410830D2F838F
+KSN:			2017110901A00040001F
+----------------------------------------
+Derived IPEK:	4B4ABF9FE75F35E1B749EBAF351D826B
+KCV:			A78186
+Derived PEK:	E7F9E210CDE2D7DEB61A84342787CD98
+KCV:			A800DC
+
+DUKPT: PIN operation
+****************************************
+PEK:			E7F9E210CDE2D7DEB61A84342787CD98
+PIN block:		041274FFFFEDCBA9
+----------------------------------------
+Encrypted PIN:	FE2D3EFDED0D3587
+
+##############################################################################################################################################################################
+#
+# COMANDO G0
+#
+
+Message Header						0000
+Command Code						G0
+Source Key							S10096B0TN00S0000BD42FC9314D6B15CCA1E2415F2A767583793D1A0BA076B89BC5E8DE8630F8ED965A9671B82381C2A
+Destination Key				    	S10096P0TN00S0000501D6B2F6E9CA0CF461B95434DFE14E3616878241DF4DDF423C49AE71C912B474EB11BBCB9A85DDF
+Source KSN Descriptor				A05
+Source KSN							2017110901A00040001F
+Source PIN Block					FE2D3EFDED0D3587
+Source PIN Block Format Code		01
+Destination PIN Block Format Code	01
+PAN									400000123456
+Delimiter							%
+LMK Identifier						00
+
+Command								0000G0S10096B0TN00S0000BD42FC9314D6B15CCA1E2415F2A767583793D1A0BA076B89BC5E8DE8630F8ED965A9671B82381C2AS10096P0TN00S0000501D6B2F6E9CA0CF461B95434DFE14E3616878241DF4DDF423C49AE71C912B474EB11BBCB9A85DDFA052017110901A00040001FFE2D3EFDED0D35870101400000123456%00
+
+Received response					0000G100[3034414641364534373036393933434239463031]
+
+Message Header						0000
+Response Code						G1
+Error Code							00
+PIN Length							3034 = 3034(HEX) = 04(ASCII)
+Destination PIN Block				414641364534373036393933434239463031 = 414641364534373036393933434239463031(HEX) = AFA6E4706993CB9F01(ASCII)

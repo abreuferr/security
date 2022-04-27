@@ -1,0 +1,132 @@
+Instalçao Hard server
+
+1- passar iso para o servidor
+
+2- montar iso (mount -o loop home/user/SecWorld-linux64-user-12.30.00.iso  /media/iso)
+
+3- extarir arquivos de todas as pasta dentro de linux/versão/amd/nfast/ (tar xf caminho/mkdir)
+3- find /linux/versão/amd/nfast/ -type f | egrep '.tar' | xargs -I {} tar xf {}
+
+4 - /opt/nfast/sbin/install
+
+5 - voltar kmdata
+
+PATH=/opt/nfast/bin:$PATH
+
+5- enquiry valida instalação hard server
+
+6- nfkminfo informações do world
+_______________________________________________________________________________________________________________________________________________
+
+# desinstalação do software
+sudo /opt/nfast/sbin/install -u && sudo rm -rf /opt/nfast
+_______________________________________________________________________________________________________________________________________________
+
+Configurar um RFS
+
+1 - pegar ESN : anonkneti IP
+
+(em root)
+2- rfs-setup ip ESN (force para manter config)
+
+3- configurar no display nshield RFS
+
+(liberar porta firewall centos: firewall-cmd --zone=public --add-port=9004/tcp --permanent)
+(Resetar servico de firewall centos: firewall-cmd --reload)
+(systemctl status firewalld)
+(systemctl enable firewalld)
+(systemctl start firewalld)
+(firewall-cmd --list-all)
+_________________________________________________________________________________________________________________________________________
+Configurar client
+1 - pegar ESN : anonkneti IP
+
+(em root)
+2- nethsmenroll
+
+3- configurar no display nshield RFS
+
+4- configserver-startup -s
+
+5- restartar hardserver (acessar caminho/opt/nfast/sbin# executar ./init.d-ncipher restart) (windows net stop "nfast server" / net start "nfast server")
+
+Somente client
+
+1- no RFS apontar o client: rfs-setup --gang-client --write-noauth <IP CLIENT>
+2- no client apontar o RFS: rfs-sync --setup --no-authenticate <IP RFS>
+3- rfs-sync --update
+
+atualizar chaves: rfs-sync --commit 
+___________________________________________________________________________________________________________________________________
+
+Criando softcard
+
+ppmk --new --recoverable NAME
+
+ppmk --check NAME
+___________________________________________________________________________________________________________________________________________
+
+Import chaves
+
+Enviar aquivo da chave .pem
+
+generatekey --import simple pemreadfile=/home/geovanne/chave/private_key.pem plainname=openSSLkey
+___________________________________________________________________________________________________________________________________________
+
+Licença
+
+the licenses files go on the RFS. From our user guide we have the following procedure installing the license files:
+To enable a feature without a smart card:
+1. Put the file that contains the feature enabling certificate in /opt/nfast/kmdata/hsm-ESN/features
+on the remote file system. In this path, ESN is the ESN of the module.
+You can give the file any name that you wish. You must enter the file name on the unit’s front
+panel, so you may prefer to use a short name.
+
+2. From the front panel, select HSM > HSM feature enable > Read from a file.
+
+3. Specify the name of the file that contains the certificate.
+
+If the feature is enabled successfully, a message confirms this.
+You can see the whitelisted set of HSM clients via front panel menu 1-1-4 (Client Config) , and you can see the enabled licenses via menu 2-3-3 (View Current State)
+___________________________________________________________________________________________________________________________________________
+
+Load Sharing
+
+You have to create the cknfastrc file 
+The only entry in that file will be CKNFAST_LOADSHARING=1
+So use some text editor - enter CKNFAST_LOADSHARING=1 save as /opt/nfast/cknfastrc
+
+ckcheckinst
+
+_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+Criando chave:
+root@ubuntera://# generatekey --generate simple
+
+
+root@ubuntera://# nfkminfo -k simple
+
+
+Criar chaves protegidas pelo OCS
+generatekey --generate --cardset=[keyHASH] simple
+__________________________________________________________________________________________________________________________________________________________________________________________________
+SNMP
+
+/etc/init.d/nc_ncsnmpd stop|start|restart
+
+confiure the SNMPD.conf
+
+keytable all
+engineIDType 1
+createUser cipherTrustUser SHA256 "AAaa00--" AES "AAaa00--"
+rwuser cipherTrustUser auth
+
+____________________________________________________________________________________________________________________________________________________________________________________________
+Java 
+
+copiar o arquivo nCipherKM.jar (opt/nfast/java/classes/) para /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64/jre/lib/ext;
+editar o arquivo: </usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64/jre/lib/security/java.security> como primiero provider: security.provider.1=com.ncipher.provider.km.nCipherKM
+Testar com o comando: java com.ncipher.provider.InstallationTest
+Testar com o comando: /opt/nfast/bin/config-serverstartup -sp
+____________________________________________________________________________________________________________________________________________________________________________________________
+	
+7CD1-74EA-6F43 f38b630500b495f518cdc0514744441e7d1a88c2

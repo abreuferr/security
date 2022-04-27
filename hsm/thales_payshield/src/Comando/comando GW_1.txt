@@ -1,0 +1,76 @@
+###############################################################################################
+# LMK
+###############################################################################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	01 Yes(H,C)    KeyBlock AES-256    Test   9D04A0 keyblock 
+
+###############################################################################################
+# BDK
+###############################################################################################
+
+# COMPONENTE
+Online-AUTH>gc 
+	Enter LMK id [0-1]: 1 
+	Enter algorithm type [D=DES, A=AES]: d 
+	Enter key length [2,3]: 2 
+	Enter key scheme: s 
+	Enter Key Usage: b0 
+	Enter Mode of Use: x 
+	Enter component number [1-9]: 1 
+	Enter Exportability: s 
+	Enter Optional Blocks? [Y/N]: n 
+ 
+	Clear component: 04A4 70D0 E991 2073 E007 5E38 343E BA5B  
+	Encrypted component: S10096B0TXc1S0001D13C91FE2EA633AA15283CF203CEC3BA7599A47FCAA533E67B6A86266E4242E410E74DF07D5D44FD 
+	Key check value: 9F0FBC 
+
+	Clear component: 91E6 8A80 A897 5820 F432 FE75 97EA 43A2  
+	Encrypted component: S10096B0TXc2S0001A2CA47E44D8566DAD9339E2C1944567DE6924CAFDA4D5C861C911E8BA66BB26E500DEB98ED86D03B 
+	Key check value: 2C7CBE 
+
+# CHAVE
+Online-AUTH>fk 
+	Enter LMK id [0-1]: 1 
+	Enter algorithm type [D=DES, A=AES]: d 
+	Enter key length [2,3]: 2 
+	Enter key scheme: s 
+	Enter component type [X,E,S]: x 
+	Enter number of components [2-9]: 2 
+	Enter Key Usage: b0 
+	Enter Mode of Use: x 
+	Enter Key Version Number: 00 
+	Enter Exportability: s 
+	Enter Optional Blocks? [Y/N]: n 
+ 
+ 	# BDK
+	Encrypted key: S10096B0TX00S0001D3B6333239C2D00FD3EAD087A78B6684F01DC91C38DEA4C2CA3418B9A7616E57BC218A51514D35B8
+	Key check value: 60F4F9 
+
+###############################################################################################
+# COMANDO GW
+###############################################################################################
+
+Message Header		0001
+Command Code		GW
+MAC Mode			4
+MAC Method			1
+BDK					S10096B0TX00S0001D3B6333239C2D00FD3EAD087A78B6684F01DC91C38DEA4C2CA3418B9A7616E57BC218A51514D35B8
+KSN Descriptor		A05
+Key Serial Number	FFFF98765432
+MAC					10E00001
+Message Data Length	0008
+Message Data		teste123
+Delimiter			%
+LMK Identifier		01
+
+Command				0001GW41S10096B0TX00S0001D3B6333239C2D00FD3EAD087A78B6684F01DC91C38DEA4C2CA3418B9A7616E57BC218A51514D35B8A05FFFF9876543210E000010008teste123%01
+
+Received response	0001GX00815B6FE4B24F8853
+
+Message Header		0001
+Response Code		GX
+Error Code			00
+MAC					815B6FE4B24F8853

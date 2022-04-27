@@ -1,0 +1,107 @@
+#################################
+# BA(Encrypt a clear text PIN.) #
+#################################
+
+Header			0000
+Command Code	BA
+PIN				1257F
+Account Number	331810031069
+Delimiter		%
+LMK Identifier	01
+Command			0000BA1257F331810031069%00
+
+Response		0000BB00[4141334338]
+Message Header	0000
+Response Code	BB
+Error Code		00
+PIN				4141334338 = 4141334338(HEX) = AA3C8(ASCII)
+
+##################################################
+# JG(Translate a PIN from LMK to ZPK Encryption) #
+##################################################
+
+Message Header			0000
+Command Code			JG
+Destination ZPK			U7A7EAD902DD5CFBCAA69FE5645BD5CCD
+PIN Block Format Code	01
+PAN						331810031069
+PIN						AA3C8
+Delimiter				%
+LMK						01
+
+Command					0000JGU7A7EAD902DD5CFBCAA69FE5645BD5CCD01331810031069AA3C8%00
+
+Response				0000JH00[33394235443933333435413931413431]
+
+Message Header			0000
+Response Code			JH
+Error Code				00
+PIN Block				33394235443933333435413931413431 = 33394235443933333435413931413431(HEX) = 39B5D93345A91A41 (ASCII)
+
+################################################
+# CC (Translate a PIN from One ZPK to Another) #
+################################################
+
+Message Header:					0000
+Command Code:					CC
+Source ZPK:						U7A7EAD902DD5CFBCAA69FE5645BD5CCD
+Source ZPK:						U7A7EAD902DD5CFBCAA69FE5645BD5CCD
+Maximum PIN Length:				04
+Source PIN block:				39B5D93345A91A41
+Source PIN block format:		01
+Destination PIN block format:	01
+PAN/Token:						331810031069
+Delimiter						%
+LMK								01
+
+Command:						0000CCU7A7EAD902DD5CFBCAA69FE5645BD5CCDU7A7EAD902DD5CFBCAA69FE5645BD5CCD0439B5D93345A91A410101331810031069%01
+
+Response						0000CD00[3034333942354439333334354139314134313031]
+
+Message Header					0000
+Response Code					CD
+Error Code						00
+PIN Length						04
+Destination PIN block			303433394235443933333435413931413431 = 303433394235443933333435413931413431(HEX) = 0439B5D93345A91A41(ASCII)
+Destination PIN block format	3031 = 3031(HEX) = 01(ASCII)
+
+#################################################
+# KW (ARQC Verification and/or ARPC Generation) #
+#################################################
+
+Message Header							0000
+Command Code							KW
+Mode Flag								0
+Scheme ID								2
+MK-AC									U947EF24DDEA3379B7D264F1DEAA23492 (KCV: B4EAAC)
+PAN/PAN Sequence No						<6778000133190500>
+Application Transaction Counter			<0006>
+Transaction Data Length					42
+Transaction Data						<0000000101000000000000000076000000000009862004140076FCF327580000060FA501A030C0000000000000000000000F00000000000000000000000000000080>
+Delimiter								;
+ARQC/TC/AAC or MPVV						<CCF68E65C866518D>
+Delimiter								%
+LMK Identifier							01
+
+Command									0000KW02U947EF24DDEA3379B7D264F1DEAA23492<6778000133190500><0006>42<0000000101000000000000000076000000000009862004140076FCF327580000060FA501A030C0000000000000000000000F00000000000000000000000000000080>;<CCF68E65C866518D>%01
+
+Received response						0000KX00
+
+##############################################
+# CY (Verify a Card Verification Code/Value) #
+##############################################
+
+Message Header 		0000
+Command Code 		CY
+CVK A/B 			UD6F064E7419E807AC834E02878B81E31
+CVV 				234
+Primary account 	4123456789012345
+Delimiter 			;
+Expiration date 	8701
+Service code 		101
+Delimiter			%
+LMK Identifier		01
+
+Command				0000CYUD6F064E7419E807AC834E02878B81E312344123456789012345;8701101%01
+
+Received response	0000CZ00

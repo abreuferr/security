@@ -1,0 +1,47 @@
+*************************************************************************************************************************
+# LMK
+*************************************************************************************************************************
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H)      Variant  3DES(2key) Test   268604 variant 
+	01 Yes(H)      KeyBlock AES-256    Test   9D04A0 keyblock 
+	Key change storage table:No keys loaded in key change storage 
+
+*************************************************************************************************************************
+# MK-AC
+*************************************************************************************************************************
+Online-AUTH>kg 
+	Enter LMK id [0-1]: 0 
+	Enter key length [1,2,3]: 2 
+	Enter key type: 109 
+	Enter key scheme (LMK): u 
+	Enter key scheme (ZMK):  
+	Enter ZMK:  
+ 
+	Key under LMK: U35F2 90DF 8C62 B1D8 F5E9 D68F F80F D5DF
+	Key check value: 596BF3 
+
+*************************************************************************************************************************
+# KQ
+*************************************************************************************************************************
+
+Message Header				0000
+Command	Code				KQ
+Mode Flag					1
+Scheme ID					1
+MK-AC						U35F290DF8C62B1D8F5E9D68FF80FD5DF
+PAN/PAN Sequence No			1122334455667700
+ATC							0006
+UN							b491d40b
+Transaction Data Length		28
+Transaction Data			000000000003
+Delimiter					;
+ARQC/TC/AAC
+ARC
+Discretionary Data MAC
+Discretionary Data Length
+Discretionary Data
+Delimiter
+LMK Identifier

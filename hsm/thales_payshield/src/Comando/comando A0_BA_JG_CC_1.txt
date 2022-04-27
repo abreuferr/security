@@ -1,0 +1,118 @@
+######################
+# A0(Generate a Key) # - OKAY
+######################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H)      KeyBlock AES-256    Test   9D04A0 keyblock 
+
+Message Header					0000
+Command Code					A0
+Mode							0
+Key Type						FFF
+Key Scheme (LMK)				S
+Delimiter						%
+LMK ID							00
+Delimiter						#
+Key Usage						P0
+Algorithm						T2
+Mode of Use						N
+Key Version Number				00
+Exportability					S
+Number of Optional Blocks		00
+
+Command							0000A00FFFS%00#P0T2N00S00
+
+Received response				0000A100S10096P0TN00S00001CB83756C6B38EB5B068170294EC7C84666D72542C091D3A585357C71D78327609C622F9D2BADC154BA044
+								0000A100S10096P0TN00S0000423922FDD4E3445B3E78560E2B53C43ADD8551E21A895F89E925385D27832B09F33CCAD5AFA2CE439E523F
+
+Message Header					0000
+Response Code					A1
+Error Code						00
+
+# ZPK de Origem
+Key Under LMK					S10096P0TN00S00001CB83756C6B38EB5B068170294EC7C84666D72542C091D3A585357C71D78327609C622F9D2BADC15
+KCV								4BA044
+
+# ZPK de Destinos
+Key Under LMK					S10096P0TN00S0000423922FDD4E3445B3E78560E2B53C43ADD8551E21A895F89E925385D27832B09F33CCAD5AFA2CE43
+KCV								9E523F
+
+################################
+# BA(Encrypt a clear text PIN) # - OKAY
+################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H)      KeyBlock AES-256    Test   9D04A0 keyblock 
+
+Header			0000
+Command Code	BA
+PIN				1257F
+PAN				000000081101
+Delimiter		%
+LMK Identifier	00
+Command			0000BA1257F000000081101%00
+
+Response		0000BB00J512073E82E9413ACC8F3D549A2FBA7D4
+Message Header	0000
+Response Code	BB
+Error Code		00
+PIN				J512073E82E9413ACC8F3D549A2FBA7D4
+
+##################################################
+# JG(Translate a PIN from LMK to ZPK Encryption) # - OKAY
+##################################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H)      KeyBlock AES-256    Test   9D04A0 keyblock
+
+Message Header			0000
+Command Code			JG
+Destination ZPK			S10096P0TN00S00001CB83756C6B38EB5B068170294EC7C84666D72542C091D3A585357C71D78327609C622F9D2BADC15
+PIN Block Format Code	01
+PAN						000000081101
+PIN						J512073E82E9413ACC8F3D549A2FBA7D4
+Delimiter				%
+LMK						00
+Command					0000JGS10096P0TN00S00001CB83756C6B38EB5B068170294EC7C84666D72542C091D3A585357C71D78327609C622F9D2BADC1501000000081101J512073E82E9413ACC8F3D549A2FBA7D4%00
+
+Received response		0000JH00066C9B0C2A14E2E7
+Message Header			0000
+Response Code			JH
+Error Code				00
+PIN Block				066C9B0C2A14E2E7
+
+#########################################################
+# CC(Translate a PIN from One ZPK to Another) - Teste 1 # - OKAY
+#########################################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H)      KeyBlock AES-256    Test   9D04A0 keyblock
+
+Message Header					NLNE
+Command Code					CC
+Source ZPK						S10096P0TN00S00001CB83756C6B38EB5B068170294EC7C84666D72542C091D3A585357C71D78327609C622F9D2BADC15
+Destination ZPK					S10096P0TN00S0000423922FDD4E3445B3E78560E2B53C43ADD8551E21A895F89E925385D27832B09F33CCAD5AFA2CE43
+Maximum PIN Length				12
+Source PIN block				066C9B0C2A14E2E7
+Source PIN block format			01
+Destination PIN block format	01
+PAN/Token						000000081101
+Delimiter						%
+LMK								00
+
+Command							NLNECCS10096P0TN00S00001CB83756C6B38EB5B068170294EC7C84666D72542C091D3A585357C71D78327609C622F9D2BADC15S10096P0TN00S0000423922FDD4E3445B3E78560E2B53C43ADD8551E21A895F89E925385D27832B09F33CCAD5AFA2CE4312066C9B0C2A14E2E70101000000081101%00
+
+Message Header					NLNE
+Response Code					CD
+Error Code						00
+PIN Length						04
+Destination PIN keyblock 		5479CAC82AA9CE3A
+Destination PIN block Format 	01

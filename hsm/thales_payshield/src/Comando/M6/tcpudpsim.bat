@@ -1,0 +1,1 @@
+tcpudpsim -f M6.txt -d 10.20.60.167 -s 1500 -r -c 1 -i 1 -o M6_out.txt

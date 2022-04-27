@@ -1,0 +1,78 @@
+
+
+Thu Mar 25 19:17:32 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: A8.txt
+Protocol Used: tcp
+Destination IP: 10.20.60.167
+Destination Port: 1500
+Destination timeout: 60
+Output: A8_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [A8]
+Description        : EDENRED
+Command            : 0000A8FFFS1009652TN00S000078DEB7E400765590E929913A7AA7CEB23A4AD1581C773010A7AA8F66C328364E97FCF5AECE6096A6S10096V0TN00S0000BC281EB5B58239966514E70014C8336C8F34D525DA74F8382FD1BF2B2255D9E5015B0ADEE8308954S%00
+Length of Command Sent: 207
+
+Compare FAILED
+Command Number in File = 0 FAILED
+Failure on iter:1 of 1
+Section Failure: [A8]
+Total Time      : 0.029
+Command    :0000A8FFFS1009652TN00S000078DEB7E400765590E929913A7AA7CEB23A4AD1581C773010A7AA8F66C328364E97FCF5AECE6096A6S10096V0TN00S0000BC281EB5B58239966514E70014C8336C8F34D525DA74F8382FD1BF2B2255D9E5015B0ADEE8308954S%00
+Expected response: 0000A900
+Received response: 0000A9A1
+
+
+Test End: Thu Mar 25 19:17:32 2021
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 12772
+-------------------------------------------------
+Target IP address : 10.20.60.167
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 0
+Failed Tests      : 1
+-------------------------------------------------
+Started:          : Thu Mar 25 19:17:32 2021
+Ended:            : Thu Mar 25 19:17:32 2021
+Total Time Spent  : 0.0292 seconds
+Transactions/Sec  : 34.2173 trans/sec
+Avg Time          : 0.0292 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 0
+Failed Tests      : 1
+-------------------------------------------------
+Earliest start:   : Thu Mar 25 19:17:32 2021
+Latest end:       : Thu Mar 25 19:17:32 2021
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

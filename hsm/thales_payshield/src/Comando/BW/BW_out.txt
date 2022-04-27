@@ -1,0 +1,77 @@
+
+
+Thu Mar 25 19:18:50 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: BW.txt
+Protocol Used: tcp
+Destination IP: 10.20.60.167
+Destination Port: 1500
+Destination timeout: 60
+Output: BW_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [BW]
+Description        : Teste BW
+Command            : 0000BW091U2F008E2708D73336402C9D1FE25B82FD%01#B0X00S00!11
+Length of Command Sent: 57
+Command Test OK
+Command    :0000BW091U2F008E2708D73336402C9D1FE25B82FD%01#B0X00S00!11
+Expected response: 0000BX00
+Received response: 0000BX00[53313030393642305458303053303030313539363146304542334237453642433741303345413035434138443142433331343839374346304242323837353944393530353945353246434141413536324445453038454430314238364646373534393445424233]
+Total Time      : 0.046
+Transactions/Sec: 21.904
+Avg Time        : 0.046
+
+
+
+Test End: Thu Mar 25 19:18:50 2021
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 9672
+-------------------------------------------------
+Target IP address : 10.20.60.167
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Started:          : Thu Mar 25 19:18:50 2021
+Ended:            : Thu Mar 25 19:18:50 2021
+Total Time Spent  : 0.0457 seconds
+Transactions/Sec  : 21.9037 trans/sec
+Avg Time          : 0.0457 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Earliest start:   : Thu Mar 25 19:18:50 2021
+Latest end:       : Thu Mar 25 19:18:50 2021
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

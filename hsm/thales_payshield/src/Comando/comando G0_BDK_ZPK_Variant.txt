@@ -1,0 +1,124 @@
+Online-AUTH>vt
+LMK table:
+ID Authorized  Scheme   Algorithm  Status Check  Comments
+00 Yes(H,C)    Variant  3DES(2key) Test   268604 Variant
+
+#
+# BDK - 009
+# 
+Online-AUTH>gc
+Enter LMK id [0-1]: 0
+Enter key length [1,2,3]: 2
+Enter key type: 009
+Enter key scheme: u
+			Clear cponent: A1FE 04E3 8AA4 C264 5446 D651 76EC 73BF 
+			Encrypted component: UA3C3 E308 62F6 88F4 ADE3 808A E72E 3E2B 
+			Key check value: 9BD377
+
+
+Online-AUTH>fk
+Enter LMK id [0-1]: 0
+Enter key length [1,2,3]: 2
+Enter key type: 009
+Enter key scheme: u
+ Enter component type [X,H,T,E,S]: x
+Enter number of components [1-9]: 1
+Enter component 1: ***************************************
+Component 1 check value: 9BD377
+Continue? [Y/N]: y
+			Encrypted key: U6515 D213 AAFD B5EC 958C 1C4F 8F92 0F27 
+			Key check value: 9BD377
+
+
+#
+# ZPK - 001
+#
+
+Online-AUTH>gc
+Enter LMK id [0-1]: 0
+Enter key length [1,2,3]: 2
+Enter key type: 001
+Enter key scheme: u
+			Clear component: 1658 83DC A797 2375 89B9 C2B3 3B0B 8CBA 
+			Encrypted component: U2339 3E41 DE3F 1402 6F44 45EC 744A 5545 
+			Key check value: 361E2A
+
+Online-AUTH>fk
+Enter LMK id [0-1]: 0
+Enter key length [1,2,3]: 2
+Enter key type: 001
+Enter key scheme: u
+ Enter component type [X,H,T,E,S]: x
+Enter number of components [1-9]: 1
+Enter component 1: ***************************************
+Component 1 check value: 361E2A
+Continue? [Y/N]: y
+			Encrypted key: U355B 13FF 51CD 98CE C918 4C0C 2E5B AED6 
+			Key check value: 361E2A
+	
+	
+#
+# PIN Block
+#
+# Como obter o PIN Block(1270A542-037 Host Programmer v3.4, pg 175)
+#
+
+- Format 			00
+- PIN				7777
+- account number	122223333444(account number) 4(checked digit)
+
+047777FFFFFFFFFF
+	(XOR)
+0000122223333444
+---------------------------------------------
+PIN block 			047765DDDCCCCBBB
+
+#
+# BDK(PIN)
+#
+# Criptografia do PIN utilizando o aplicativo Crypto Calculator
+
+DUKPT: PEK derivation
+****************************************
+ BDK:				A1FE04E38AA4C2645446D65176EC73BF
+ KSN:				AAAAAAAAA0CCCCC0000D
+ ----------------------------------------
+ Derived IPEK:		A4135B830850EF4480C6736E8E358671
+ KCV:				A7F282
+ Derived PEK:		BC21393771BC6B8EF9203BE5C1D24B33
+ KCV:				FA3E3B
+
+
+DUKPT: PIN operation finished
+ ****************************************
+ PEK:			BC21393771BC6B8EF9203BE5C1D24B33
+ PIN block:		047765DDDCCCCBBB
+ ----------------------------------------
+ Encrypted PIN:		59CDF56434E8200B
+
+
+
+##############################################################################################################################################################################
+#
+# COMANDO G0
+#
+
+Message Header						XXXX
+Command Code						G0
+Source Key							U6515D213AAFDB5EC958C1C4F8F920F27
+Destination Key				    	U355B13FF51CD98CEC9184C0C2E5BAED6
+Source KSN Descriptor				A05
+Source KSN							AAAAAAAAA0CCCCC0000D
+Source PIN Block					59CDF56434E8200B
+Source PIN Block Format Code		01
+Destination PIN Block Format Code	01
+PAN									122223333444  
+
+Command:							XXXXG0U6515D213AAFDB5EC958C1C4F8F920F27U355B13FF51CD98CEC9184C0C2E5BAED6A05AAAAAAAAA0CCCCC0000D59CDF56434E8200B0101122223333444
+
+Message Header						
+Response Code						
+Error Code							
+PIN Length							
+Destination PIN Block				
+Destination PIN blockformat code	

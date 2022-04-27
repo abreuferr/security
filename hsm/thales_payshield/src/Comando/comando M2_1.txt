@@ -1,0 +1,81 @@
+Menssage Header:	0000
+Command Code:		M2
+Mode Flag:			00
+Input Format Flag:	1
+Output Format Flag:	1
+Key Type:			009
+Key (BDK):			UE50543536EAB5493829F0D146C1865C8
+KSN Descriptor:		A05
+Key Serial Number:	BC75601201000DE00003
+Message Length:		0020
+Encrypted Message:	BD41EF723AF48C1FBD41EF723AF48C1F
+Delimiter			%
+LMK Identifier		00
+
+Command:			0000M20011009UE50543536EAB5493829F0D146C1865C8A05BC75601201000DE000030020BD41EF723AF48C1FBD41EF723AF48C1F%00
+
+Received response: 	0000M30000206D656E736167656D6D656E736167656D
+
+Message Header		0000
+Response Code		M3
+Error Code			00
+Message Length		0020
+Decrypted Message	6D656E736167656D6D656E736167656D
+
+###############################################################################################################
+# EXEMPLO 02
+###############################################################################################################
+
+
+# LMK
+Secure-AUTH>vt
+	LMK table:
+	ID Authorized  Scheme   Algorithm  Status Check  Comments
+	00 Yes(H,C)    Variant  3DES(2key) Test   268604 variant
+
+# ZEK (00A)
+	Encrypted key: U11D1 5D1C FB4C 981A 5D12 77CD 440B 7487
+	Key check value: C27AB5
+
+Menssage Header:	0000
+Command Code:		M2
+Mode Flag:			00
+Input Format Flag:	1
+Output Format Flag:	2
+Key Type:			00A
+Key:				U11D15D1CFB4C981A5D1277CD440B7487
+Message Length:		0020
+Encrypted Message:	3636443742344644383635343937314636364437423446443836353439373146
+Delimiter			%
+LMK Identifier		00
+
+Command    			0000M2001200AU11D15D1CFB4C981A5D1277CD440B74870020<3636443742344644383635343937314636364437423446443836353439373146>%00
+
+Received response: 	0000M30000101234123412341234
+
+Message Header		0000
+Response Code		M3
+Error Code			00
+Message Length		0010
+Decrypted Message	1234123412341234
+
+###############################################################################################################
+# EXEMPLO 03
+###############################################################################################################
+
+
+Received response	0000M100[3030303815F939DB6F7218BD]
+
+Menssage Header:	0000
+Command Code:		M2
+Mode Flag:			00
+Input Format Flag:	0
+Output Format Flag:	0
+Key Type:			FFF
+Key:				S10096B0TN99E000125F62EE14EBFC4FB55D1A91986E419BE8EDBA2FCC7AD22105281312B7556830D25949E74B0940D1F
+Message Length:		0008 = 0008(HEX) = 8(DEC)
+Encrypted Message:	15F939DB6F7218BD
+Delimiter			%
+LMK Identifier		01
+
+0000M20000FFFS10096B0TN99E000125F62EE14EBFC4FB55D1A91986E419BE8EDBA2FCC7AD22105281312B7556830D25949E74B0940D1F0008<15F939DB6F7218BD>%01

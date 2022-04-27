@@ -1,0 +1,59 @@
+# BDK
+Key under LMK: U239F10DB8F392B095893CEC376D1F3C7
+Key check value: 5CD44C 
+
+##############################
+# M0 (M1) Encrypt Data Block #
+##############################
+
+Menssage Header:		0000
+Command Code:			M0
+Mode Flag (ECB)			00
+Input Format Flag:		1
+Output Format Flag:		1
+Key Type:				009
+Key (BDK):				U239F10DB8F392B095893CEC376D1F3C7
+KSN Descriptor:			A05
+Key Serial Number:		BC75602002004F80002B
+Message Length:			0020
+Message:				AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Delimiter				%
+LMK Identifier			01
+
+Command    				0000M00011009U239F10DB8F392B095893CEC376D1F3C7A05BC75602002004F80002B0020AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%01
+
+Received response: 		0000M1000020FCE90944E1FF0850FCE90944E1FF0850
+
+Message Header			0000
+Response Code			M1
+Error Code				00
+Message Length			0020
+Encrypted Message		FCE90944E1FF0850FCE90944E1FF0850
+
+##############################
+# M2 (M3) Decrypt Data Block #
+##############################
+
+Menssage Header:		0000
+Command Code:			M2
+Mode Flag (ECB)			00
+Input Format Flag:		1
+Output Format Flag:		1
+Key Type:				009
+Key (BDK):				U239F10DB8F392B095893CEC376D1F3C7
+KSN Descriptor:			A05
+Key Serial Number:		BC75602002004F80002B
+Message Length:			0020
+Encrypted Message:		FCE90944E1FF0850FCE90944E1FF0850
+Delimiter				%
+LMK Identifier			01
+
+Command					0000M20011009U239F10DB8F392B095893CEC376D1F3C7A05BC75602002004F80002B0020FCE90944E1FF0850FCE90944E1FF0850%01
+
+Received response: 		0000M3000020AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+Message Header			0000
+Response Code			M3
+Error Code				00
+Message Length			0020
+Encrypted Message		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA

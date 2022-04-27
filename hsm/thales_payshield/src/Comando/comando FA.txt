@@ -1,0 +1,53 @@
+#
+# LMK
+#
+Online-AUTH>vt 
+LMK table: 
+ID Authorized  Scheme   Algorithm  Status Check  Comments 
+00 Yes(H,C)    Variant  3DES(2key) Test   268604 variant 
+Key change storage table:No keys loaded in key change storage
+
+#
+# ZMK - 000
+#
+Key...................... = [UECBB4B37E5FDC8A0BA88C617105E8B17]
+KCV...................... = [C09EB3]
+
+#
+# ZPK - 001
+#
+Key...................... = [U1446E03207C565A6D48F0C3C98D6507A]
+Key under ZMK/TMK........ = [X16884DBD2FC4B792C08FA7140B1B6ECE]
+KCV...................... = [96DA39]
+
+#
+# COMANDO FA
+#
+
+Message Header			0000
+Command Code			FA
+ZMK						UECBB4B37E5FDC8A0BA88C617105E8B17
+ZPK						X16884DBD2FC4B792C08FA7140B1B6ECE
+Delimiter				;
+Reserved				0
+Key Scheme 				U
+Key Check Value Type	1
+Delimiter				%
+LMK Identifier			00
+
+Message Header........... = [0000]
+Command Code............. = [FA] Translate a ZPK from ZMK to LMK encryption Request
+ZMK...................... = [UECBB4B37E5FDC8A0BA88C617105E8B17]
+TPK...................... = [X16884DBD2FC4B792C08FA7140B1B6ECE]
+Delimiter................ = [;]
+Key Scheme ZMK........... = [0]
+Key Scheme LMK........... = [U]
+Key Check Value Type..... = [1]
+Delimiter................ = [%]
+LMK Identifier........... = [00]
+
+Message Header........... = [0000]
+Command Code............. = [FB] Translate a ZPK from ZMK to LMK encryption Response
+Error Code............... = [00] No error
+TPK...................... = [U1446E03207C565A6D48F0C3C98D6507A]
+KCV...................... = [96DA39]

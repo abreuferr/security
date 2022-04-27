@@ -1,0 +1,77 @@
+
+
+Thu Mar 25 19:19:19 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: CC.txt
+Protocol Used: tcp
+Destination IP: 10.20.60.160
+Destination Port: 1500
+Destination timeout: 60
+Output: CC_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [CC]
+Description        : Teste CC
+Command            : 0000CCU7A7EAD902DD5CFBCAA69FE5645BD5CCDU7A7EAD902DD5CFBCAA69FE5645BD5CCD0439B5D93345A91A410101331810031069%00
+Length of Command Sent: 109
+Command Test OK
+Command    :0000CCU7A7EAD902DD5CFBCAA69FE5645BD5CCDU7A7EAD902DD5CFBCAA69FE5645BD5CCD0439B5D93345A91A410101331810031069%00
+Expected response: 0000CD00
+Received response: 0000CD00[3034333942354439333334354139314134313031]
+Total Time      : 0.016
+Transactions/Sec: 61.083
+Avg Time        : 0.016
+
+
+
+Test End: Thu Mar 25 19:19:19 2021
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 15320
+-------------------------------------------------
+Target IP address : 10.20.60.160
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Started:          : Thu Mar 25 19:19:19 2021
+Ended:            : Thu Mar 25 19:19:19 2021
+Total Time Spent  : 0.0164 seconds
+Transactions/Sec  : 61.0825 trans/sec
+Avg Time          : 0.0164 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Earliest start:   : Thu Mar 25 19:19:19 2021
+Latest end:       : Thu Mar 25 19:19:19 2021
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

@@ -1,0 +1,78 @@
+
+
+Wed Dec 23 20:26:40 2020
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: G0.txt
+Protocol Used: tcp
+Destination IP: 10.20.60.167
+Destination Port: 1500
+Destination timeout: 60
+Output: G0_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [G0]
+Description        : EDENRED
+Command            : 0000G0S10096B0AN00S000018D8BCD6D33622F56C7C9CF5454A7F5AD9D62A66884A7399BF1C305CF4021AC4B18CCAF932F55AFDS10096B0AN00S00000B51C60849E838979DBE464226A82F49F48C0BE98C60F24BAFD904567810C3F086BCEF13B877C6BE000BC75601102A00040001FFFFF000BC75601102A00040001F0000E691748A48D70882A33B6272D7B741B7484843219876543210987;;432198765432109870;%00
+Length of Command Sent: 331
+
+Compare FAILED
+Command Number in File = 0 FAILED
+Failure on iter:1 of 1
+Section Failure: [G0]
+Total Time      : 0.023
+Command    :0000G0S10096B0AN00S000018D8BCD6D33622F56C7C9CF5454A7F5AD9D62A66884A7399BF1C305CF4021AC4B18CCAF932F55AFDS10096B0AN00S00000B51C60849E838979DBE464226A82F49F48C0BE98C60F24BAFD904567810C3F086BCEF13B877C6BE000BC75601102A00040001FFFFF000BC75601102A00040001F0000E691748A48D70882A33B6272D7B741B7484843219876543210987;;432198765432109870;%00
+Expected response: 0000G100
+Received response: 0000G120
+
+
+Test End: Wed Dec 23 20:26:41 2020
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 9272
+-------------------------------------------------
+Target IP address : 10.20.60.167
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 0
+Failed Tests      : 1
+-------------------------------------------------
+Started:          : Wed Dec 23 20:26:41 2020
+Ended:            : Wed Dec 23 20:26:41 2020
+Total Time Spent  : 0.0228 seconds
+Transactions/Sec  : 43.7694 trans/sec
+Avg Time          : 0.0228 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 0
+Failed Tests      : 1
+-------------------------------------------------
+Earliest start:   : Wed Dec 23 20:26:41 2020
+Latest end:       : Wed Dec 23 20:26:41 2020
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

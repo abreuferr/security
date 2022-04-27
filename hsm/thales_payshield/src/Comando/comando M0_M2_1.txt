@@ -1,0 +1,80 @@
+#
+# LMK
+#
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	01 Yes(H,C)    KeyBlock AES-256    Test   9D04A0 kb 
+	Key change storage table:No keys loaded in key change storage 	
+
+#
+# BDK - b0
+#
+Online-AUTH>kg 
+	Enter LMK id [0-1]: 1 
+	Enter algorithm type [D=DES, A=AES]: d 
+	Enter key length [2,3]: 2 
+	Enter key scheme (LMK): s 
+	Enter key scheme (ZMK):  
+	Enter ZMK:  
+	Enter Key Usage: b0 
+	Enter Mode of Use: n 
+	Enter Key Version Number: 00 
+	Enter Exportability: s 
+	Enter Optional Blocks? [Y/N]: n 
+ 
+	Key under LMK: S10096B0TN00S000136B898BD249B84BCC7D5E2BDBCECE0CF802D7D86EB7834514F8706EB18DF059838DCE36152B109CB 
+	Key check value: 912CBA 
+
+#
+# M0
+#
+Menssage Header		0000
+Command Code		M0
+Mode Flag (ECB)		00
+Input Format Flag	2
+Output Format Flag	1
+Key Type			FFF
+Key					S10096B0TN00S000136B898BD249B84BCC7D5E2BDBCECE0CF802D7D86EB7834514F8706EB18DF059838DCE36152B109CB
+KSN Descriptor		A05
+Key Serial Number	BC75601201000DE00003
+Message Length		0010
+Message				1234123412341234
+Delimiter			%
+LMK Identifier		01
+
+Command				0000M00021FFFS10096B0TN00S000136B898BD249B84BCC7D5E2BDBCECE0CF802D7D86EB7834514F8706EB18DF059838DCE36152B109CBA05BC75601201000DE0000300101234123412341234%01
+
+Received response	0000M10000203194A9F6805322923194A9F680532292
+Message Header		0000
+Response Code		M1
+Error Code			00
+Message Length		0020
+Encrypted Message	3194A9F6805322923194A9F680532292
+
+#
+# M2
+#
+Menssage Header:	0000
+Command Code:		M2
+Mode Flag (ECB)		00
+Input Format Flag:	1
+Output Format Flag:	2
+Key Type:			FFF
+Key:				S10096B0TN00S000136B898BD249B84BCC7D5E2BDBCECE0CF802D7D86EB7834514F8706EB18DF059838DCE36152B109CB
+KSN Descriptor		A05
+Key Serial Number	BC75601201000DE00003
+Message Length:		0020
+Encrypted Message:	3194A9F6805322923194A9F680532292
+Delimiter			%
+LMK Identifier		01
+
+Command    			0000M20012FFFS10096B0TN00S000136B898BD249B84BCC7D5E2BDBCECE0CF802D7D86EB7834514F8706EB18DF059838DCE36152B109CBA05BC75601201000DE0000300203194A9F6805322923194A9F680532292%01
+
+Received response:	0000M30000101234123412341234
+
+Message Header		0000
+Response Code		M3
+Error Code			00
+Message Length		0010
+Decrypted Message	1234123412341234

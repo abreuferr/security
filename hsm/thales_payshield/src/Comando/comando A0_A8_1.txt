@@ -1,0 +1,157 @@
+#####################################
+# COMANDO A0 PARA CRIAR UMA ZMK(K0) #
+#####################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H,C)    KeyBlock AES-256    Test   9D04A0  
+
+Message Header					0000
+Command Code					A0
+Mode							0
+Key Type						FFF
+Key Scheme (LMK)				S
+Delimiter						%
+LMK ID							00
+Delimiter						#
+Key Usage						K0; ZMK
+Algorithm						T2; 'T2' – double length DES key
+Mode of Use						N
+Key Version Number				00
+Exportability					S
+Number of Optional Blocks		00
+
+Command							0000A00FFFS%00#K0T2N00S00
+
+Received response				0000A100S10096K0TN00S000075B672BE56F56D4B7BBC902122E4D8908746E3D471A998235C9A8249EB066457012DB9925C7BE77BBDC757
+
+Message Header					0000
+Response Code					A1
+Error Code						00
+Key Under LMK					S10096K0TN00S000075B672BE56F56D4B7BBC902122E4D8908746E3D471A998235C9A8249EB066457012DB9925C7BE77B
+KCV								BDC757
+
+#####################################
+# COMANDO A0 PARA CRIAR UMA ZPK(P0) #
+#####################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H,C)    KeyBlock AES-256    Test   9D04A0
+
+Message Header					0000
+Command Code					A0
+Mode							0
+Key Type						FFF
+Key Scheme (LMK)				S
+Delimiter						%
+LMK ID							00
+Delimiter						#
+Key Usage						P0; ZPK
+Algorithm						T2; 'T2' – double length DES key
+Mode of Use						N
+Key Version Number				00
+Exportability					S
+Number of Optional Blocks		00
+
+Command							0000A00FFFS%00#P0T2N00S00
+
+Received response 				0000A100S10096P0TN00S00003441D5B31C90AC901AD222BC6FB5715BC648CC120EC876892C5E40803D7E8F3CA1B3B03B654A9227D9FC92
+
+Message Header					0000
+Response Code					A1
+Error Code						00
+Key Under LMK					S10096P0TN00S00003441D5B31C90AC901AD222BC6FB5715BC648CC120EC876892C5E40803D7E8F3CA1B3B03B654A9227
+KCV								D9FC92
+
+#####################################
+# COMANDO A0 PARA CRIAR UMA ZAK(M3) #
+#####################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H,C)    KeyBlock AES-256    Test   9D04A0
+
+Message Header				0000
+Command Code				A0
+Mode						0
+Key Type					FFF
+Key Scheme (LMK)			S
+Delimiter					%
+LMK ID						00
+Delimiter					#
+Key Usage					M3
+Algorithm					T2
+Mode of Use					N
+Key Version Number			00
+Exportability				S
+Number of Optional Blocks	00
+
+Command						0000A00FFFS%00#M3T2N00S00
+
+Received response			0000A100S10096M3TN00S0000E405E4A68ABB809F0A3EE1134B5288406A96817F3A60A291DFA0678762B5E4BDE2408362CCA16057CD3BD9
+
+Message Header				0000
+Response Code				A1
+Error Code					00
+Key Under LMK				S10096M3TN00S0000E405E4A68ABB809F0A3EE1134B5288406A96817F3A60A291DFA0678762B5E4BDE2408362CCA16057
+KCV							CD3BD9
+
+################################################################
+# COMANDO A8 PARA CRIPTOGRAFAR UMA ZPK SOBRE UMA ZMK, ZMK(ZPK) #
+################################################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	01 Yes(H,C)    KeyBlock AES-256    Test   9D04A0
+
+Message Header			0000
+Command Code			A8
+Key type				FFF
+ZMK						S10096K0TN00S000075B672BE56F56D4B7BBC902122E4D8908746E3D471A998235C9A8249EB066457012DB9925C7BE77B
+Key						S10096P0TN00S00003441D5B31C90AC901AD222BC6FB5715BC648CC120EC876892C5E40803D7E8F3CA1B3B03B654A9227
+Scheme ZMK				S
+Delimiter				%
+LMK ID					00
+
+Command					0000A8FFFS10096K0TN00S000075B672BE56F56D4B7BBC902122E4D8908746E3D471A998235C9A8249EB066457012DB9925C7BE77BS10096P0TN00S00003441D5B31C90AC901AD222BC6FB5715BC648CC120EC876892C5E40803D7E8F3CA1B3B03B654A9227S%00
+
+Received response		0000A900S00072P0TN00S00FF1E3005DB28B9FF042B005C457DCB7C36AD3D85171D07BC3E18CE2F40D9FC92
+
+Message Header			0000
+Response Code			A9
+Error Code				00
+Key (under ZMK or TMK)	S00072P0TN00S00FF1E3005DB28B9FF042B005C457DCB7C36AD3D85171D07BC3E18CE2F40
+Key Check Value			D9FC92
+
+################################################################
+# COMANDO A8 PARA CRIPTOGRAFAR UMA ZAK SOBRE UMA ZMK, ZMK(ZAK) #
+################################################################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	01 Yes(H,C)    KeyBlock AES-256    Test   9D04A0
+
+Message Header			0000
+Command Code			A8
+Key type				FFF
+ZMK						S10096K0TN00S000075B672BE56F56D4B7BBC902122E4D8908746E3D471A998235C9A8249EB066457012DB9925C7BE77B
+Key						S10096M3TN00S0000E405E4A68ABB809F0A3EE1134B5288406A96817F3A60A291DFA0678762B5E4BDE2408362CCA16057
+Scheme ZMK				S
+Delimiter				%
+LMK ID					00
+
+Command					0000A8FFFS10096K0TN00S000075B672BE56F56D4B7BBC902122E4D8908746E3D471A998235C9A8249EB066457012DB9925C7BE77BS10096M3TN00S0000E405E4A68ABB809F0A3EE1134B5288406A96817F3A60A291DFA0678762B5E4BDE2408362CCA16057S%00
+
+Received response		0000A900S00072M3TN00S00FF3BA366B9B74E9B03E7014D38C2F9C829155254F1B003E54506B17083CD3BD9
+
+Message Header			0000
+Response Code			A9
+Error Code				00
+Key (under ZMK or TMK)	S00072M3TN00S00FF3BA366B9B74E9B03E7014D38C2F9C829155254F1B003E54506B17083
+Key Check Value			CD3BD9

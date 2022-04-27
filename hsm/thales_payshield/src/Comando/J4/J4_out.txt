@@ -1,0 +1,77 @@
+
+
+Thu Mar 11 13:35:49 2021
+Test Configuration:
+----------------------------------------------------------
+Iterations (per thread): 1
+Command File: J4.txt
+Protocol Used: tcp
+Destination IP: 10.20.60.167
+Destination Port: 1500
+Destination timeout: 60
+Output: J4_out.txt
+Error Output: stderr
+----------------------------------------------------------
+
+
+
+Sending Command 0
+Section            : [J4]
+Description        : Teste J4
+Command            : 0000J4
+Length of Command Sent: 6
+Command Test OK
+Command    :0000J4
+Expected response: 0000J500
+Received response: 0000J500[42343636353330333034364E32313033303431323432333932313033313131333130343232313033313131333130343230303030363036323938425730303030303030303030303243433030303030303030303030324357303030303030303030303032435930303030303030303030303245493030303030303030303030354A323030303030303030303030334A413030303030303030303030324B513030303030303030303030314B573030303030303030303030314D303030303030303030303031314D323030303030303030303030345830303030303030303030303031]
+Total Time      : 0.007
+Transactions/Sec: 145.660
+Avg Time        : 0.007
+
+
+
+Test End: Thu Mar 11 13:35:49 2021
+
+
+-------------------------------------------------
+Thread Test Statistics for: ID 7792
+-------------------------------------------------
+Target IP address : 10.20.60.167
+Target Port       : 1500
+Protocol Used:    : tcp
+Total Socket Sends: 1
+Total Socket Fails: 0
+Total Socket Pass : 1
+-------------------------------------------------
+Test Statistics
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Started:          : Thu Mar 11 13:35:49 2021
+Ended:            : Thu Mar 11 13:35:49 2021
+Total Time Spent  : 0.0069 seconds
+Transactions/Sec  : 145.6601 trans/sec
+Avg Time          : 0.0069 sec/cmd
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------
+Test Statistics for all threads
+  (NOTE: low resolution timer -- seconds only)
+-------------------------------------------------
+Total Tests       : 1
+Passed Tests      : 1
+Failed Tests      : 0
+-------------------------------------------------
+Earliest start:   : Thu Mar 11 13:35:49 2021
+Latest end:       : Thu Mar 11 13:35:49 2021
+Total Time Spent  : 0 seconds
+Transactions/Sec  : 1.#INF trans/sec
+Avg Time          : 0.0000 sec/cmd
+-------------------------------------------------
+
+

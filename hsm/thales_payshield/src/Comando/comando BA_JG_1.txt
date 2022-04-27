@@ -1,0 +1,70 @@
+***************************************************************************************************************
+EXEMPLO 01
+***************************************************************************************************************
+LMK table:
+ID Authorized  Scheme   Algorithm  Status Check  Comments
+01 Yes(H,C)    KeyBlock 3DES(3key) Test   165126 keyblock
+
+# BA
+Received response:		0000BB00[3837313939]
+Received response:		0000BB00[87199]
+
+Message header:			0000
+Command code:			JG
+Destination ZPK:		S00072P0TN00E000165D153CF33F0F069F430A23B5C7CA746AE8DB5A61F9FC618EFB8D381
+PIN Block Format Code:	01
+PAN:					166203887730
+PIN:					87199
+delimiter:				%
+LMK:					01
+
+Command:				0000JGS00072P0TN00E000165D153CF33F0F069F430A23B5C7CA746AE8DB5A61F9FC618EFB8D3810116620388773087199%01
+
+Received response: 0000JH00[45364536304144383045424145424233]
+
+***************************************************************************************************************
+EXEMPLO 02
+***************************************************************************************************************
+LMK table:
+ID Authorized  Scheme   Algorithm  Status Check  Comments
+01 Yes(H,C)    KeyBlock 3DES(3key) Test   165126 keyblock
+
+
+Message header:			0000
+Command code:			JG
+Destination ZPK:		S10096P0AE0nE00019C0B642F1A3DE85559DF602F421E8F3E16495D315A484F5069E3B7F1B2134D9DCFD2F16615A15FA7
+PIN Block Format Code:	48
+PAN:					166203887730
+Delimiter:				;
+PIN:					J0B8F9DB518CBEC285167CD5FAC71F18E
+delimiter:				%
+LMK:					01
+
+command:				0000JGS10096P0AE0nE00019C0B642F1A3DE85559DF602F421E8F3E16495D315A484F5069E3B7F1B2134D9DCFD2F16615A15FA748166203887730;J0B8F9DB518CBEC285167CD5FAC71F18E%01
+
+
+response:				0000JH00[4530434534303241313844413137433335453331434536444334433442344643]
+
+
+***************************************************************************************************************
+EXEMPLO 03
+***************************************************************************************************************
+LMK table:
+ID Authorized  Scheme   Algorithm  Status Check  Comments
+01 Yes(H,C)    KeyBlock 3DES(3key) Test   165126 keyblock
+
+Message Header			0000
+Command Code			JG
+Destination ZPK			S00072P0TN00E000165D153CF33F0F069F430A23B5C7CA746AE8DB5A61F9FC618EFB8D381
+PIN Block Format Code	01
+PAN						166203887730
+PIN						87199
+Delimiter				%
+LMK Identifier			01
+Command					0000JGS00072P0TN00E000165D153CF33F0F069F430A23B5C7CA746AE8DB5A61F9FC618EFB8D3810116620388773087199%01
+
+Received response		0000JH00[45364536304144383045424145424233]
+Message Header			0000
+Response Code			JH
+Error Code				00
+PIN Block				45364536304144383045424145424233 = 45364536304144383045424145424233(HEX) = E6E60AD80EBAEBB3(ASCII)

@@ -1,0 +1,35 @@
+##
+# INPUT
+##
+
+Message Header	0000
+Command Code	JA
+Account Number	012345678912
+Delimiter		%
+LMK Identifier	00
+
+Command			0000JA012345678912%00
+
+##
+# OUTPUT - LMK tipo Variant
+##
+
+Received response	0000JB00[3138363134]
+Received response	0000JB00[3330353432]
+
+Message Header	0000
+Response Code	JB
+Error Code		00
+PIN				3138363134
+				3330353432
+
+##
+# OUTPUT - LMK tipo KeyBlock(AES)
+##
+
+Received response	0000JB00[4A4636373646433344443346354244463337433743424438363432424246324344]
+
+Message Header	0000
+Response Code	JB
+Error Code		00
+PIN				4A4636373646433344443346354244463337433743424438363432424246324344

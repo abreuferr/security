@@ -1,0 +1,59 @@
+###############################
+# COMANDO A0 (Generate a Key) #
+###############################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H,C)    Variant  3DES(2key) Test   268604 Variant
+
+Message Header		0000
+Command Code		A0
+Mode				0
+Key Type			000; ZMK
+Key Scheme (LMK)	U
+Delimiter			%
+LMK Identifier		00
+
+Command				0000A00000U%00
+
+Received response: 0000A100UBB9F0D1705A3C6070E3C92D898EFF7BC435DC9
+
+Message Header		0000
+Response Code		A1
+Error Code			00
+
+Key (under LMK)		UBB9F0D1705A3C6070E3C92D898EFF7BC
+KCV					435DC9
+
+###############################
+# COMANDO A0 (Generate a Key) #
+###############################
+
+Online-AUTH>vt 
+	LMK table: 
+	ID Authorized  Scheme   Algorithm  Status Check  Comments 
+	00 Yes(H,C)    Variant  3DES(2key) Test   268604 Variant
+
+Message Header							0000
+Command Code							A0
+Mode									1
+Key Type								001
+Key Scheme (LMK)						U
+Delimiter								;
+ZMK/TMK Flag							0
+ZMK (or TMK or Current BDK)				UBB9F0D1705A3C6070E3C92D898EFF7BC
+Key Scheme (ZMK or TMK or Current BDK)	X
+Delimiter								%
+LMK Identifier							00
+
+Command									0000A01001U;0UBB9F0D1705A3C6070E3C92D898EFF7BCX%00
+
+Received Response 						0000A100UA9111848F6436147C2533B4B47E5E712XB1D6450A6602091D802BAE29EAC8ABD7734C36
+
+Message Header							0000
+Response Code							A1
+Error Code								00
+Key (under ZMK or TMK or Current BDK)	UA9111848F6436147C2533B4B47E5E712
+										XB1D6450A6602091D802BAE29EAC8ABD7
+Key Check Value							734C36
