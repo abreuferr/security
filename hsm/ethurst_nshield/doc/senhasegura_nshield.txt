@@ -1,0 +1,80 @@
+#: Title : senhasegura and nshield
+#: Author : "Caio Abreu Ferreira" <abreuferr_gmail.com>
+#: Description : senhasegura and entrust nshield
+#: Options : 
+
+#
+# Teoria
+#
+
+nSRES:COLO: Remote access to HSM
+
+nSRTL:CAMB: 
+
+#
+# Instalação
+#
+
+$ sudo su
+
+root@ebian-Entrust-HSM-Nshield:~# mount -t iso9660 -o loop SecWorld_Lin64-12.80.4.iso /media/cdrom
+
+root@Debian-Entrust-HSM-Nshield:/home/cferreira# cd /
+
+root@Debian-Entrust-HSM-Nshield:/# tar xf /media/cdrom/linux/amd64/ctd.tar.gz
+root@Debian-Entrust-HSM-Nshield:/# tar xf /media/cdrom/linux/amd64/ctls.tar.gz
+root@Debian-Entrust-HSM-Nshield:/# tar xf /media/cdrom/linux/amd64/devref.tar.gz
+root@Debian-Entrust-HSM-Nshield:/# tar xf /media/cdrom/linux/amd64/hwsp.tar.gz
+root@Debian-Entrust-HSM-Nshield:/# tar xf /media/cdrom/linux/amd64/javasp.tar.gz
+root@Debian-Entrust-HSM-Nshield:/# tar xf /media/cdrom/linux/amd64/jd.tar.gz
+root@Debian-Entrust-HSM-Nshield:/# tar xf /media/cdrom/linux/amd64/ncsnmp.tar.gz
+root@Debian-Entrust-HSM-Nshield:/# tar xf /media/cdrom/linux/amd64/raserv.tar.gz
+
+root@Debian-Entrust-HSM-Nshield:/# cd /opt/nfast/sbin
+
+root@ebian-Entrust-HSM-Nshield:/opt/nfast/sbin# ./install
+
+#
+# Configuração
+#
+
+root@ebian-Entrust-HSM-Nshield:/opt/nfast/sbin# ../bin/enquiry
+Server:
+ enquiry reply flags  none
+ enquiry reply level  Six
+ serial number        
+ mode                 operational
+ version              12.80.4
+ speed index          0
+ rec. queue           2..50
+ level one flags      none
+ version string       12.80.4-274-813026a
+ checked in           00000000618aeb9c Tue Nov  9 18:43:56 2021
+ level two flags      none
+ max. write size      8192
+ level three flags    none
+ level four flags     ServerHasPollCmds ServerHasLongJobs ServerHasCreateClient
+ module type code     0
+ product name         nFast server
+ device name          
+ EnquirySix version   8
+ impath kx groups    
+ feature ctrl flags   none
+ features enabled     none
+ version serial       0
+ level six flags      none
+ remote port (IPv4)   9004
+ kneti hash           d22763d9b5af11234e1dff1af5b4205067585f67
+ rec. LongJobs queue  0
+ SEE machine type     None
+ supported KML types 
+ active modes         none
+ remote port (IPv6)   9004
+
+root@Debian-Entrust-HSM-Nshield:/opt/nfast/sbin# cd /opt/nfast/bin/
+
+root@Debian-Entrust-HSM-Nshield:/opt/nfast/bin# ./anonkneti --port 9084 [IP_HSM]
+[ESN] [KNETI HASH]
+
+root@Debian-Entrust-HSM-Nshield:/opt/nfast/bin# ./anonkneti -v
+anonkneti, nshield (12.80.4-274-813026a)
