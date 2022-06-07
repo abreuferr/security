@@ -74,11 +74,9 @@ Server:
 root@Debian-Entrust-HSM-Nshield:/opt/nfast/sbin# cd /opt/nfast/bin/
 
 root@Debian-Entrust-HSM-Nshield:/opt/nfast/bin# ./anonkneti --port 9044 [IP_nSRES:COLO]
-root@Debian-Entrust-HSM-Nshield:/opt/nfast/bin# ./anonkneti --port 9084 [IP_nSRES:COLO]
 [ESN] [KNETI HASH]
 
 root@Debian-Entrust-HSM-Nshield:/opt/nfast/bin# ./anonkneti --port 9044 [IP_nSRTL:CAMB]
-root@Debian-Entrust-HSM-Nshield:/opt/nfast/bin# ./anonkneti --port 9084 [IP_nSRTL:CAMB]
 [ESN] [KNETI HASH]
 
 root@Debian-Entrust-HSM-Nshield:/opt/nfast/bin# ./anonkneti -v

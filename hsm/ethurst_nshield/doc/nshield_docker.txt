@@ -1,0 +1,65 @@
+#: Title :  nShield Container Option Pack
+#: Author : "Caio Abreu Ferreira" <abreuferr_gmail.com>
+#: Description :  nShield Container Option Pack and no docker
+#: Options : 
+
+#
+# Theory
+#
+
+The nShield Container Option Pack (nSCOP) provides application developers, in a container-based
+environment, the ability to access the cryptographic functionality of an nShield Connect HSM.
+
+The nShield Container Option Pack is installed on top of your existing Security World Software
+installation, allowing you to continue using your existing Security World and keys.
+
+The nShield Container Option Pack requires nShield Security World Software and Docker to be
+installed prior to the use of the nShield Container Option Pack scripts.
+
+#
+# Installation - Security World
+#
+
+$ sudo su
+
+# mount -t iso9660 -o loop SecWorld_Lin64-12.80.4.iso /media/cdrom
+
+# cd /
+
+# tar xf /media/cdrom/linux/amd64/ctd.tar.gz
+# tar xf /media/cdrom/linux/amd64/ctls.tar.gz
+# tar xf /media/cdrom/linux/amd64/devref.tar.gz
+# tar xf /media/cdrom/linux/amd64/hwsp.tar.gz
+# tar xf /media/cdrom/linux/amd64/javasp.tar.gz
+# tar xf /media/cdrom/linux/amd64/jd.tar.gz
+# tar xf /media/cdrom/linux/amd64/ncsnmp.tar.gz
+# tar xf /media/cdrom/linux/amd64/raserv.tar.gz
+
+# cd /opt/nfast/sbin
+
+# ./install
+
+#
+# Installation - nShield Container Option Pack (nSCOP)
+#
+
+# mkdir -p /opt/nscop
+
+# tar xf nscop-1.1.1.tar -C /opt/nscop
+
+# mount -o loop SecWorld_Lin64-12.80.4.iso /media/cdrom
+
+# cd /opt/nscop
+
+# vi make-nshield-hwsp
+
+    DE: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
+    PARA: DEFAULT_FROM="docker.io/library/debian:buster-slim"
+
+# ./make-nshield-hwsp /media/cdrom
+
+# docker image ls
+REPOSITORY     TAG           IMAGE ID       CREATED          SIZE
+nshield-hwsp   12.80.4       f338b0fc3b9e   38 minutes ago   320MB
+debian         buster-slim   c2303a498941   10 days ago      69.3MB
+
