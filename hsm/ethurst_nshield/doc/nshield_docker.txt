@@ -3,6 +3,7 @@
 #: Description :  nShield Container Option Pack and no docker
 #: Options : 
 
+####################################################################
 #
 # Information
 #
@@ -29,6 +30,7 @@ application containers.
 on the HSM, and map the key management data folder (kmdata) from your container host
 machine into the running application containers.
 
+####################################################################
 #
 # Installation - Security World
 #
@@ -53,43 +55,13 @@ $ sudo su
 
 # ./install
 
+####################################################################
 #
 # Configura - Security World
 #
 ####################################################################
 
 # ../bin/enquiry
-Server:
- enquiry reply flags  none
- enquiry reply level  Six
- serial number        
- mode                 operational
- version              12.80.4
- speed index          0
- rec. queue           2..50
- level one flags      none
- version string       12.80.4-274-813026a
- checked in           00000000618aeb9c Tue Nov  9 18:43:56 2021
- level two flags      none
- max. write size      8192
- level three flags    none
- level four flags     ServerHasPollCmds ServerHasLongJobs ServerHasCreateClient
- module type code     0
- product name         nFast server
- device name          
- EnquirySix version   8
- impath kx groups    
- feature ctrl flags   none
- features enabled     none
- version serial       0
- level six flags      none
- remote port (IPv4)   9004
- kneti hash           d22763d9b5af11234e1dff1af5b4205067585f67
- rec. LongJobs queue  0
- SEE machine type     None
- supported KML types 
- active modes         none
- remote port (IPv6)   9004
 
 # cd /opt/nfast/bin/
 
@@ -129,6 +101,7 @@ OK configuring hardserver's nethsm imports
 # ./perfcheck -m1 signing:287
 
 
+####################################################################
 #
 # Installation - nShield Container Option Pack (nSCOP)
 #
