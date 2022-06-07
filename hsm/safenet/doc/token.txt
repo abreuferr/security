@@ -172,14 +172,18 @@ $ pkcs11-tool --module /usr/lib/libeToken.so --login --delete-object --type cert
 #
 #################################################################
 
+# Gerando o par de chaves RSA
+#
+$ pkcs11-tool -vv --module /usr/lib/libeToken.so --login --keypairgen --key-type RSA:2048 --id 1 --label abreuferr_gmail_com
+
 # Gerando o CSR utilizando a chave privada RSA que esta armazenada no HSM
 #
 # Utilizando o arquivo "engine.conf" veja o SLOT e o ID da chave privada 
 # a utilizar, no caso, Slot 0 e ID 01 - o CSR deve ser assinado pela infra
 # 
-$ openssl req -new -subj '/CN=abreuferr/' -sha256 -config engine.conf -engine pkcs11 -keyform engine -key 0:01 -out arquivo_certificado.csr
+$ openssl req -new -subj '/CN=abreuferr_gmail_com/' -sha256 -config engine.conf -engine pkcs11 -keyform engine -key 0:01 -out arquivo_certificado.csr
 
-# o arquivo arquivo_certificado.csr deve ser enviado para o responsavel o qual
+# o arquivo "arquivo_certificado.csr" deve ser enviado para o responsavel o qual
 # ira assinar o certificado.
 #
 # o responsavel ira enviar um e-mail com o certificado assinado. O certificado 
@@ -194,7 +198,7 @@ $ openssl x509 -outform der -in certificado_assinado.pem -out certificado_assina
 # IMPORTANTE - o certificado deve ter o mesmo ID da chave pública/privada RSA 
 # gerou o certificado.
 #
-$ pkcs11-tool --module /usr/lib/libeToken.so -l --write-object certificado_assinado.der --type cert --id 01 --label "abreuferr"
+$ pkcs11-tool --module /usr/lib/libeToken.so -l --write-object certificado_assinado.der --type cert --id 01 --label "abreuferr_gmail_com"
 
 # Obtendo o "Serialized id"
 #

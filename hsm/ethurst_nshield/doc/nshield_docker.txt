@@ -6,6 +6,7 @@
 #
 # Theory
 #
+####################################################################
 
 The nShield Container Option Pack (nSCOP) provides application developers, in a container-based
 environment, the ability to access the cryptographic functionality of an nShield Connect HSM.
@@ -16,9 +17,21 @@ installation, allowing you to continue using your existing Security World and ke
 The nShield Container Option Pack requires nShield Security World Software and Docker to be
 installed prior to the use of the nShield Container Option Pack scripts.
 
+Before you can begin using nSCOP you must complete the following steps:
+1. Set up the HSM(s). For instructions, see the Installation Guide of your HSM(s).
+
+2. Using its IP address, configure your container host machine as a client of the HSM(s).
+The container host machine is the machine on which you will run the nShield hardserver and
+application containers.
+
+3. To access and use cryptographic keys from a Security World, load or create a Security World
+on the HSM, and map the key management data folder (kmdata) from your container host
+machine into the running application containers.
+
 #
 # Installation - Security World
 #
+####################################################################
 
 $ sudo su
 
@@ -42,6 +55,7 @@ $ sudo su
 #
 # Installation - nShield Container Option Pack (nSCOP)
 #
+####################################################################
 
 # mkdir -p /opt/nscop
 
@@ -56,6 +70,8 @@ $ sudo su
     DE: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
     PARA: DEFAULT_FROM="docker.io/library/debian:buster-slim"
 
+# Run make-nshield-hwsp to create the hardserver container.
+#
 # ./make-nshield-hwsp /media/cdrom
 
 # docker image ls
