@@ -4,7 +4,7 @@
 #: Options : 
 
 #
-# Theory
+# Information
 #
 ####################################################################
 
@@ -18,6 +18,7 @@ The nShield Container Option Pack requires nShield Security World Software and D
 installed prior to the use of the nShield Container Option Pack scripts.
 
 Before you can begin using nSCOP you must complete the following steps:
+
 1. Set up the HSM(s). For instructions, see the Installation Guide of your HSM(s).
 
 2. Using its IP address, configure your container host machine as a client of the HSM(s).
@@ -51,6 +52,82 @@ $ sudo su
 # cd /opt/nfast/sbin
 
 # ./install
+
+#
+# Configura - Security World
+#
+####################################################################
+
+# ../bin/enquiry
+Server:
+ enquiry reply flags  none
+ enquiry reply level  Six
+ serial number        
+ mode                 operational
+ version              12.80.4
+ speed index          0
+ rec. queue           2..50
+ level one flags      none
+ version string       12.80.4-274-813026a
+ checked in           00000000618aeb9c Tue Nov  9 18:43:56 2021
+ level two flags      none
+ max. write size      8192
+ level three flags    none
+ level four flags     ServerHasPollCmds ServerHasLongJobs ServerHasCreateClient
+ module type code     0
+ product name         nFast server
+ device name          
+ EnquirySix version   8
+ impath kx groups    
+ feature ctrl flags   none
+ features enabled     none
+ version serial       0
+ level six flags      none
+ remote port (IPv4)   9004
+ kneti hash           d22763d9b5af11234e1dff1af5b4205067585f67
+ rec. LongJobs queue  0
+ SEE machine type     None
+ supported KML types 
+ active modes         none
+ remote port (IPv6)   9004
+
+# cd /opt/nfast/bin/
+
+# ./anonkneti -v
+anonkneti, nshield (12.80.4-274-813026a)
+
+# nSRES (nShield Remote Evaluation Service)
+#
+# ./anonkneti --port 9084 93.93.131.226
+7425-03E0-D947 00681b15d0c79af58b6ac3728c709f0b95940a50
+
+# nSRTL (nShield Remote Test Lab)
+#
+# ./anonkneti --port 9084 213.121.187.217
+9A26-03E0-D947 292c91cc2028f4a827d3796f3865075eea3db130
+
+# cp module_7425-03E0-D947 /opt/nfast/kmdata/local/
+# cp module_9A26-03E0-D947 /opt/nfast/kmdata/local/
+# cp world /opt/nfast/kmdata/local/
+
+# ./nethsmenroll --port 9084 93.93.131.226
+Remote module returned ESN: 7425-03E0-D947
+                    HKNETI: 00681b15d0c79af58b6ac3728c709f0b95940a50
+Is the above correct? (yes/no): yes
+OK configuring hardserver's nethsm imports
+
+# ./nethsmenroll --port 9084 213.121.187.217
+Remote module returned ESN: 9A26-03E0-D947
+                    HKNETI: 292c91cc2028f4a827d3796f3865075eea3db130
+Is the above correct? (yes/no): yes
+OK configuring hardserver's nethsm imports
+
+# To test HSM connectivity
+#
+# ./enquiry
+# ./nfkminfo
+# ./perfcheck -m1 signing:287
+
 
 #
 # Installation - nShield Container Option Pack (nSCOP)
