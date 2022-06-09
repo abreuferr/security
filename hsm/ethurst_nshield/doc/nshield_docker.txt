@@ -1,7 +1,9 @@
 #: Title :  nShield as a Service (nSaaS) and nShield Container Option Pack
 #: Author : "Caio Abreu Ferreira"
 #: Description :  nShield as a Service (nSaaS) and nShield Container Option Pack and no docker
-#: Options : https://www.ncipher.com/products/general-purpose-hsms/nshield-as-a-service
+#: Options : 
+#: https://www.ncipher.com/products/general-purpose-hsms/nshield-as-a-service
+#: https://nshieldsupport.entrust.com/hc/en-us/articles/360009873277-HowTo-Setup-a-Self-Managed-nShield-as-a-Service-environment
 
 ####################################################################
 #
@@ -46,8 +48,8 @@ $ cd /opt/nscop
 
 $ vi make-nshield-hwsp
 
-    DE: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
-    PARA: DEFAULT_FROM="docker.io/library/debian:buster-slim"
+    FROM: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
+    TO: DEFAULT_FROM="docker.io/library/debian:buster-slim"
 
 # Run make-nshield-hwsp to create the hardserver container.
 #

@@ -9,51 +9,116 @@
 #
 ####################################################################
 
-The nShield Container Option Pack (nSCOP) provides application developers, in a container-based
-environment, the ability to access the cryptographic functionality of an nShield Connect HSM.
-
-The nShield Container Option Pack is installed on top of your existing Security World Software
-installation, allowing you to continue using your existing Security World and keys.
-
-The nShield Container Option Pack requires nShield Security World Software and Docker to be
-installed prior to the use of the nShield Container Option Pack scripts.
-
-Before you can begin using nSCOP you must complete the following steps:
-
-1. Set up the HSM(s). For instructions, see the Installation Guide of your HSM(s).
-
-2. Using its IP address, configure your container host machine as a client of the HSM(s).
-The container host machine is the machine on which you will run the nShield hardserver and
-application containers.
-
-3. To access and use cryptographic keys from a Security World, load or create a Security World
-on the HSM, and map the key management data folder (kmdata) from your container host
-machine into the running application containers.
 
 ####################################################################
 #
-# Installation - nShield Container Option Pack (nSCOP)
+# Installation
 #
 ####################################################################
 
-$ mkdir -p /opt/nscop
+$ sudo su
 
-$ tar xf nscop-1.1.1.tar -C /opt/nscop
+$ mount -t iso9660 -o loop SecWorld_Lin64-12.80.4.iso /media/cdrom
 
-$ mount -o loop SecWorld_Lin64-12.80.4.iso /media/cdrom
+$ cd /
 
-$ cd /opt/nscop
+$ tar xf /media/cdrom/linux/amd64/ctd.tar.gz
+$ tar xf /media/cdrom/linux/amd64/ctls.tar.gz
+$ tar xf /media/cdrom/linux/amd64/devref.tar.gz
+$ tar xf /media/cdrom/linux/amd64/hwsp.tar.gz
+$ tar xf /media/cdrom/linux/amd64/javasp.tar.gz
+$ tar xf /media/cdrom/linux/amd64/jd.tar.gz
+$ tar xf /media/cdrom/linux/amd64/ncsnmp.tar.gz
+$ tar xf /media/cdrom/linux/amd64/raserv.tar.gz
 
-$ vi make-nshield-hwsp
+$ cd /opt/nfast/sbin
 
-    DE: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
-    PARA: DEFAULT_FROM="docker.io/library/debian:buster-slim"
+$ ./install
 
-# Run make-nshield-hwsp to create the hardserver container.
+####################################################################
 #
-$ ./make-nshield-hwsp /media/cdrom
+# Settings
+#
+####################################################################
 
-$ docker image ls
-REPOSITORY     TAG           IMAGE ID       CREATED          SIZE
-nshield-hwsp   12.80.4       f338b0fc3b9e   38 minutes ago   320MB
-debian         buster-slim   c2303a498941   10 days ago      69.3MB
+$ ../bin/enquiry
+
+$ cd /opt/nfast/bin/
+
+$ ./anonkneti -v
+anonkneti, nshield (12.80.4-274-813026a)
+
+#
+# Electronic Serial Number (ESN) and KNETI-hash
+#
+
+# nSRES (nShield Remote Evaluation Service)
+#
+$ ./anonkneti --port 9084 93.93.131.226
+7425-03E0-D947 00681b15d0c79af58b6ac3728c709f0b95940a50
+
+# nSRTL (nShield Remote Test Lab)
+#
+$ ./anonkneti --port 9084 213.121.187.217
+9A26-03E0-D947 292c91cc2028f4a827d3796f3865075eea3db130
+
+#
+# Copy the Security World and module files to additional client hosts
+#
+
+$ cp module_7425-03E0-D947 /opt/nfast/kmdata/local/
+$ cp module_9A26-03E0-D947 /opt/nfast/kmdata/local/
+$ cp world /opt/nfast/kmdata/local/
+
+#
+# Enroll the HSM - configure the client to communicate with the HSM
+#
+# nethsmenroll --port <assigned-HSM-IP-address> --privileged <assigned-HSM-IP-address> <ESN> <KNETIhash>
+#
+
+$ ./nethsmenroll --port 9084 93.93.131.226
+Remote module returned ESN: 7425-03E0-D947
+                    HKNETI: 00681b15d0c79af58b6ac3728c709f0b95940a50
+Is the above correct? (yes/no): yes
+OK configuring hardserver's nethsm imports
+
+$ ./nethsmenroll --port 9084 213.121.187.217
+Remote module returned ESN: 9A26-03E0-D947
+                    HKNETI: 292c91cc2028f4a827d3796f3865075eea3db130
+Is the above correct? (yes/no): yes
+OK configuring hardserver's nethsm imports
+
+#
+# To test HSM connectivity
+#
+
+$ ./enquiry
+Server:
+serial number        7425-03E0-D947 9A26-03E0-D947
+mode                 operational
+
+Module #1:
+serial number        7425-03E0-D947
+mode                 operational
+
+Module #2:
+serial number        9A26-03E0-D947
+mode                 operational
+
+$ ./nfkminfo
+$ ./perfcheck -m1 signing:287
+
+#
+# Generate an application key protected by the HSM
+#
+
+$ ./generatekey --generate --batch simple type=rsa size=2048 plainname=keya ident=abcd certreq=yes
+Key successfully generated.
+Path to key: /opt/nfast/kmdata/local/key_simple_abcd
+Path to CSR: /opt/nfast/bin/simple_abcd_req
+
+$ ls -l /opt/nfast/kmdata/local/
+-rw-r--r-- 1 root nfast  7008 jun  8 15:16 key_simple_abcd
+-rw-r--r-- 1 root nfast  5000 jun  7 18:25 module_7425-03E0-D947
+-rw-r--r-- 1 root nfast  4996 jun  7 18:25 module_9A26-03E0-D947
+-rw-r--r-- 1 root nfast 36736 jun  7 18:25 world
