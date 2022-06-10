@@ -1,7 +1,7 @@
 #: Title :  nShield as a Service (nSaaS) and nShield Container Option Pack
 #: Author : "Caio Abreu Ferreira"
 #: Description :  nShield as a Service (nSaaS) and nShield Container Option Pack and no docker
-#: Options : https://www.ncipher.com/products/general-purpose-hsms/nshield-as-a-service
+#: Options : 
 
 ####################################################################
 #
@@ -9,6 +9,9 @@
 #
 ####################################################################
 
+https://www.ncipher.com/products/general-purpose-hsms/nshield-as-a-service
+
+https://nshieldsupport.entrust.com/hc/en-us/articles/360009873277-HowTo-Setup-a-Self-Managed-nShield-as-a-Service-environment
 
 ####################################################################
 #
@@ -16,12 +19,18 @@
 #
 ####################################################################
 
+# Root
+#
 $ sudo su
 
+# Mount ISO
+#
 $ mount -t iso9660 -o loop SecWorld_Lin64-12.80.4.iso /media/cdrom
 
 $ cd /
 
+# Uncompress
+#
 $ tar xf /media/cdrom/linux/amd64/ctd.tar.gz
 $ tar xf /media/cdrom/linux/amd64/ctls.tar.gz
 $ tar xf /media/cdrom/linux/amd64/devref.tar.gz
@@ -33,6 +42,8 @@ $ tar xf /media/cdrom/linux/amd64/raserv.tar.gz
 
 $ cd /opt/nfast/sbin
 
+# Install
+#
 $ ./install
 
 ####################################################################
@@ -41,16 +52,39 @@ $ ./install
 #
 ####################################################################
 
-$ ../bin/enquiry
-
 $ cd /opt/nfast/bin/
 
+# Software Version
+#
 $ ./anonkneti -v
 anonkneti, nshield (12.80.4-274-813026a)
 
 #
-# Electronic Serial Number (ESN) and KNETI-hash
+# Copy the Security World and module files to additional client hosts
 #
+
+$ cp module_7425-03E0-D947 /opt/nfast/kmdata/local/
+$ cp module_9A26-03E0-D947 /opt/nfast/kmdata/local/
+$ cp world /opt/nfast/kmdata/local/
+
+#
+# To test HSM connectivity
+#
+
+# Run enquiry command to validate nfast server is in an operational state
+#
+$ ./enquiry
+Server:
+serial number        7425-03E0-D947 9A26-03E0-D947
+mode                 operational
+
+Module #1:
+serial number        7425-03E0-D947
+mode                 operational
+
+Module #2:
+serial number        9A26-03E0-D947
+mode                 operational
 
 # nSRES (nShield Remote Evaluation Service)
 #
@@ -63,17 +97,7 @@ $ ./anonkneti --port 9084 213.121.187.217
 9A26-03E0-D947 292c91cc2028f4a827d3796f3865075eea3db130
 
 #
-# Copy the Security World and module files to additional client hosts
-#
-
-$ cp module_7425-03E0-D947 /opt/nfast/kmdata/local/
-$ cp module_9A26-03E0-D947 /opt/nfast/kmdata/local/
-$ cp world /opt/nfast/kmdata/local/
-
-#
 # Enroll the HSM - configure the client to communicate with the HSM
-#
-# nethsmenroll --port <assigned-HSM-IP-address> --privileged <assigned-HSM-IP-address> <ESN> <KNETIhash>
 #
 
 $ ./nethsmenroll --port 9084 93.93.131.226
@@ -88,23 +112,8 @@ Remote module returned ESN: 9A26-03E0-D947
 Is the above correct? (yes/no): yes
 OK configuring hardserver's nethsm imports
 
+# Run nfkminfo to confirm HSM's are in a Factory State
 #
-# To test HSM connectivity
-#
-
-$ ./enquiry
-Server:
-serial number        7425-03E0-D947 9A26-03E0-D947
-mode                 operational
-
-Module #1:
-serial number        7425-03E0-D947
-mode                 operational
-
-Module #2:
-serial number        9A26-03E0-D947
-mode                 operational
-
 $ ./nfkminfo
 $ ./perfcheck -m1 signing:287
 
@@ -122,3 +131,33 @@ $ ls -l /opt/nfast/kmdata/local/
 -rw-r--r-- 1 root nfast  5000 jun  7 18:25 module_7425-03E0-D947
 -rw-r--r-- 1 root nfast  4996 jun  7 18:25 module_9A26-03E0-D947
 -rw-r--r-- 1 root nfast 36736 jun  7 18:25 world
+
+#
+# Initialize HSM with Security World
+#
+
+
+
+
+
+
+
+
+
+
+####################################################################
+#
+# Example code
+#
+####################################################################
+
+/opt/nfast/c/ctd/examples/
+
+/opt/nfast/java/
+
+/opt/nfast/python
+
+/opt/nfast/python3/
+
+
+

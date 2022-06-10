@@ -11,11 +11,15 @@
 #
 ####################################################################
 
+1 Introduction
+
 The nShield Container Option Pack (nSCOP) provides application developers, in a container-based
 environment, the ability to access the cryptographic functionality of an nShield Connect HSM.
 
 The nShield Container Option Pack is installed on top of your existing Security World Software
 installation, allowing you to continue using your existing Security World and keys.
+
+2 Software Prerequisites
 
 The nShield Container Option Pack requires nShield Security World Software and Docker to be
 installed prior to the use of the nShield Container Option Pack scripts.
