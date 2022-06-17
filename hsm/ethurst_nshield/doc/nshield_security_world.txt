@@ -132,19 +132,6 @@ $ ls -l /opt/nfast/kmdata/local/
 -rw-r--r-- 1 root nfast  4996 jun  7 18:25 module_9A26-03E0-D947
 -rw-r--r-- 1 root nfast 36736 jun  7 18:25 world
 
-#
-# Initialize HSM with Security World
-#
-
-
-
-
-
-
-
-
-
-
 ####################################################################
 #
 # Example code
@@ -158,6 +145,3 @@ $ ls -l /opt/nfast/kmdata/local/
 /opt/nfast/python
 
 /opt/nfast/python3/
-
-
-

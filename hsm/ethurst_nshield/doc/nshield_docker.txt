@@ -42,6 +42,10 @@ machine into the running application containers.
 #
 ####################################################################
 
+#
+# Create nshield-hwsp
+#
+
 $ mkdir -p /opt/nscop
 
 $ tar xf nscop-1.1.1.tar -C /opt/nscop
@@ -57,9 +61,27 @@ $ vi make-nshield-hwsp
 
 # Run make-nshield-hwsp to create the hardserver container.
 #
+# Makes an nShield hardserver Docker image.
+#
 $ ./make-nshield-hwsp /media/cdrom
 
 $ docker image ls
 REPOSITORY     TAG           IMAGE ID       CREATED          SIZE
 nshield-hwsp   12.80.4       f338b0fc3b9e   38 minutes ago   320MB
 debian         buster-slim   c2303a498941   10 days ago      69.3MB
+
+#
+# Configure nshield-hwsp
+#
+
+$ mkdir -p /opt/nscop/config
+
+$ cd /opt/nscop/
+
+$ ./make-nshield-hwsp-config --output /opt/nscop/config1/config 93.93.131.226
+
+Error from AnonymousKnetiHash command: RemoteServerFailed, <us> (nCErrno(ECONNREFUSED): Connection refused)
+
+$ ./make-nshield-hwsp-config --output /opt/nscop/config1/config 213.121.187.217
+
+Error from AnonymousKnetiHash command: RemoteServerFailed, <us> (nCErrno(ECONNREFUSED): Connection refused)
