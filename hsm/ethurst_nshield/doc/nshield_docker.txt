@@ -74,14 +74,14 @@ debian         buster-slim   c2303a498941   10 days ago      69.3MB
 # Configure nshield-hwsp
 #
 
-$ mkdir -p /opt/nscop/config
+$ sudo mkdir -p /opt/nscop/config
 
-$ cd /opt/nscop/
+$ sudo cd /opt/nscop/
 
-$ ./make-nshield-hwsp-config --output /opt/nscop/config1/config 93.93.131.226
+$ sudo ./make-nshield-hwsp-config --output /opt/nscop/config1/config 93.93.131.226
 
 Error from AnonymousKnetiHash command: RemoteServerFailed, <us> (nCErrno(ECONNREFUSED): Connection refused)
 
-$ ./make-nshield-hwsp-config --output /opt/nscop/config1/config 213.121.187.217
+$ sudo ./make-nshield-hwsp-config --output /opt/nscop/config1/config 213.121.187.217
 
 Error from AnonymousKnetiHash command: RemoteServerFailed, <us> (nCErrno(ECONNREFUSED): Connection refused)
