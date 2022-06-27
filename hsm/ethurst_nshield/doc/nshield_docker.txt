@@ -230,6 +230,8 @@ nshield-hwsp   12.80.4        5f5ef9082050   2 weeks ago      320MB
 
 $ cd /opt/nscop/examples/nfkmverify
 
+$ cat README.md
+
 $ sudo docker build . --tag nfkmverify
 
 $ cd ../..
