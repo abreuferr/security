@@ -134,7 +134,6 @@ $ sudo cat /opt/nscop/config/config
 
 # To run the hardserver container
 
-
 # Create a volume
 #
 $ docker volume create socket
@@ -227,21 +226,25 @@ $ docker image ls
     nshield-hwsp   12.80.4        5f5ef9082050   2 weeks ago      320MB
 
 #
-# Derive a container with Security World from application containers
+# Derive a container with Security World from application containers - nfkmverify
 #
 
-$ cd /opt/nscop/examples/nfkmverify
+$ cd /opt/nscop/examples/nfkmverify/
 
-$ cat README.md
+$ cat /opt/nscop/examples/nfkmverify/README.md
 
 $ sudo docker build . --tag nfkmverify
 
 $ cd ../..
 
+# Build docker image
+#
 $ sudo ./extend-nshield-application --from nfkmverify /media/cdrom
     (...)
     Successfully built 11b33f761d14
 
+# List Docker image
+#
 $ docker image ls
     REPOSITORY     TAG            IMAGE ID       CREATED          SIZE
     <none>         <none>         11b33f761d14   13 seconds ago   899MB
@@ -253,6 +256,41 @@ $ docker image ls
 $ docker run -v /opt/nfast/kmdata:/opt/nfast/kmdata:ro -v /opt/nfast/sockets.hwsp:/opt/nfast/sockets 11b33f761d14
     nfkmverify: couldn't get world information: ServerNotRunning
 
-$ docker container ps
-    CONTAINER ID   IMAGE                  COMMAND                  CREATED      STATUS      PORTS     NAMES
-    5b547248f407   nshield-hwsp:12.80.4   "/opt/nfast/sbin/nsh…"   5 days ago   Up 5 days             musing_euclid
+#
+# Derive a container with Security World from application containers - nfkminfo
+#
+
+$ cd /opt/nscop/examples/nfkminfo
+
+$ cat /opt/nscop/examples/nfkminfo/README.md
+
+$ sudo vi Dockerfile
+    FROM - FROM nshield-ubi7:12.60.3
+    TO - FROM nshield-ubi7:12.80.4
+
+# Build docker image
+#
+$ docker build .
+    (...)
+    Successfully built d6a017c2df4f
+
+# List Docker image
+#
+$ docker image ls
+REPOSITORY     TAG            IMAGE ID       CREATED         SIZE
+<none>         <none>         d6a017c2df4f   6 minutes ago   790MB
+<none>         <none>         11b33f761d14   21 hours ago    899MB
+nfkmverify     latest         50d2114f5363   21 hours ago    204MB
+nshield-ubi7   12.80.4-java   f14c44f2fdfe   21 hours ago    804MB
+nshield-ubi7   12.80.4        7167b15c963c   7 days ago      790MB
+nshield-hwsp   12.80.4        5f5ef9082050   2 weeks ago     320MB
+
+$ cd ../..
+
+$ docker run -v /opt/nscop/app/kmdata/local:/opt/nfast/kmdata:ro -v /opt/nfast/sockets.hwsp:/opt/nfast/sockets d6a017c2df4f
+    4f
+    NFKM_getinfo: ServerNotRunning
+    World unchanged
+    Modules - list unavailable
+
+    No Pre-Loaded Objects
