@@ -13,6 +13,13 @@ https://www.ncipher.com/products/general-purpose-hsms/nshield-as-a-service
 
 https://nshieldsupport.entrust.com/hc/en-us/articles/360009873277-HowTo-Setup-a-Self-Managed-nShield-as-a-Service-environment
 
+The remote file system (RFS) contains the master copy of the HSM Security World data for backup 
+purposes. The RFS can be located on either a client or another networkaccessible computer where 
+the Security World Software is installed. If the RFS is on a client, the same file structure also 
+contains the configuration files for that client.
+
+aplicativo RFS-SYNC para sincronizar o Security World
+
 ####################################################################
 #
 # Installation
@@ -99,6 +106,10 @@ $ ./anonkneti --port 9084 213.121.187.217
 #
 # Enroll the HSM - configure the client to communicate with the HSM
 #
+
+# The nethsmenroll command-line utility edits the client hardserver’s 
+# configuration file to add the specified nShield Connect.
+# HA (High Availability) 
 
 $ ./nethsmenroll --port 9084 93.93.131.226
 Remote module returned ESN: 7425-03E0-D947
