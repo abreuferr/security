@@ -60,6 +60,9 @@ $ sudo tar xf nscop-1.1.1.tar -C /opt/nscop
 #
 ####################################################################
 
+# The hardserver container, nshield-hwsp, controls communication between 
+# the configured HSM(s) and application containers. 
+
 #
 # Create nshield-hwsp
 #
@@ -68,7 +71,7 @@ $ sudo tar xf nscop-1.1.1.tar -C /opt/nscop
 #
 $ sudo mount -o loop SecWorld_Lin64-12.80.4.iso /media/cdrom
 
-# Working directory
+# Work directory
 #
 $ sudo cd /opt/nscop
 
