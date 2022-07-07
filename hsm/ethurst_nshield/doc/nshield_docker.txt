@@ -43,10 +43,10 @@ machine into the running application containers.
 ####################################################################
 
 #
-# Installation nshield-hwsp
+# Installation nShield Container Option Pack (nSCOP)
 #
 
-# Create the directory where you wish to install nSCOP,
+# Create the directory where you wish to install nSCOP
 #
 $ sudo mkdir -p /opt/nscop
 
@@ -61,7 +61,10 @@ $ sudo tar xf nscop-1.1.1.tar -C /opt/nscop
 ####################################################################
 
 # The hardserver container, nshield-hwsp, controls communication between 
-# the configured HSM(s) and application containers. 
+# the configured HSM(s) and application containers.
+#
+# A hardserver container image that controls communication between the HSM(s)
+# and the application containers
 
 #
 # Create nshield-hwsp
@@ -81,7 +84,7 @@ $ sudo vi make-nshield-hwsp
     FROM: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
     TO: DEFAULT_FROM="docker.io/library/debian:buster-slim"
 
-# Run make-nshield-hwsp to create the hardserver container.
+# Run make-nshield-hwsp to create the hardserver image
 #
 $ sudo ./make-nshield-hwsp /media/cdrom
 
@@ -99,16 +102,15 @@ $ sudo cd /opt/nscop/
 
 # Create the directory where the configuration file will be stored.
 #
-$ sudo mkdir -p /opt/nscop/config
+$ sudo mkdir -p /opt/nscop/config1
 
 # Create the configuration file
 #
-$ sudo ./make-nshield-hwsp-config --output /opt/nscop/config/config NSHIELD_HSM_IP_ADDRESS
+$ sudo ./make-nshield-hwsp-config --output /opt/nscop/config1 config <NSHIELD_HSM_IP_ADDRESS>
 
 # NSRES
 #
 $ sudo ./make-nshield-hwsp-config-port9044 --output /opt/nscop/config/config 93.93.131.226
-    Error from AnonymousKnetiHash command: RemoteServerFailed, <us> (nCErrno(ECONNREFUSED): Connection refused)
 
 # nSRTL
 #
@@ -137,14 +139,14 @@ $ sudo cat /opt/nscop/config/config
 
 # To run the hardserver container
 
-# Create a volume
+# Create a new socket so that application containers can use the hardserver
 #
-$ docker volume create socket
-    socket
+$ docker volume create socket1
+    socket1
 
 # Run the hardserver container
 #
-$ docker run -v /opt/nscop/config:/opt/nfast/kmdata/config:ro -v socket:/opt/nfast/sockets nshield-hwsp:12.80.4
+$ docker run -v /opt/nscop/config1:/opt/nfast/kmdata/config:ro -v socket1:/opt/nfast/sockets nshield-hwsp:12.80.4
     OR
 $ docker run -d -v /opt/nscop/config:/opt/nfast/kmdata/config:ro -v socket:/opt/nfast/sockets nshield-hwsp:12.80.4 ; To run a Docker container in the background
 
@@ -152,6 +154,8 @@ $ docker run -d -v /opt/nscop/config:/opt/nfast/kmdata/config:ro -v socket:/opt/
 #
 $ docker volume inspect socket
 
+# Check the status of nshield-hwsp using the enquiry command
+#
 $ sudo NFAST_SERVER=/var/lib/docker/volumes/socket/_data/nserver /opt/nfast/bin/enquiry -m0
     Server:
      enquiry reply flags  none
@@ -227,6 +231,12 @@ $ docker image ls
     nshield-ubi7   12.80.4-java   f14c44f2fdfe   31 seconds ago   804MB
     nshield-ubi7   12.80.4        7167b15c963c   6 days ago       790MB
     nshield-hwsp   12.80.4        5f5ef9082050   2 weeks ago      320MB
+
+####################################################################
+#
+# Extend Application Containers - senhasegura-appliance
+#
+####################################################################
 
 #
 # Derive a container with Security World from application containers - nfkmverify
