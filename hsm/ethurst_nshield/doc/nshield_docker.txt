@@ -246,7 +246,7 @@ $ cd /opt/nscop/examples/nfkmverify/
 
 $ cat /opt/nscop/examples/nfkmverify/README.md
 
-$ sudo docker build . --tag nfkmverify
+$ sudo docker build . --tag nfkmverifys
 
 $ cd ../..
 
