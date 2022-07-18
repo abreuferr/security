@@ -76,13 +76,13 @@ $ sudo mount -o loop SecWorld_Lin64-12.80.4.iso /media/cdrom
 
 # Work directory
 #
-$ sudo cd /opt/nscop
+$ cd /opt/nscop
 
 # Edit script file
 #
 $ sudo vi make-nshield-hwsp
-    FROM: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
-    TO: DEFAULT_FROM="docker.io/library/debian:buster-slim"
+FROM: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
+TO: DEFAULT_FROM="docker.io/library/debian:buster-slim"
 
 # Run make-nshield-hwsp to create the hardserver image
 #
@@ -91,26 +91,30 @@ $ sudo ./make-nshield-hwsp /media/cdrom
 # Makes an nShield hardserver Docker image.
 #
 $ docker image ls
-    REPOSITORY     TAG           IMAGE ID       CREATED          SIZE
-    nshield-hwsp   12.80.4       f338b0fc3b9e   38 minutes ago   320MB
+REPOSITORY     TAG           IMAGE ID       CREATED          SIZE
+nshield-hwsp   12.80.4       8ac6274965db   12 seconds ago   320MB
+debian         buster-slim   5cbfa61a3abc   36 hours ago     69.3MB
 
 #
 # Configure nshield-hwsp
 #
 
-$ sudo cd /opt/nscop/
+# Work directory
+#
+$ cd /opt/nscop/
 
 # Create the directory where the configuration file will be stored.
 #
-$ sudo mkdir -p /opt/nscop/config1
+$ sudo mkdir -p /opt/nscop/config
 
 # Create the configuration file
 #
-$ sudo ./make-nshield-hwsp-config --output /opt/nscop/config1 config <NSHIELD_HSM_IP_ADDRESS>
+$ sudo ./make-nshield-hwsp-config --output /opt/nscop/config config <NSHIELD_HSM_IP_ADDRESS>
 
 # NSRES
 #
 $ sudo ./make-nshield-hwsp-config-port9044 --output /opt/nscop/config/config 93.93.131.226
+Error from AnonymousKnetiHash command: RemoteServerFailed, <us> (nCErrno(ECONNREFUSED): Connection refused)
 
 # nSRTL
 #
@@ -118,20 +122,20 @@ $ sudo ./make-nshield-hwsp-config-port9044 --output /opt/nscop/config/config 213
 
 # 213.121.187.217
 #
-$ sudo cat /opt/nscop/config/config
-    syntax-version=1
+$ cat /opt/nscop/config/config
+syntax-version=1
 
-    [server_startup]
-    nonpriv_port=9000
-    unix_privsocket_name=/opt/nfast/private/privsocket
+[server_startup]
+nonpriv_port=9000
+unix_privsocket_name=/opt/nfast/private/privsocket
 
-    [nethsm_imports]
-    local_module=1
-    remote_esn=090E-03E0-D947
-    remote_ip=213.121.187.217
-    remote_port=9044
-    keyhash=e3ccceb081699312254fccb70607dadc8cf220e5
-    privileged=0
+[nethsm_imports]
+local_module=1
+remote_esn=090E-03E0-D947
+remote_ip=213.121.187.217
+remote_port=9044
+keyhash=e3ccceb081699312254fccb70607dadc8cf220e5
+privileged=0
 
 #
 # Run nshield-hwsp container
@@ -144,19 +148,48 @@ $ sudo cat /opt/nscop/config/config
 $ docker volume create socket1
     socket1
 
-# Run the hardserver container
+# List volume created
 #
-$ docker run -v /opt/nscop/config1:/opt/nfast/kmdata/config:ro -v socket1:/opt/nfast/sockets nshield-hwsp:12.80.4
-    OR
-$ docker run -d -v /opt/nscop/config:/opt/nfast/kmdata/config:ro -v socket:/opt/nfast/sockets nshield-hwsp:12.80.4 ; To run a Docker container in the background
+$ docker volume ls
+    DRIVER    VOLUME NAME
+    local     socket1
 
 # Obtain the mount point for the Docker volume
 #
-$ docker volume inspect socket
+$ docker volume inspect socket1
+    [
+        {
+            "CreatedAt": "2022-07-13T08:21:00-03:00",
+            "Driver": "local",
+            "Labels": {},
+            "Mountpoint": "/var/lib/docker/volumes/socket1/_data",
+            "Name": "socket1",
+            "Options": {},
+            "Scope": "local"
+        }
+    ]
+
+# Run the hardserver container
+#
+$ docker run -v /opt/nscop/config:/opt/nfast/kmdata/config:ro -v socket1:/opt/nfast/sockets nshield-hwsp:12.80.4
+    OR
+$ docker run -d -v /opt/nscop/config:/opt/nfast/kmdata/config:ro -v socket1:/opt/nfast/sockets nshield-hwsp:12.80.4 ; To run a Docker container in the background
+
+# List container started
+#
+$ docker container ps
+CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS          PORTS     NAMES
+74ee0e86d7ca   nshield-hwsp:12.80.4   "/opt/nfast/sbin/nsh…"   35 seconds ago   Up 34 seconds             bold_easley
+
+# List container started
+#
+$ docker ps --all
+CONTAINER ID   IMAGE                  COMMAND                  CREATED              STATUS              PORTS     NAMES
+74ee0e86d7ca   nshield-hwsp:12.80.4   "/opt/nfast/sbin/nsh…"   About a minute ago   Up About a minute             bold_easley
 
 # Check the status of nshield-hwsp using the enquiry command
 #
-$ sudo NFAST_SERVER=/var/lib/docker/volumes/socket/_data/nserver /opt/nfast/bin/enquiry -m0
+$ sudo NFAST_SERVER=/var/lib/docker/volumes/socket1/_data/nserver /opt/nfast/bin/enquiry -m0
     Server:
      enquiry reply flags  none
      enquiry reply level  Six
@@ -164,6 +197,7 @@ $ sudo NFAST_SERVER=/var/lib/docker/volumes/socket/_data/nserver /opt/nfast/bin/
      mode                 operational
      version              12.80.4
      (...)
+
 
 ####################################################################
 #
@@ -178,9 +212,13 @@ $ sudo NFAST_SERVER=/var/lib/docker/volumes/socket/_data/nserver /opt/nfast/bin/
 # nShield base container
 #
 
+# Work directory
+#
+$ cd /opt/nscop/
+
 # Building the base container
 #
-$ vi make-nshield-hwsp-application
+$ sudo vi make-nshield-application
     FROM: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
     TO: DEFAULT_FROM="docker.io/library/debian:buster-slim"
 
@@ -189,9 +227,10 @@ $ vi make-nshield-hwsp-application
 $ sudo ./make-nshield-application /media/cdrom
 
 $ docker image ls
-    REPOSITORY     TAG           IMAGE ID       CREATED          SIZE
-    nshield-ubi7   12.80.4       7167b15c963c   22 seconds ago   790MB
-    nshield-hwsp   12.80.4       5f5ef9082050   13 days ago      320MB
+REPOSITORY     TAG           IMAGE ID       CREATED          SIZE
+nshield-ubi7   12.80.4       1631a438b512   46 minutes ago   788MB
+nshield-hwsp   12.80.4       8ac6274965db   55 minutes ago   320MB
+debian         buster-slim   5cbfa61a3abc   37 hours ago     69.3MB
 
 $ sudo mkdir -p /opt/nscop/app/kmdata/local
 
@@ -227,10 +266,11 @@ $ docker run -it -v /opt/nscop/app/kmdata/local:/opt/nfast/kmdata:ro -v socket:/
 $ sudo ./make-nshield-application --java /media/cdrom
 
 $ docker image ls
-    REPOSITORY     TAG            IMAGE ID       CREATED          SIZE
-    nshield-ubi7   12.80.4-java   f14c44f2fdfe   31 seconds ago   804MB
-    nshield-ubi7   12.80.4        7167b15c963c   6 days ago       790MB
-    nshield-hwsp   12.80.4        5f5ef9082050   2 weeks ago      320MB
+REPOSITORY     TAG            IMAGE ID       CREATED          SIZE
+nshield-ubi7   12.80.4-java   579384acd35e   16 seconds ago   802MB
+nshield-ubi7   12.80.4        1631a438b512   3 hours ago      788MB
+nshield-hwsp   12.80.4        8ac6274965db   3 hours ago      320MB
+debian         buster-slim    5cbfa61a3abc   39 hours ago     69.3MB
 
 ####################################################################
 #
@@ -247,26 +287,30 @@ $ cd /opt/nscop/examples/nfkmverify/
 $ cat /opt/nscop/examples/nfkmverify/README.md
 
 $ sudo docker build . --tag nfkmverifys
+(...)
+Successfully built c57be9533fdd
+Successfully tagged nfkmverifys:latest
 
 $ cd ../..
 
 # Build docker image
 #
 $ sudo ./extend-nshield-application --from nfkmverify /media/cdrom
-    (...)
-    Successfully built 11b33f761d14
+(...)
+Successfully built 8c2e47f094c3
 
 # List Docker image
 #
 $ docker image ls
     REPOSITORY     TAG            IMAGE ID       CREATED          SIZE
-    <none>         <none>         11b33f761d14   13 seconds ago   899MB
-    nfkmverify     latest         50d2114f5363   7 minutes ago    204MB
-    nshield-ubi7   12.80.4-java   f14c44f2fdfe   12 minutes ago   804MB
-    nshield-ubi7   12.80.4        7167b15c963c   6 days ago       790MB
-    nshield-hwsp   12.80.4        5f5ef9082050   2 weeks ago      320MB
+    nfkmverifys    latest         8c2e47f094c3   22 seconds ago   204MB
+    nshield-ubi7   12.80.4-java   f14c44f2fdfe   2 weeks ago      804MB
+    nshield-ubi7   12.80.4        7167b15c963c   3 weeks ago      790MB
+    nshield-hwsp   12.80.4        5f5ef9082050   5 weeks ago      320MB
+    debian         buster-slim    c2303a498941   6 weeks ago      69.3MB
+    centos         centos7        eeb6ee3f44bd   10 months ago    204MB
 
-$ docker run -v /opt/nfast/kmdata:/opt/nfast/kmdata:ro -v /opt/nfast/sockets.hwsp:/opt/nfast/sockets 11b33f761d14
+$ docker run -v /opt/nfast/kmdata:/opt/nfast/kmdata:ro -v /opt/nfast/sockets.hwsp:/opt/nfast/sockets 8c2e47f094c3
     nfkmverify: couldn't get world information: ServerNotRunning
 
 #
@@ -284,26 +328,31 @@ $ sudo vi Dockerfile
 # Build docker image
 #
 $ docker build .
-    (...)
-    Successfully built d6a017c2df4f
+(...)
+Successfully built 71d737d29d95
 
 # List Docker image
 #
 $ docker image ls
-REPOSITORY     TAG            IMAGE ID       CREATED         SIZE
-<none>         <none>         d6a017c2df4f   6 minutes ago   790MB
-<none>         <none>         11b33f761d14   21 hours ago    899MB
-nfkmverify     latest         50d2114f5363   21 hours ago    204MB
-nshield-ubi7   12.80.4-java   f14c44f2fdfe   21 hours ago    804MB
-nshield-ubi7   12.80.4        7167b15c963c   7 days ago      790MB
-nshield-hwsp   12.80.4        5f5ef9082050   2 weeks ago     320MB
+REPOSITORY     TAG            IMAGE ID       CREATED          SIZE
+<none>         <none>         71d737d29d95   30 seconds ago   788MB
+nshield-ubi7   12.80.4-java   579384acd35e   2 minutes ago    802MB
+nshield-ubi7   12.80.4        1631a438b512   3 hours ago      788MB
+nshield-hwsp   12.80.4        8ac6274965db   3 hours ago      320MB
+debian         buster-slim    5cbfa61a3abc   39 hours ago     69.3MB
 
 $ cd ../..
 
-$ docker run -v /opt/nscop/app/kmdata/local:/opt/nfast/kmdata:ro -v /opt/nfast/sockets.hwsp:/opt/nfast/sockets d6a017c2df4f
-    4f
-    NFKM_getinfo: ServerNotRunning
-    World unchanged
-    Modules - list unavailable
+cferreira@Debian-Entrust-HSM-Nshield:/opt/nscop$ docker run -v /opt/nscop/app/kmdata/local:/opt/nfast/kmdata:ro -v /opt/nfast/sockets.hwsp:/opt/nfast/sockets 7a02543fff51
+World unchanged
+Modules - list unavailable
 
-    No Pre-Loaded Objects
+No Pre-Loaded Objects
+NFKM_getinfo: ServerNotRunning
+
+cferreira@Debian-Entrust-HSM-Nshield:/opt/nscop$ docker run -v /opt/nfast/sockets.hwsp:/opt/nfast/sockets 7a02543fff51
+NFKM_getinfo: ServerNotRunning
+World unchanged
+Modules - list unavailable
+
+No Pre-Loaded Objects
