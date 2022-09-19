@@ -140,16 +140,37 @@ $ ./perfcheck -m1 signing:287
 # Generate an application key protected by the HSM
 #
 
-$ ./generatekey --generate --batch simple type=rsa size=2048 plainname=keya ident=abcd certreq=yes
+$ ./generatekey --generate --batch simple type=rsa size=2048 plainname=keya ident=202209191542 certreq=yes
+key generation parameters:
+ operation      Operation to perform               generate
+ application    Application                        simple
+ module         Module to use                      1
+ verify         Verify security of key             yes
+ type           Key type                           rsa
+ size           Key size                           2048
+ pubexp         Public exponent for RSA key (hex)  
+ ident          Key identifier                     202209191542
+ plainname      Key name                           keya
+ x509country    Country code                       
+ x509province   State or province                  
+ x509locality   City or locality                   
+ x509org        Organisation                       
+ x509orgunit    Organisation unit                  
+ x509dnscommon  Domain name                        
+ x509email      Email address                      
+ nvram          Blob in NVRAM (needs ACS)          no
+ digest         Digest to sign cert req with       sha256
 Key successfully generated.
-Path to key: /opt/nfast/kmdata/local/key_simple_abcd
-Path to CSR: /opt/nfast/bin/simple_abcd_req
+Path to key: /opt/nfast/kmdata/local/key_simple_202209191542
+Path to CSR: /opt/nfast/bin/simple_202209191542_req
 
 $ ls -l /opt/nfast/kmdata/local/
+-rw-r--r-- 1 root nfast  7016 set 19 15:42 key_simple_202209191542
 -rw-r--r-- 1 root nfast  7008 jun  8 15:16 key_simple_abcd
--rw-r--r-- 1 root nfast  5000 jun  7 18:25 module_7425-03E0-D947
--rw-r--r-- 1 root nfast  4996 jun  7 18:25 module_9A26-03E0-D947
--rw-r--r-- 1 root nfast 36736 jun  7 18:25 world
+-rw-r--r-- 1 root nfast  5000 set 19 12:06 module_7425-03E0-D947
+-rw-r--r-- 1 root nfast  4996 set 19 12:06 module_9A26-03E0-D947
+-rw-r--r-- 1 root nfast 36736 set 19 12:07 world
+
 
 ####################################################################
 #
