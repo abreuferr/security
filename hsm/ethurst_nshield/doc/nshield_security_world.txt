@@ -1,6 +1,6 @@
-#: Title :  nShield as a Service (nSaaS) and nShield Container Option Pack
+#: Title :  nShield as a Service (nSaaS)
 #: Author : Caio Abreu Ferreira - cferreira at senhasegura dot com
-#: Description :  nShield as a Service (nSaaS) and nShield Container Option Pack and no docker
+#: Description :  nShield as a Service (nSaaS)
 #: Options : 
 
 ####################################################################
@@ -70,34 +70,21 @@ anonkneti, nshield (12.80.4-274-813026a)
 # Copy the Security World and module files to additional client hosts
 #
 
+# Copy the Security World and module files to the Security World client’s
+# kmdata/local folder.
 $ unzip /root/dmz.1250n8.zip
 $ cp /root/dmz.1250n8/module_7425-03E0-D947 /opt/nfast/kmdata/local/
 $ cp /root/dmz.1250n8/module_9A26-03E0-D947 /opt/nfast/kmdata/local/
 $ cp /root/dmz.1250n8/world /opt/nfast/kmdata/local/
 
-#
-# To test HSM connectivity
-#
-
 $ cd /opt/nfast/bin/
 
-# Run enquiry command to validate nfast server is in an operational state
 #
-$ ./enquiry
-Server:
-serial number        7425-03E0-D947 9A26-03E0-D947
-mode                 operational
-(...)
+# ESN and KNETI-hash
+# 
 
-Module #1:
-serial number        7425-03E0-D947
-mode                 operational
-(...)
-
-Module #2:
-serial number        9A26-03E0-D947
-mode                 operational
-(...)
+# The anonkneti command returns an output with the ESN and the KNETI hash
+# in the following form: <ESN> <KNETI-hash>
 
 # nSRES (nShield Remote Evaluation Service)
 #
@@ -129,6 +116,30 @@ Remote module returned ESN: 9A26-03E0-D947
 Is the above correct? (yes/no): yes
 OK configuring hardserver's nethsm imports
 
+#
+# To test HSM connectivity
+#
+
+# Run enquiry command to validate nfast server is in an operational state
+#
+# Check that the module is installed and configured correctly on the client.
+#
+$ ./enquiry
+Server:
+serial number        7425-03E0-D947 9A26-03E0-D947
+mode                 operational
+(...)
+
+Module #1:
+serial number        7425-03E0-D947
+mode                 operational
+(...)
+
+Module #2:
+serial number        9A26-03E0-D947
+mode                 operational
+(...)
+
 # Run nfkminfo to confirm HSM's are in a Factory State
 #
 $ ./nfkminfo
@@ -141,25 +152,6 @@ $ ./perfcheck -m1 signing:287
 #
 
 $ ./generatekey --generate --batch simple type=rsa size=2048 plainname=keya ident=202209191542 certreq=yes
-key generation parameters:
- operation      Operation to perform               generate
- application    Application                        simple
- module         Module to use                      1
- verify         Verify security of key             yes
- type           Key type                           rsa
- size           Key size                           2048
- pubexp         Public exponent for RSA key (hex)  
- ident          Key identifier                     202209191542
- plainname      Key name                           keya
- x509country    Country code                       
- x509province   State or province                  
- x509locality   City or locality                   
- x509org        Organisation                       
- x509orgunit    Organisation unit                  
- x509dnscommon  Domain name                        
- x509email      Email address                      
- nvram          Blob in NVRAM (needs ACS)          no
- digest         Digest to sign cert req with       sha256
 Key successfully generated.
 Path to key: /opt/nfast/kmdata/local/key_simple_202209191542
 Path to CSR: /opt/nfast/bin/simple_202209191542_req
