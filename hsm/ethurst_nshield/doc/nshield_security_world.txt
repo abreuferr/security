@@ -64,6 +64,7 @@ $ cd /opt/nfast/bin/
 # Software Version
 #
 $ ./anonkneti -v
+
 anonkneti, nshield (12.80.4-274-813026a)
 
 #
@@ -72,6 +73,8 @@ anonkneti, nshield (12.80.4-274-813026a)
 
 # Copy the Security World and module files to the Security World client’s
 # kmdata/local folder.
+#
+$ cd /root
 $ unzip /root/dmz.1250n8.zip
 $ cp /root/dmz.1250n8/module_7425-03E0-D947 /opt/nfast/kmdata/local/
 $ cp /root/dmz.1250n8/module_9A26-03E0-D947 /opt/nfast/kmdata/local/
@@ -79,9 +82,11 @@ $ cp /root/dmz.1250n8/world /opt/nfast/kmdata/local/
 
 $ cd /opt/nfast/bin/
 
+####################################################################
 #
 # ESN and KNETI-hash
-# 
+#
+####################################################################
 
 # The anonkneti command returns an output with the ESN and the KNETI hash
 # in the following form: <ESN> <KNETI-hash>
@@ -89,36 +94,45 @@ $ cd /opt/nfast/bin/
 # nSRES (nShield Remote Evaluation Service)
 #
 $ ./anonkneti --port 9084 93.93.131.226
+
 7425-03E0-D947 00681b15d0c79af58b6ac3728c709f0b95940a50
 
 # nSRTL (nShield Remote Test Lab)
 #
 $ ./anonkneti --port 9084 213.121.187.217
+
 9A26-03E0-D947 292c91cc2028f4a827d3796f3865075eea3db130
 
+####################################################################
 #
 # Enroll the HSM - configure the client to communicate with the HSM
 #
+####################################################################
 
 # The nethsmenroll command-line utility edits the client hardserver’s 
 # configuration file to add the specified nShield Connect.
 # HA (High Availability) 
 
 $ ./nethsmenroll --force --port 9084 93.93.131.226
+
 Remote module returned ESN: 7425-03E0-D947
                     HKNETI: 00681b15d0c79af58b6ac3728c709f0b95940a50
-Is the above correct? (yes/no): yes
+Is the above correct? (yes/no): <YES>
 OK configuring hardserver's nethsm imports
 
 $ ./nethsmenroll --force --port 9084 213.121.187.217
+
 Remote module returned ESN: 9A26-03E0-D947
                     HKNETI: 292c91cc2028f4a827d3796f3865075eea3db130
-Is the above correct? (yes/no): yes
+Is the above correct? (yes/no): <YES>
 OK configuring hardserver's nethsm imports
 
+
+####################################################################
 #
 # To test HSM connectivity
 #
+####################################################################
 
 # Run enquiry command to validate nfast server is in an operational state
 #
@@ -147,9 +161,11 @@ $ ./nfkminfo
 $ ./perfcheck -m1 signing:287
 (...)
 
+####################################################################
 #
 # Generate an application key protected by the HSM
 #
+####################################################################
 
 $ ./generatekey --generate --batch simple type=rsa size=2048 plainname=keya ident=202209191542 certreq=yes
 Key successfully generated.
