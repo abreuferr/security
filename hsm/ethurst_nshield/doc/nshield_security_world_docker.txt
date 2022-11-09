@@ -78,11 +78,20 @@ $ sudo mount -o loop SecWorld_Lin64-12.80.4.iso /media/cdrom
 #
 $ cd /opt/nscop
 
+# Backup copy
+#
+$ sudo cp make-nshield-hwsp make-nshield-hwsp.BKP
+
 # Edit script file
 #
 $ sudo vi make-nshield-hwsp
 FROM: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
 TO: DEFAULT_FROM="docker.io/library/debian:buster-slim"
+
+(...)
+
+FROM: docker build --tag "${TAG}" "$@" ${WORK}
+TO: docker build --network=host --tag "${TAG}" "$@" ${WORK}
 
 # Run make-nshield-hwsp to create the hardserver image
 #
