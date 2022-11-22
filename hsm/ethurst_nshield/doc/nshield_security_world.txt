@@ -53,6 +53,22 @@ $ cd /opt/nfast/sbin
 #
 $ ./install
 
+# 1st run the installer and let it fail.
+#  
+# Then:
+#  
+# In the config file under /opt/nfast/kmdata/config/config
+#  
+# Under:
+# 
+# [server_remotecomms_ipv6]
+#  
+# Find impath_port and set it to 0.
+ 
+# Install
+#
+$ ./install
+
 ####################################################################
 #
 # Settings
