@@ -90,11 +90,9 @@ anonkneti, nshield (12.80.4-274-813026a)
 # Copy the Security World and module files to the Security World client’s
 # kmdata/local folder.
 #
-$ cd /root
-$ unzip /root/dmz.1250n8.zip
-$ cp /root/dmz.1250n8/module_7425-03E0-D947 /opt/nfast/kmdata/local/
-$ cp /root/dmz.1250n8/module_9A26-03E0-D947 /opt/nfast/kmdata/local/
-$ cp /root/dmz.1250n8/world /opt/nfast/kmdata/local/
+$ cd /home/mt4adm
+$ unzip dmz.1250n8.zip
+$ cp dmz.1250n8/* /opt/nfast/kmdata/local/
 
 $ cd /opt/nfast/bin/
 
@@ -208,3 +206,16 @@ $ ls -l /opt/nfast/kmdata/local/
 /opt/nfast/python
 
 /opt/nfast/python3/
+
+
+####################################################################
+#
+# Simulation
+#
+####################################################################
+
+# ss-01
+$ ./generatekey --generate --batch simple type=rsa size=2048 plainname=keya ident=202211251749 certreq=yes
+
+# ss-02
+$ ./generatekey --generate --batch simple type=rsa size=2048 plainname=keya ident=202211251750 certreq=yes

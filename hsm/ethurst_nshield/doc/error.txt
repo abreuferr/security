@@ -1,3 +1,10 @@
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+iptables -t nat -A POSTROUTING -s 192.168.56.0/24 ! -d 192.168.56.0/24 -o tun0 -j SNAT --to-source 172.16.20.1
+iptables -t nat -A POSTROUTING -o vboxnet0 -j MASQUERADE
+
+--------------------------------------------------------------------------------------------------
+
 # ps aux | grep hardserver
 root     10577  0.0  0.0   2384   764 pts/0    S    11:39   0:00 sh -c ../sbin/hardserver -p hardserver.pid -Lhardserver.log ; echo hardserver exit code $?
 nfast    10580  4.0  0.2 121640 16492 pts/0    Sl   11:39   0:00 ../sbin/hardserver -p hardserver.pid -Lhardserver.log
