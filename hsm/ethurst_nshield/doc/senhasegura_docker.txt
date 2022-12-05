@@ -188,4 +188,88 @@ waiting for nCipher server to become operational ...
 nCipher server did not start; end of /opt/nfast/log/hardserver.log reports:
 tail: cannot open '/opt/nfast/log/hardserver.log' for reading: No such file or directory
 perhaps failed binding to port if local hardserver running
-The command '/bin/sh -c /tmp/test.sh #Generates the soft kneti and proves hardserver can run; remove that from the image.' returned a non-zero code: 1 
+The command '/bin/sh -c /tmp/test.sh #Generates the soft kneti and proves hardserver can run; remove that from the image.' returned a non-zero code: 1
+
+--------------------------------------------------------------------------------------------------
+
+$ sudo su
+
+$ cd /opt/nfast/sbin
+ 
+$ ./init.d-ncipher stop
+ -- Running shutdown script 90ncsnmpd
+
+ -- Running shutdown script 60raserv
+
+ -- Running shutdown script 50hardserver
+
+ -- Running shutdown script 46exard
+
+ -- Running shutdown script 45drivers
+No locally built nfp drivers found
+
+$ cd /opt/nscop
+
+$ vi make-nshield-hwsp
+(...)
+# RUN /tmp/test.sh #Generates the soft kneti and proves hardserver can run; remove that from the image.
+
+$ ./make-nshield-hwsp /media/cdrom
+(...)
+Successfully built 2f255fb47680
+Successfully tagged nshield-hwsp:12.80.4
+
+$ docker image ls
+REPOSITORY                             TAG                 IMAGE ID       CREATED              SIZE
+nshield-hwsp                           12.80.4             2f255fb47680   About a minute ago   320MB
+debian                                 buster-slim         6dd568177594   2 weeks ago          69.3MB
+
+$ cd /opt/nfast/sbin
+
+$ ./init.d-ncipher start
+ -- Running startup script 45drivers
+No locally built nfp drivers found
+
+ -- Running startup script 46exard
+
+ -- Running startup script 50hardserver
+waiting for nCipher server to become operational ...
+nCipher server now running
+
+ -- Running startup script 60raserv
+.
+waiting for 'raserv'
+
+'raserv' server now running
+
+ -- Running startup script 90ncsnmpd
+...
+waiting for 'ncsnmpd'
+
+'ncsnmpd' server now running
+
+$ cd /opt/nscop
+
+$ ./make-nshield-hwsp-config-port9044 --output /opt/nscop/config/config 93.93.131.226
+
+Error from AnonymousKnetiHash command: RemoteServerFailed, <us> (nCErrno(ECONNREFUSED): Connection refused)
+
+$ ./make-nshield-hwsp-config-port9044 --output /opt/nscop/config/config 213.121.187.217
+
+$ cat /opt/nscop/config/config
+syntax-version=1
+
+[server_startup]
+nonpriv_port=9000
+unix_privsocket_name=/opt/nfast/private/privsocket
+
+[nethsm_imports]
+local_module=1
+remote_esn=090E-03E0-D947
+remote_ip=213.121.187.217
+remote_port=9044
+keyhash=e3ccceb081699312254fccb70607dadc8cf220e5
+privileged=0
+
+
+
