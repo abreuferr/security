@@ -1,7 +1,20 @@
+$ sudo su
 
-echo 1 > /proc/sys/net/ipv4/ip_forward
-iptables -t nat -A POSTROUTING -s 192.168.56.0/24 ! -d 192.168.56.0/24 -o tun0 -j SNAT --to-source 172.16.20.1
-iptables -t nat -A POSTROUTING -o vboxnet0 -j MASQUERADE
+$ mkdir -p /opt/nscop
+
+$ tar xf nscop-1.1.1.tar -C /opt/nscop
+
+$ mount -o loop SecWorld_Lin64-12.80.4.iso /media/cdrom
+
+$ cd /opt/nscop
+
+$ cp make-nshield-hwsp make-nshield-hwsp.BKP
+
+$ sudo vi make-nshield-hwsp
+FROM: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
+TO: DEFAULT_FROM="docker.io/library/debian:buster-slim"
+
+$ ./make-nshield-hwsp /media/cdrom
 
 --------------------------------------------------------------------------------------------------
 
@@ -26,7 +39,6 @@ No locally built nfp drivers found
 
 # ps aux | grep hardserver
 root     10152  0.0  0.0  10212   828 pts/0    S+   11:37   0:00 grep hardserver
-
 
 # ./make-nshield-hwsp /media/cdrom
 Detecting nShield software version
