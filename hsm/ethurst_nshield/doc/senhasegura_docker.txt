@@ -16,31 +16,27 @@ TO: DEFAULT_FROM="docker.io/library/debian:buster-slim"
 
 $ ./make-nshield-hwsp /media/cdrom
 
---------------------------------------------------------------------------------------------------
+---------------------------------------- (2022-11-15) ----------------------------------------
 
-# ps aux | grep hardserver
+$ ps aux | grep hardserver
 root     10577  0.0  0.0   2384   764 pts/0    S    11:39   0:00 sh -c ../sbin/hardserver -p hardserver.pid -Lhardserver.log ; echo hardserver exit code $?
 nfast    10580  4.0  0.2 121640 16492 pts/0    Sl   11:39   0:00 ../sbin/hardserver -p hardserver.pid -Lhardserver.log
 nfast    10581  0.0  0.0   2384   764 pts/0    S    11:39   0:00 sh -c "../sbin/hardserver" --spawn-svc
 nfast    10584  0.0  0.1  53652 11288 pts/0    S    11:39   0:00 ../sbin/hardserver --spawn-svc
 root     10678  0.0  0.0  10212   828 pts/0    S+   11:39   0:00 grep hardserver
 
-# ./init.d-ncipher stop
+$ ./init.d-ncipher stop
  -- Running shutdown script 90ncsnmpd
-
  -- Running shutdown script 60raserv
-
  -- Running shutdown script 50hardserver
-
  -- Running shutdown script 46exard
-
  -- Running shutdown script 45drivers
 No locally built nfp drivers found
 
-# ps aux | grep hardserver
+$ ps aux | grep hardserver
 root     10152  0.0  0.0  10212   828 pts/0    S+   11:37   0:00 grep hardserver
 
-# ./make-nshield-hwsp /media/cdrom
+$ ./make-nshield-hwsp /media/cdrom
 Detecting nShield software version
 Version is 12.80.4
 Unpacking hwsp...
@@ -202,21 +198,15 @@ tail: cannot open '/opt/nfast/log/hardserver.log' for reading: No such file or d
 perhaps failed binding to port if local hardserver running
 The command '/bin/sh -c /tmp/test.sh #Generates the soft kneti and proves hardserver can run; remove that from the image.' returned a non-zero code: 1
 
---------------------------------------------------------------------------------------------------
-
-$ sudo su
+---------------------------------------- (2022-12-01) ----------------------------------------
 
 $ cd /opt/nfast/sbin
  
 $ ./init.d-ncipher stop
  -- Running shutdown script 90ncsnmpd
-
  -- Running shutdown script 60raserv
-
  -- Running shutdown script 50hardserver
-
  -- Running shutdown script 46exard
-
  -- Running shutdown script 45drivers
 No locally built nfp drivers found
 
@@ -283,5 +273,134 @@ remote_port=9044
 keyhash=e3ccceb081699312254fccb70607dadc8cf220e5
 privileged=0
 
+$ vi /opt/nscop/config/config
+(...)
+[server_remotecomms_ipv6]
+impath_port=0
 
+$ docker volume create socket1
+socket1
 
+$ docker volume ls
+DRIVER    VOLUME NAME
+local     socket1
+
+$ docker volume inspect socket1
+[
+    {
+        "CreatedAt": "2022-12-06T14:07:44-03:00",
+        "Driver": "local",
+        "Labels": {},
+        "Mountpoint": "/var/lib/docker/volumes/socket1/_data",
+        "Name": "socket1",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+
+$ ./init.d-ncipher stop
+ -- Running shutdown script 90ncsnmpd
+
+ -- Running shutdown script 60raserv
+
+ -- Running shutdown script 50hardserver
+
+ -- Running shutdown script 46exard
+
+ -- Running shutdown script 45drivers
+No locally built nfp drivers found
+
+$ ps aux | grep hardserver
+root     16549  0.0  0.0  10212   828 pts/0    S+   14:27   0:00 grep hardserver
+
+---------------------------------------- (2022-12-06) ----------------------------------------
+
+$ docker run --net=host -v /opt/nscop/config:/opt/nfast/kmdata/config:ro -v socket1:/opt/nfast/sockets nshield-hwsp:12.80.4
+    OR
+$ docker run --net=host -d -v /opt/nscop/config:/opt/nfast/kmdata/config:ro -v socket1:/opt/nfast/sockets nshield-hwsp:12.80.4 ; To run a Docker container in the background
+
+$ docker container ls
+CONTAINER ID   IMAGE                                       COMMAND                  CREATED         STATUS         PORTS     NAMES
+7d725e9c7614   nshield-hwsp:12.80.4                        "/opt/nfast/sbin/nsh…"   7 seconds ago   Up 6 seconds             sharp_cori
+
+$ NFAST_SERVER=/var/lib/docker/volumes/socket1/_data/nserver /opt/nfast/bin/enquiry -m0
+Server:
+ enquiry reply flags  none
+ enquiry reply level  Six
+ serial number        090E-03E0-D947
+ mode                 operational
+ version              12.80.4
+ speed index          15843
+ rec. queue           368..566
+ level one flags      Hardware HasTokens SupportsCommandState
+ version string       12.80.4-274-813026a, 12.50.11-270-fb3b87dd465b6f6e53d9f829fc034f8be2dafd13 2019/05/16 22:02:33 BST, Bootloader: 1.2.3, Security Processor: 12.50.11 , 12.60.2-68-0587d6b7
+ checked in           00000000618aeb9c Tue Nov  9 18:43:56 2021
+ level two flags      none
+ max. write size      8192
+ level three flags    KeyStorage
+ level four flags     OrderlyClearUnit HasRTC HasNVRAM HasNSOPermsCmd ServerHasPollCmds FastPollSlotList HasSEE HasKLF HasShareACL HasFeatureEnable HasFileOp HasLongJobs ServerHasLongJobs AESModuleKeys NTokenCmds JobFragmentation LongJobsPreferred Type2Smartcard ServerHasCreateClient HasInitialiseUnitEx AlwaysUseStrongPrimes Type3Smartcard HasKLF2
+ module type code     0
+ product name         nFast server
+ device name          
+ EnquirySix version   8
+ impath kx groups    
+ feature ctrl flags   none
+ features enabled     none
+ version serial       0
+ level six flags      none
+ remote port (IPv4)   9004
+ kneti hash           1b0f966226b54da4124887ca0574cf85bfabd1fc
+ rec. LongJobs queue  0
+ SEE machine type     None
+ supported KML types 
+ active modes         none
+
+$ cd /opt/nscop/
+
+$ vi make-nshield-application
+    FROM: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
+    TO: DEFAULT_FROM="docker.io/library/debian:buster-slim"
+
+$ ./make-nshield-application /media/cdrom
+
+$ docker image ls
+REPOSITORY                             TAG                 IMAGE ID       CREATED          SIZE
+nshield-ubi7                           12.80.4             f72f1382c8e2   43 seconds ago   788MB
+nshield-hwsp                           12.80.4             2f255fb47680   7 days ago       320MB
+
+$ cd /opt/nscop/examples/nfkmverify/
+
+$ docker build . --tag nfkmverifys
+Sending build context to Docker daemon  3.584kB
+Step 1/2 : FROM centos:centos7
+centos7: Pulling from library/centos
+2d473b07cdd5: Pull complete 
+Digest: sha256:c73f515d06b0fa07bb18d8202035e739a494ce760aa73129f60f4bf2bd22b407
+Status: Downloaded newer image for centos:centos7
+ ---> eeb6ee3f44bd
+Step 2/2 : CMD [ "/opt/nfast/bin/nfkmverify" ]
+ ---> [Warning] IPv4 forwarding is disabled. Networking will not work.
+ ---> Running in a83a9217ee74
+Removing intermediate container a83a9217ee74
+ ---> bea8038e7edf
+Successfully built bea8038e7edf
+Successfully tagged nfkmverifys:latest
+
+# docker image ls
+REPOSITORY                             TAG                 IMAGE ID       CREATED          SIZE
+nfkmverifys                            latest              bea8038e7edf   4 minutes ago    204MB
+nshield-ubi7                           12.80.4             f72f1382c8e2   17 minutes ago   788MB
+nshield-hwsp                           12.80.4             2f255fb47680   7 days ago       320MB
+
+$ cd ../..
+
+$ ./extend-nshield-application --from nfkmverify /media/cdrom
+Detecting nShield software version
+Version is 12.80.4
+Unpacking /media/cdrom/linux/amd64/hwsp.tar.gz ...
+Unpacking /media/cdrom/linux/amd64/ctls.tar.gz ...
+Adding files...
+Building image...
+Sending build context to Docker daemon  702.7MB
+Step 1/4 : FROM nfkmverify
+pull access denied for nfkmverify, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
