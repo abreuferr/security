@@ -10,205 +10,30 @@ $ cd /opt/nscop
 
 $ cp make-nshield-hwsp make-nshield-hwsp.BKP
 
-$ sudo vi make-nshield-hwsp
-FROM: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
-TO: DEFAULT_FROM="docker.io/library/debian:buster-slim"
+$ vi make-nshield-hwsp
+DEFAULT_FROM="docker.io/library/debian:buster-slim"
+(...)
+docker build --network=host --tag "${TAG}" "$@" ${WORK}
 
 $ ./make-nshield-hwsp /media/cdrom
 
 ---------------------------------------- (2022-11-15) ----------------------------------------
 
+$ cd /opt/nfast/sbin
+
 $ ps aux | grep hardserver
-root     10577  0.0  0.0   2384   764 pts/0    S    11:39   0:00 sh -c ../sbin/hardserver -p hardserver.pid -Lhardserver.log ; echo hardserver exit code $?
-nfast    10580  4.0  0.2 121640 16492 pts/0    Sl   11:39   0:00 ../sbin/hardserver -p hardserver.pid -Lhardserver.log
-nfast    10581  0.0  0.0   2384   764 pts/0    S    11:39   0:00 sh -c "../sbin/hardserver" --spawn-svc
-nfast    10584  0.0  0.1  53652 11288 pts/0    S    11:39   0:00 ../sbin/hardserver --spawn-svc
-root     10678  0.0  0.0  10212   828 pts/0    S+   11:39   0:00 grep hardserver
 
 $ ./init.d-ncipher stop
- -- Running shutdown script 90ncsnmpd
- -- Running shutdown script 60raserv
- -- Running shutdown script 50hardserver
- -- Running shutdown script 46exard
- -- Running shutdown script 45drivers
-No locally built nfp drivers found
 
 $ ps aux | grep hardserver
-root     10152  0.0  0.0  10212   828 pts/0    S+   11:37   0:00 grep hardserver
 
 $ ./make-nshield-hwsp /media/cdrom
-Detecting nShield software version
-Version is 12.80.4
-Unpacking hwsp...
-Extracting tools from ctls...
-Removing redundant files...
-Creating files...
-Building image...
-Sending build context to Docker daemon  234.6MB
-Step 1/24 : FROM docker.io/library/debian:buster-slim
- ---> 3045415257d9
-Step 2/24 : RUN if [ -x /usr/bin/microdnf ]; then microdnf update && microdnf install shadow-utils libcap findutils && microdnf clean all; fi
- ---> Running in f86eeff4338e
-Removing intermediate container f86eeff4338e
- ---> 370806896747
-Step 3/24 : RUN grep "release 8" /etc/redhat-release >/dev/null 2>&1; if [ "$?" -eq "0" ] && [ -x /usr/bin/microdnf ] ; then microdnf install libnsl2; fi #no libnsl2 in UBI8-minimal
- ---> Running in cbd08e6d065e
-Removing intermediate container cbd08e6d065e
- ---> 071a1638bc49
-Step 4/24 : RUN if [ -x /usr/bin/yum ]; then yum -y update && yum -y install libcap libnsl2 && yum clean all; fi
- ---> Running in a38c44010707
-Removing intermediate container a38c44010707
- ---> 5187d3701b30
-Step 5/24 : RUN grep "release 8" /etc/redhat-release >/dev/null 2>&1; if [ "$?" -eq "0" ]; then ln -s /usr/lib64/libnsl.so.2 /usr/lib64/libnsl.so.1; fi #no libnsl in UBI
- ---> Running in 7a46caa36457
-Removing intermediate container 7a46caa36457
- ---> 6448a80d58be
-Step 6/24 : RUN if [ -x /usr/bin/apt-get ]; then apt-get -y update && apt-get -y upgrade && apt-get -y install libcap2 && apt-get clean; fi
- ---> Running in 851080463acd
-Get:1 http://deb.debian.org/debian buster InRelease [122 kB]
-Get:2 http://deb.debian.org/debian-security buster/updates InRelease [34.8 kB]
-Get:3 http://deb.debian.org/debian buster-updates InRelease [56.6 kB]
-Get:4 http://deb.debian.org/debian buster/main amd64 Packages [7909 kB]
-Get:5 http://deb.debian.org/debian-security buster/updates/main amd64 Packages [397 kB]
-Get:6 http://deb.debian.org/debian buster-updates/main amd64 Packages [8788 B]
-Fetched 8529 kB in 3s (3356 kB/s)
-Reading package lists...
-Reading package lists...
-Building dependency tree...
-Reading state information...
-Calculating upgrade...
-The following packages will be upgraded:
-  libncursesw6 libtinfo6 ncurses-base ncurses-bin tzdata
-5 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
-Need to get 1389 kB of archives.
-After this operation, 2048 B disk space will be freed.
-Get:1 http://deb.debian.org/debian-security buster/updates/main amd64 ncurses-bin amd64 6.1+20181013-2+deb10u3 [407 kB]
-Get:2 http://deb.debian.org/debian-security buster/updates/main amd64 ncurses-base all 6.1+20181013-2+deb10u3 [259 kB]
-Get:3 http://deb.debian.org/debian-security buster/updates/main amd64 libtinfo6 amd64 6.1+20181013-2+deb10u3 [326 kB]
-Get:4 http://deb.debian.org/debian-security buster/updates/main amd64 libncursesw6 amd64 6.1+20181013-2+deb10u3 [132 kB]
-Get:5 http://deb.debian.org/debian-security buster/updates/main amd64 tzdata all 2021a-0+deb10u8 [266 kB]
-debconf: delaying package configuration, since apt-utils is not installed
-Fetched 1389 kB in 1s (2198 kB/s)
-(Reading database ... 6460 files and directories currently installed.)
-Preparing to unpack .../ncurses-bin_6.1+20181013-2+deb10u3_amd64.deb ...
-Unpacking ncurses-bin (6.1+20181013-2+deb10u3) over (6.1+20181013-2+deb10u2) ...
-Setting up ncurses-bin (6.1+20181013-2+deb10u3) ...
-(Reading database ... 6460 files and directories currently installed.)
-Preparing to unpack .../ncurses-base_6.1+20181013-2+deb10u3_all.deb ...
-Unpacking ncurses-base (6.1+20181013-2+deb10u3) over (6.1+20181013-2+deb10u2) ...
-Setting up ncurses-base (6.1+20181013-2+deb10u3) ...
-(Reading database ... 6460 files and directories currently installed.)
-Preparing to unpack .../libtinfo6_6.1+20181013-2+deb10u3_amd64.deb ...
-Unpacking libtinfo6:amd64 (6.1+20181013-2+deb10u3) over (6.1+20181013-2+deb10u2) ...
-Setting up libtinfo6:amd64 (6.1+20181013-2+deb10u3) ...
-(Reading database ... 6460 files and directories currently installed.)
-Preparing to unpack .../libncursesw6_6.1+20181013-2+deb10u3_amd64.deb ...
-Unpacking libncursesw6:amd64 (6.1+20181013-2+deb10u3) over (6.1+20181013-2+deb10u2) ...
-Setting up libncursesw6:amd64 (6.1+20181013-2+deb10u3) ...
-(Reading database ... 6460 files and directories currently installed.)
-Preparing to unpack .../tzdata_2021a-0+deb10u8_all.deb ...
-Unpacking tzdata (2021a-0+deb10u8) over (2021a-0+deb10u7) ...
-Setting up tzdata (2021a-0+deb10u8) ...
-debconf: unable to initialize frontend: Dialog
-debconf: (TERM is not set, so the dialog frontend is not usable.)
-debconf: falling back to frontend: Readline
-debconf: unable to initialize frontend: Readline
-debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.28.1 /usr/local/share/perl/5.28.1 /usr/lib/x86_64-linux-gnu/perl5/5.28 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.28 /usr/share/perl/5.28 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
-debconf: falling back to frontend: Teletype
-
-Current default time zone: 'Etc/UTC'
-Local time is now:      Mon Nov 21 14:33:24 UTC 2022.
-Universal Time is now:  Mon Nov 21 14:33:24 UTC 2022.
-Run 'dpkg-reconfigure tzdata' if you wish to change it.
-
-Processing triggers for libc-bin (2.28-10+deb10u2) ...
-Reading package lists...
-Building dependency tree...
-Reading state information...
-The following NEW packages will be installed:
-  libcap2
-0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
-Need to get 17.6 kB of archives.
-After this operation, 53.2 kB of additional disk space will be used.
-Get:1 http://deb.debian.org/debian buster/main amd64 libcap2 amd64 1:2.25-2 [17.6 kB]
-debconf: delaying package configuration, since apt-utils is not installed
-Fetched 17.6 kB in 0s (83.9 kB/s)
-Selecting previously unselected package libcap2:amd64.
-(Reading database ... 6460 files and directories currently installed.)
-Preparing to unpack .../libcap2_1%3a2.25-2_amd64.deb ...
-Unpacking libcap2:amd64 (1:2.25-2) ...
-Setting up libcap2:amd64 (1:2.25-2) ...
-Processing triggers for libc-bin (2.28-10+deb10u2) ...
-Removing intermediate container 851080463acd
- ---> 6703bda4e2a8
-Step 7/24 : RUN if [ -x /usr/bin/zypper ]; then zypper update -y && zypper install -y insserv-compat && zypper clean --all; fi
- ---> Running in 0a70065b849f
-Removing intermediate container 0a70065b849f
- ---> 38b0a428ad45
-Step 8/24 : RUN if [ -x /sbin/apk ]; then apk add shadow libcap; fi
- ---> Running in d0d12f502917
-Removing intermediate container d0d12f502917
- ---> 82890f9d9862
-Step 9/24 : RUN groupadd -g 4002 nfast && useradd -g nfast -d /opt/nfast -c nShield -u 1012 nfast
- ---> Running in 9a5a2ef37b4b
-Removing intermediate container 9a5a2ef37b4b
- ---> 9ad2e1e2507f
-Step 10/24 : COPY opt /opt
- ---> 56cbe4cd4721
-Step 11/24 : RUN mkdir -m 755 /opt/nfast/log && chown nfast:nfast /opt/nfast/log
- ---> Running in 03ea3ff51023
-Removing intermediate container 03ea3ff51023
- ---> 3c9756de6694
-Step 12/24 : RUN mkdir -m 755 /opt/nfast/sockets && chown nfast:nfast /opt/nfast/sockets
- ---> Running in 3b1a8daa6d82
-Removing intermediate container 3b1a8daa6d82
- ---> 2e7c28ba26a8
-Step 13/24 : RUN mkdir -m 750 /opt/nfast/sockets-priv && chown nfast:nfast /opt/nfast/sockets-priv
- ---> Running in 719bc70b049f
-Removing intermediate container 719bc70b049f
- ---> 3da60aa2fe8b
-Step 14/24 : RUN if [ true = true ]; then mkdir -p -m 0700 /opt/nfast/hardserver.d && chown nfast:nfast /opt/nfast/hardserver.d; else mkdir -p -m 0700 /opt/nfast/kmdata/hardserver.d && chown nfast:nfast /opt/nfast/kmdata/hardserver.d; fi
- ---> Running in 5853090c9d1c
-Removing intermediate container 5853090c9d1c
- ---> c80e11be6331
-Step 15/24 : RUN mkdir -p -m 0700 /opt/nfast/kmdata/config && chown nfast:nfast /opt/nfast/kmdata/config
- ---> Running in e3ed13ea191b
-Removing intermediate container e3ed13ea191b
- ---> 0daad79cb8d7
-Step 16/24 : RUN /opt/nfast/bin/cfg-mkdefault -f /opt/nfast/kmdata/config/config && chown nfast:nfast /opt/nfast/kmdata/config/config
- ---> Running in 8936035efc12
-Removing intermediate container 8936035efc12
- ---> 109227ed5e9c
-Step 17/24 : COPY test.sh /tmp
- ---> 20888d2805d8
-Step 18/24 : RUN /tmp/test.sh #Generates the soft kneti and proves hardserver can run; remove that from the image.
- ---> Running in c1f7f69fdba6
-waiting for nCipher server to become operational ...
-waiting for nCipher server to become operational ...
-waiting for nCipher server to become operational ...
-waiting for nCipher server to become operational ...
-waiting for nCipher server to become operational ...
-waiting for nCipher server to become operational ...
-waiting for nCipher server to become operational ...
-waiting for nCipher server to become operational ...
-waiting for nCipher server to become operational ...
-waiting for nCipher server to become operational ...
-nCipher server did not start; end of /opt/nfast/log/hardserver.log reports:
-tail: cannot open '/opt/nfast/log/hardserver.log' for reading: No such file or directory
-perhaps failed binding to port if local hardserver running
-The command '/bin/sh -c /tmp/test.sh #Generates the soft kneti and proves hardserver can run; remove that from the image.' returned a non-zero code: 1
 
 ---------------------------------------- (2022-12-01) ----------------------------------------
 
 $ cd /opt/nfast/sbin
  
 $ ./init.d-ncipher stop
- -- Running shutdown script 90ncsnmpd
- -- Running shutdown script 60raserv
- -- Running shutdown script 50hardserver
- -- Running shutdown script 46exard
- -- Running shutdown script 45drivers
-No locally built nfp drivers found
 
 $ cd /opt/nscop
 
@@ -216,10 +41,9 @@ $ vi make-nshield-hwsp
 (...)
 # RUN /tmp/test.sh #Generates the soft kneti and proves hardserver can run; remove that from the image.
 
+$ cd /opt/nfast/sbin
+
 $ ./make-nshield-hwsp /media/cdrom
-(...)
-Successfully built 2f255fb47680
-Successfully tagged nshield-hwsp:12.80.4
 
 $ docker image ls
 REPOSITORY                             TAG                 IMAGE ID       CREATED              SIZE
@@ -229,26 +53,6 @@ debian                                 buster-slim         6dd568177594   2 week
 $ cd /opt/nfast/sbin
 
 $ ./init.d-ncipher start
- -- Running startup script 45drivers
-No locally built nfp drivers found
-
- -- Running startup script 46exard
-
- -- Running startup script 50hardserver
-waiting for nCipher server to become operational ...
-nCipher server now running
-
- -- Running startup script 60raserv
-.
-waiting for 'raserv'
-
-'raserv' server now running
-
- -- Running startup script 90ncsnmpd
-...
-waiting for 'ncsnmpd'
-
-'ncsnmpd' server now running
 
 $ cd /opt/nscop
 
@@ -259,19 +63,6 @@ Error from AnonymousKnetiHash command: RemoteServerFailed, <us> (nCErrno(ECONNRE
 $ ./make-nshield-hwsp-config-port9044 --output /opt/nscop/config/config 213.121.187.217
 
 $ cat /opt/nscop/config/config
-syntax-version=1
-
-[server_startup]
-nonpriv_port=9000
-unix_privsocket_name=/opt/nfast/private/privsocket
-
-[nethsm_imports]
-local_module=1
-remote_esn=090E-03E0-D947
-remote_ip=213.121.187.217
-remote_port=9044
-keyhash=e3ccceb081699312254fccb70607dadc8cf220e5
-privileged=0
 
 $ vi /opt/nscop/config/config
 (...)
@@ -299,67 +90,25 @@ $ docker volume inspect socket1
 ]
 
 $ ./init.d-ncipher stop
- -- Running shutdown script 90ncsnmpd
-
- -- Running shutdown script 60raserv
-
- -- Running shutdown script 50hardserver
-
- -- Running shutdown script 46exard
-
- -- Running shutdown script 45drivers
-No locally built nfp drivers found
 
 $ ps aux | grep hardserver
-root     16549  0.0  0.0  10212   828 pts/0    S+   14:27   0:00 grep hardserver
 
 ---------------------------------------- (2022-12-06) ----------------------------------------
 
 $ docker run --net=host -v /opt/nscop/config:/opt/nfast/kmdata/config:ro -v socket1:/opt/nfast/sockets nshield-hwsp:12.80.4
     OR
-$ docker run --net=host -d -v /opt/nscop/config:/opt/nfast/kmdata/config:ro -v socket1:/opt/nfast/sockets nshield-hwsp:12.80.4 ; To run a Docker container in the background
+$ docker run --net=host -d -v /opt/nscop/config:/opt/nfast/kmdata/config:ro -v socket1:/opt/nfast/sockets nshield-hwsp:12.80.4
 
 $ docker container ls
 CONTAINER ID   IMAGE                                       COMMAND                  CREATED         STATUS         PORTS     NAMES
 7d725e9c7614   nshield-hwsp:12.80.4                        "/opt/nfast/sbin/nsh…"   7 seconds ago   Up 6 seconds             sharp_cori
 
 $ NFAST_SERVER=/var/lib/docker/volumes/socket1/_data/nserver /opt/nfast/bin/enquiry -m0
-Server:
- enquiry reply flags  none
- enquiry reply level  Six
- serial number        090E-03E0-D947
- mode                 operational
- version              12.80.4
- speed index          15843
- rec. queue           368..566
- level one flags      Hardware HasTokens SupportsCommandState
- version string       12.80.4-274-813026a, 12.50.11-270-fb3b87dd465b6f6e53d9f829fc034f8be2dafd13 2019/05/16 22:02:33 BST, Bootloader: 1.2.3, Security Processor: 12.50.11 , 12.60.2-68-0587d6b7
- checked in           00000000618aeb9c Tue Nov  9 18:43:56 2021
- level two flags      none
- max. write size      8192
- level three flags    KeyStorage
- level four flags     OrderlyClearUnit HasRTC HasNVRAM HasNSOPermsCmd ServerHasPollCmds FastPollSlotList HasSEE HasKLF HasShareACL HasFeatureEnable HasFileOp HasLongJobs ServerHasLongJobs AESModuleKeys NTokenCmds JobFragmentation LongJobsPreferred Type2Smartcard ServerHasCreateClient HasInitialiseUnitEx AlwaysUseStrongPrimes Type3Smartcard HasKLF2
- module type code     0
- product name         nFast server
- device name          
- EnquirySix version   8
- impath kx groups    
- feature ctrl flags   none
- features enabled     none
- version serial       0
- level six flags      none
- remote port (IPv4)   9004
- kneti hash           1b0f966226b54da4124887ca0574cf85bfabd1fc
- rec. LongJobs queue  0
- SEE machine type     None
- supported KML types 
- active modes         none
 
 $ cd /opt/nscop/
 
 $ vi make-nshield-application
-    FROM: DEFAULT_FROM="registry.access.redhat.com/ubi7/ubi:latest"
-    TO: DEFAULT_FROM="docker.io/library/debian:buster-slim"
+DEFAULT_FROM="docker.io/library/debian:buster-slim"
 
 $ ./make-nshield-application /media/cdrom
 
@@ -371,20 +120,6 @@ nshield-hwsp                           12.80.4             2f255fb47680   7 days
 $ cd /opt/nscop/examples/nfkmverify/
 
 $ docker build . --tag nfkmverifys
-Sending build context to Docker daemon  3.584kB
-Step 1/2 : FROM centos:centos7
-centos7: Pulling from library/centos
-2d473b07cdd5: Pull complete 
-Digest: sha256:c73f515d06b0fa07bb18d8202035e739a494ce760aa73129f60f4bf2bd22b407
-Status: Downloaded newer image for centos:centos7
- ---> eeb6ee3f44bd
-Step 2/2 : CMD [ "/opt/nfast/bin/nfkmverify" ]
- ---> [Warning] IPv4 forwarding is disabled. Networking will not work.
- ---> Running in a83a9217ee74
-Removing intermediate container a83a9217ee74
- ---> bea8038e7edf
-Successfully built bea8038e7edf
-Successfully tagged nfkmverifys:latest
 
 # docker image ls
 REPOSITORY                             TAG                 IMAGE ID       CREATED          SIZE
