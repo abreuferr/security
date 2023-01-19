@@ -22,15 +22,13 @@ $ sudo systemctl enable --now pcscd.socket
 
 # Debian
 #
-$ sudo apt-get install opensc libpcsclite1 pcsc-tools pcscd
-$ sudo apt-get install libengine-pkcs11-openssl 
-$ sudo apt-get install gnupg-pkcs11-scd 
-$ sudo apt-get install gnupg2
+$ sudo apt install libjbig0 libtiff5 fontconfig-config libfontconfig1 libwxbase3.0-0v5 libpcsclite1 libccid pcscd opensc libengine-pkcs11-openssl  gnupg-pkcs11-scd gnupg2
 
-$ sudo cat /etc/apt/sources.list.d/mjblenner-ubuntu-ppa-hal-hirsute.list
-  deb http://ppa.launchpad.net/mjblenner/ppa-hal/ubuntu/ xenial main
-$ sudo apt-get update
-$ sudo apt-get install libhal1 libhal-storage1
+$ cd /tmp 
+$ wget https://www.globalsign.com/en/safenet-drivers/USB/10.7/Safenet_Linux_Installer_DEB_x64.zip 
+$ unzip Safenet_Linux_Installer_DEB_x64.zip 
+$ sudo dpkg -i safenetauthenticationclient_10.7.77_amd64.deb 
+$ sudo apt-get -f install
 
 #
 # Inicializar token
