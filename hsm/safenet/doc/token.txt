@@ -16,7 +16,7 @@
 
 # Arch Linux
 #
-$ yay -S opensc openct sac-core ccid pcsclite pcsc-tools pcsc-perl
+$ yay -S opensc openct sac-core ccid pcsclite pcsc-tools pcsc-perl libp11 pkcs11-helper
 $ sudo systemctl enable --now pcscd.service
 $ sudo systemctl enable --now pcscd.socket
 
