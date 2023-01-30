@@ -229,7 +229,7 @@ key-direction 1
 route 10.66.0.0 255.255.0.0 172.16.20.1
 <ca>
 -----BEGIN CERTIFICATE-----
-(...))
+(...)
 -----END CERTIFICATE-----
 </ca>
 pkcs11-providers /usr/lib/libeToken.so
