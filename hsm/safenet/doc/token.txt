@@ -96,7 +96,7 @@ $ ssh-keygen -D /usr/lib/libeToken.so
 #
 # (cert, privkey, pubkey, secrkey, data)
 #
-$ pkcs11-tool -vv  --module /usr/lib/libeToken.so --login --delete-object --id 01 --type pubkey 
+$ pkcs11-tool -vv  --module /usr/lib/libeToken.so --login --delete-object --id 01 --type pubkey
 
 #################################################################
 #
