@@ -114,18 +114,18 @@ Para realizar o ataque Terrapin, é necessário ter recursos MitM na camada de r
 Para mitigar o ataque Terrapin em um servidor ou cliente do tipo OpenSSH, é imperativo que o administrador de sistemas modifique os arquivos de configuração do OpenSSH, o arquivo \textbf{ssh\underline{\hspace{.1in}}config} para o cliente e o arquivo \textbf{sshd\underline{\hspace{.1in}}config} para o servidor e altere os arquivos para que fiquem igual as linhas abaixo.
 
 \begin{itemize}
-	\item \small \textbf{Ciphers aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr}
-	\item \small \textbf{MACs hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com}
+    \item \small \textbf{Ciphers aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr}
+    \item \small \textbf{MACs hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com}
 \end{itemize}
 
 O comando acima irá remover o algoritmo de criptografia \textbf{ChaCha20-Poly1305} e o algoritmo de MAC \textbf{-etm@openssh.com} do processo de autenticação.\\
 
-Na Figura \ref{fig:terrapin_depois}, a ferramenta nmap está sendo utilizada para obter informações do servidor OpenSSH. Como é possível verificar no destaque da figura, o algoritmo de criptografia \textbf{ChaCha20-Poly1305} e o algoritmo de MAC \textbf{-etm@openssh.com} não estão sendo utilizados.
+A Figura \ref{fig:terrapin_depois} exemplifica uma tentativa de conexão utilizando o algoritmo de criptografia \textbf{ChaCha20-Poly1305} e a recusa da conexão pois o algoritmo de criptografia não é mais suportado pelo servidor SSH.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.63]{terrapin_depois.png}
-	\caption{Ferramenta nmap utilizada para verificar o servidor OpenSSH}
+	\includegraphics[scale=0.50]{terrapin_depois.png}
+	\caption{Algoritmos utilizados pelo OpenSSH}
 	\label{fig:terrapin_depois}
 \end{figure}
 
