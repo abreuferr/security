@@ -9,6 +9,7 @@
 \usepackage{titlesec}
 \usepackage{background} % Componente de Watermark
 \usepackage{hyperref}
+\usepackage[T1]{fontenc}
 
 % Definir as características do hyperlink
 \hypersetup{
@@ -116,6 +117,13 @@ Para mitigar o ataque Terrapin em um servidor ou cliente do tipo OpenSSH, é imp
 \begin{itemize}
     \item \small \textbf{Ciphers aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr}
     \item \small \textbf{MACs hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com}
+\end{itemize}
+
+Ou então execute os comandos abaixo no Cliente e no Servidor OpenSSH.
+
+\begin{itemize}
+    \item \small \textbf{echo 'Ciphers -chacha20-poly1305@openssh.com' > /etc/ssh/sshd\underline{\hspace{.1in}}config.d/anti-terrapin-attack.conf}
+    \item \small \textbf{echo 'Ciphers -chacha20-poly1305@openssh.com' > /etc/ssh/ssh\underline{\hspace{.1in}}config.d/anti-terrapin-attack.conf}
 \end{itemize}
 
 O comando acima irá remover o algoritmo de criptografia \textbf{ChaCha20-Poly1305} e o algoritmo de MAC \textbf{-etm@openssh.com} do processo de autenticação.\\
