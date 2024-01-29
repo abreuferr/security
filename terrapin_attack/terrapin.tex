@@ -111,9 +111,12 @@ Para realizar o ataque Terrapin, é necessário ter recursos MitM na camada de r
 
 \subsection{Mitigação}
 
-Para mitigar o ataque Terrapin em um servidor ou cliente do tipo OpenSSH, é imperativo que o administrador de sistemas modifique os arquivos de configuração do OpenSSH, o arquivo \textbf{/etc/ssh/ssh\underline{\hspace{.1in}}config} para o cliente e o arquivo \textbf{/etc/ssh/sshd\underline{\hspace{.1in}}config} para o servidor e adicionando a linha abaixo.\\
+Para mitigar o ataque Terrapin em um servidor ou cliente do tipo OpenSSH, é imperativo que o administrador de sistemas modifique os arquivos de configuração do OpenSSH, o arquivo \textbf{/etc/ssh/ssh\underline{\hspace{.1in}}config} para o cliente e o arquivo \textbf{/etc/ssh/sshd\underline{\hspace{.1in}}config} para o servidor e altere as linhas abaixo.
 
-\textbf{Ciphers -chacha20-poly1305@openssh.com}\\
+\begin{itemize}
+	\item \textbf{Ciphers aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr}
+	\item \textbf{MACs hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com}
+\end{itemize}
 
 O comando acima irá remover o algoritmo de criptografia "ChaCha20-Poly1305" do processo de autenticação.\\
 
