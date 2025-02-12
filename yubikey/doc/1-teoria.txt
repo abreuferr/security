@@ -1,0 +1,20 @@
+#: Title : Teoria
+#: Author : "Caio Abreu Ferreira" <abreuferr_gmail.com>
+#: Description : Conceitos sobre Yubikey
+#: Options : None
+
+#
+# O que é
+#
+
+MFA (Autenticação de Múltiplos Fatores)
+O que é: Utilizar mais de um fator de autenticação para proteger o acesso (por exemplo, senha + dispositivo físico).
+
+OTP (One-Time Password)
+O que é: Uma senha descartável, válida por uma única sessão ou transação.
+
+PIV (Personal Identity Verification)
+O que é: Um padrão do governo dos EUA para identificação digital e assinatura de documentos. Permite armazenar um certificado X.509 dentro da YubiKey para autenticação, criptografia e assinatura.
+
+GPG (GNU Privacy Guard)
+O que é: Uma ferramenta de criptografia para e-mails e arquivos.
