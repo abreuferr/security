@@ -1,0 +1,111 @@
+#: Title : HSM SafeNet 5110 e Yubikey 5 NFS
+#: Author : "Caio Abreu Ferreira" <abreuferr_gmail.com>
+#: Description : Yubikey 5 NFS e HSM SafeNet 5110
+#: Options : None
+
+######
+#
+# 
+# YUBIKEY 
+#
+#
+######
+
+#
+# Instalação
+#
+
+$ sudo pacman -S yubikey-manager yubikey-personalization yubico-piv-tool opensc openssh openssl pcsclite ccid
+$ sudo systemctl enable --now pcscd
+
+#
+# Reset do PIN, PUK and Management Key
+#
+
+$ ykman piv reset
+Your YubiKey now has the default PIN, PUK and Management Key:
+	PIN:	123456
+	PUK:	12345678
+	Management Key:	010203040506070801020304050607080102030405060708
+
+#
+# Gerar uma Management Key de forma aleatória (Anotar em um local seguro)
+#
+
+$ ykman piv access change-management-key --generate --algorithm AES256
+
+#
+# Alterar o PIN, PUK e Management Key
+#
+
+$ ykman piv access change-pin    # Recomendo um PIN de 6 a 8 dígitos
+$ ykman piv access change-puk    # Recomendo um PUK de 8 dígitos
+$ ykman piv access change-management-key
+
+
+######
+#
+# 
+# SSH e GITLAB 
+#
+#
+######
+
+#
+# Gerar chaves ECC (384 bits)
+#
+
+$ yubico-piv-tool -s 9a -a generate -k -A ECCP384 -o public.pem
+
+#
+# Exportar chave pública
+#
+
+$ ssh-keygen -D /usr/lib/libykcs11.so -e > ~/.ssh/id_ecdsa_yubikey.pub
+
+
+######
+#
+# 
+# VPN OpenVPN
+#
+#
+######
+
+#
+# Gerar Par de Chaves RSA 2048 para VPN (OpenVPN)
+#
+
+$ ykman piv keys generate --algorithm RSA2048 --touch-policy always 9a pubkey.pem 
+Enter a management key [blank to use default key]: 
+Private key generated in slot 9A (AUTHENTICATION), public key written to pubkey.pem.
+
+#
+# Gerar o Certificado X.509
+#
+
+$ ykman piv certificates generate --subject "CN=cferreira" --valid-days 3650 9a pubkey.pem
+Enter a management key [blank to use default key]: 
+Enter PIN: 
+Touch your YubiKey...
+Certificate generated in slot AUTHENTICATION.
+
+#
+# Exportar o Certificado X.509
+#
+
+$ cat csr.conf
+[ req ]
+distinguished_name = req_distinguished_name
+prompt = no
+
+[ req_distinguished_name ]
+CN = cferreira
+
+
+
+$ ykman piv certificates export 9a certificate.pem
+
+
+
+243419ecf874f4c0712069c8a0c6e4fd13b4e3736bcc960531fbe23bdc6bfcde
