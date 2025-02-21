@@ -6,17 +6,25 @@
 ######
 #
 # 
-# YUBIKEY 
+# Instalação 
 #
 #
 ######
 
 #
-# Instalação
+# GNU Linux Arch Linux
 #
 
 $ sudo pacman -S yubikey-manager yubikey-personalization yubico-piv-tool opensc openssh openssl pcsclite ccid
 $ sudo systemctl enable --now pcscd
+
+######
+#
+# 
+# Configuração Inicial
+#
+#
+######
 
 #
 # Reset do PIN, PUK and Management Key
@@ -66,7 +74,7 @@ $ openssl ec -in public_ecc.pem -pubin -text -noout
 $ ssh-keygen -i -m PKCS8 -f public_ecc.pem > id_ecdsa_yubikey.pub
 
 #
-# /etc/ssh/ssh_config
+# OpenSSH Client
 #
 
 $ cat /etc/ssh/ssh_config
