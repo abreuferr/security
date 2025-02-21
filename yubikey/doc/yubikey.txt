@@ -46,13 +46,13 @@ $ ykman piv access change-management-key
 ######
 #
 # 
-# SSH e GITLAB 
+# SSH e GITLAB/GITHUB
 #
 #
 ######
 
 #
-# Gerar chaves ECC (384 bits)
+# Gerando a chave ECC P-384 para GitLab/GitHub e SSH (Slot 9E)
 #
 
 $ yubico-piv-tool -a generate -s 9e -k -A ECCP384 -o public_ecc.pem
@@ -61,7 +61,9 @@ $ yubico-piv-tool -a generate -s 9e -k -A ECCP384 -o public_ecc.pem
 # Exportar chave pública
 #
 
-$ ssh-keygen -D /usr/lib/libykcs11.so -e > ~/.ssh/id_ecdsa_yubikey.pub
+$ ykman piv keys export 9e public_ecc.pem
+$ openssl ec -in public_ecc.pem -pubin -text -noout
+$ ssh-keygen -i -m PKCS8 -f public_ecc.pem > id_ecdsa_yubikey.pub
 
 #
 # /etc/ssh/ssh_config
@@ -88,36 +90,16 @@ Host *
 # Gerar Par de Chaves RSA 2048 para VPN (OpenVPN)
 #
 
-$ ykman piv keys generate --algorithm RSA2048 --touch-policy always 9a pubkey.pem 
-Enter a management key [blank to use default key]: 
-Private key generated in slot 9A (AUTHENTICATION), public key written to pubkey.pem.
+$ yubico-piv-tool -a generate -s 9a -k -A RSA2048
 
 #
-# Gerar o Certificado X.509
+# Exportar a chave pública (public_rsa.key)
 #
 
-$ ykman piv certificates generate --subject "CN=cferreira" --valid-days 3650 9a pubkey.pem
-Enter a management key [blank to use default key]: 
-Enter PIN: 
-Touch your YubiKey...
-Certificate generated in slot AUTHENTICATION.
+$ ykman piv keys export 9a public_rsa.key
 
 #
-# Exportar o Certificado X.509
+# Gerar o Certificado X.509 para ser assinado pelo RDO (request.csr)
 #
 
-$ cat csr.conf
-[ req ]
-distinguished_name = req_distinguished_name
-prompt = no
-
-[ req_distinguished_name ]
-CN = cferreira
-
-
-
-$ ykman piv certificates export 9a certificate.pem
-
-
-
-243419ecf874f4c0712069c8a0c6e4fd13b4e3736bcc960531fbe23bdc6bfcde
+$ ykman piv certificates request -s 'CN=cferreira' 9A public_rsa.key request.csr
