@@ -55,7 +55,7 @@ $ ykman piv access change-management-key
 # Gerar chaves ECC (384 bits)
 #
 
-$ yubico-piv-tool -s 9a -a generate -k -A ECCP384 -o public.pem
+$ yubico-piv-tool -a generate -s 9e -k -A ECCP384 -o public_ecc.pem
 
 #
 # Exportar chave pública
@@ -63,6 +63,18 @@ $ yubico-piv-tool -s 9a -a generate -k -A ECCP384 -o public.pem
 
 $ ssh-keygen -D /usr/lib/libykcs11.so -e > ~/.ssh/id_ecdsa_yubikey.pub
 
+#
+# /etc/ssh/ssh_config
+#
+
+$ cat /etc/ssh/ssh_config
+Host *
+    # HSM
+    # PKCS11Provider /usr/lib/libeToken.so
+
+    # Yubikey
+    IdentityAgent /usr/lib/libykcs11.so
+    PKCS11Provider /usr/lib/libykcs11.so
 
 ######
 #
